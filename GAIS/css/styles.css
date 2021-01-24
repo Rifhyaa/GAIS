@@ -1,0 +1,19 @@
+﻿.gais-breadcrumb {
+    background-color: #fff;
+    margin: -16px;
+}
+
+.gais-breadcrumb li {
+    color: #2c2c2c;
+}
+
+.gais-table-text tr {
+    color: #2c2c2c;
+}
+
+input.input-validation-error,
+textarea.input-validation-error,
+select.input-validation-error {
+    /*background: #FEF1EC;*/
+    border: 1px solid #CD0A0A;
+}

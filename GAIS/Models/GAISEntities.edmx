@@ -1,0 +1,1106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="GAISModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BarangPerusahaan">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NamaBarang" Type="varchar" MaxLength="75" />
+          <Property Name="Keterangan" Type="varchar" MaxLength="255" />
+          <Property Name="ID_JenisBarang" Type="int" />
+          <Property Name="ID_Seksi" Type="int" />
+          <Property Name="ID_Vendor" Type="int" />
+          <Property Name="Stok" Type="int" />
+          <Property Name="Harga" Type="int" />
+          <Property Name="CreatedTime" Type="datetime" />
+          <Property Name="LastModifiedTime" Type="datetime" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="ModifiedBy" Type="varchar" MaxLength="50" />
+          <Property Name="RowStatus" Type="int" />
+        </EntityType>
+        <EntityType Name="BarangVendor">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NamaBarang" Type="varchar" MaxLength="100" />
+          <Property Name="Keterangan" Type="varchar" MaxLength="255" />
+          <Property Name="ID_JenisBarang" Type="int" />
+          <Property Name="ID_Vendor" Type="int" />
+          <Property Name="Harga" Type="int" />
+          <Property Name="CreatedTime" Type="datetime" />
+          <Property Name="LastModifiedTime" Type="datetime" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="ModifiedBy" Type="varchar" MaxLength="50" />
+          <Property Name="RowStatus" Type="int" />
+        </EntityType>
+        <EntityType Name="DetailPeminjaman">
+          <Key>
+            <PropertyRef Name="ID_Peminjaman" />
+            <PropertyRef Name="ID_Barang" />
+          </Key>
+          <Property Name="ID_Peminjaman" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="ID_Barang" Type="int" Nullable="false" />
+          <Property Name="Kuantitas" Type="int" />
+          <Property Name="HargaBarang" Type="int" />
+          <Property Name="Kondisi_Rusak" Type="int" />
+        </EntityType>
+        <EntityType Name="DetailPengajuan">
+          <Key>
+            <PropertyRef Name="ID_Pengajuan" />
+            <PropertyRef Name="ID_Barang" />
+          </Key>
+          <Property Name="ID_Pengajuan" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="ID_Barang" Type="int" Nullable="false" />
+          <Property Name="Kuantitas" Type="int" />
+          <Property Name="HargaBarang" Type="int" />
+        </EntityType>
+        <EntityType Name="JenisBank">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nama" Type="varchar" MaxLength="50" />
+          <Property Name="Keterangan" Type="varchar" MaxLength="255" />
+          <Property Name="CreatedTime" Type="datetime" />
+          <Property Name="LastModifiedTime" Type="datetime" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="ModifiedBy" Type="varchar" MaxLength="50" />
+          <Property Name="RowStatus" Type="int" />
+        </EntityType>
+        <EntityType Name="JenisBarang">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nama" Type="varchar" MaxLength="50" />
+          <Property Name="Keterangan" Type="varchar" MaxLength="255" />
+          <Property Name="CreatedTime" Type="datetime" />
+          <Property Name="LastModifiedTime" Type="datetime" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="ModifiedBy" Type="varchar" MaxLength="50" />
+          <Property Name="RowStatus" Type="int" />
+        </EntityType>
+        <EntityType Name="Karyawan">
+          <Key>
+            <PropertyRef Name="NPK" />
+          </Key>
+          <Property Name="NPK" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="NamaKaryawan" Type="varchar" MaxLength="100" />
+          <Property Name="JenisKelamin" Type="char" MaxLength="1" />
+          <Property Name="TanggalLahir" Type="date" />
+          <Property Name="Alamat" Type="varchar" MaxLength="255" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="NoTelp" Type="varchar" MaxLength="13" />
+          <Property Name="ID_Role" Type="int" />
+          <Property Name="ID_Seksi" Type="int" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
+          <Property Name="CreatedTime" Type="datetime" />
+          <Property Name="LastModifiedTime" Type="datetime" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="ModifiedBy" Type="varchar" MaxLength="50" />
+          <Property Name="RowStatus" Type="int" />
+          <Property Name="Foto" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Keranjang">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Barang" Type="int" />
+          <Property Name="ID_Karyawan" Type="varchar" MaxLength="10" />
+          <Property Name="Qyt" Type="int" />
+        </EntityType>
+        <EntityType Name="Peminjaman">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="ID_Karyawan" Type="varchar" MaxLength="10" />
+          <Property Name="ID_GA" Type="varchar" MaxLength="10" />
+          <Property Name="TglPeminjaman" Type="datetime" />
+          <Property Name="TglPengembalian" Type="datetime" />
+          <Property Name="LastModifiedTime" Type="datetime" />
+          <Property Name="AcceptedBy" Type="varchar" MaxLength="50" />
+          <Property Name="ModifiedBy" Type="varchar" MaxLength="50" />
+          <Property Name="Status" Type="int" />
+          <Property Name="IsLate" Type="int" />
+          <Property Name="Denda" Type="int" />
+        </EntityType>
+        <EntityType Name="Pengajuan">
+          <Key>
+            <PropertyRef Name="ID_Pengajuan" />
+          </Key>
+          <Property Name="ID_Pengajuan" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="ID_GA" Type="varchar" MaxLength="10" />
+          <Property Name="Tgl_Pengajuan" Type="datetime" />
+          <Property Name="TotalHarga" Type="int" />
+          <Property Name="StatusPengajuan" Type="int" />
+          <Property Name="SudahDibayar" Type="int" />
+          <Property Name="StatusPengiriman" Type="int" />
+          <Property Name="StatusFinal" Type="varchar" MaxLength="50" />
+          <Property Name="LastModifiedTime" Type="datetime" />
+          <Property Name="ModifiedBy" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Reference">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Value" Type="varchar" MaxLength="10" />
+          <Property Name="Deskripsi" Type="varchar" MaxLength="50" />
+          <Property Name="UsedFor" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NamaRole" Type="varchar" MaxLength="50" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="LastModifiedTime" Type="datetime" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="ModifiedBy" Type="varchar" MaxLength="50" />
+          <Property Name="RowStatus" Type="int" />
+        </EntityType>
+        <EntityType Name="Section">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NamaSection" Type="varchar" MaxLength="50" />
+          <Property Name="Keterangan" Type="varchar" MaxLength="255" />
+          <Property Name="CreatedTime" Type="datetime" />
+          <Property Name="LastModifiedTime" Type="datetime" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="ModifiedBy" Type="varchar" MaxLength="50" />
+          <Property Name="RowStatus" Type="int" />
+        </EntityType>
+        <EntityType Name="Vendor">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NamaVendor" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Alamat" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="NoTelp" Type="varchar" MaxLength="13" Nullable="false" />
+          <Property Name="NoRek" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ID_JenisBank" Type="int" Nullable="false" />
+          <Property Name="CreatedTime" Type="datetime" />
+          <Property Name="LastModifiedTime" Type="datetime" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="ModifiedBy" Type="varchar" MaxLength="50" />
+          <Property Name="RowStatus" Type="int" />
+        </EntityType>
+        <Association Name="FK_BarangPerusahaan_JenisBarang">
+          <End Role="JenisBarang" Type="Self.JenisBarang" Multiplicity="0..1" />
+          <End Role="BarangPerusahaan" Type="Self.BarangPerusahaan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JenisBarang">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BarangPerusahaan">
+              <PropertyRef Name="ID_JenisBarang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BarangPerusahaan_Seksi">
+          <End Role="Section" Type="Self.Section" Multiplicity="0..1" />
+          <End Role="BarangPerusahaan" Type="Self.BarangPerusahaan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Section">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BarangPerusahaan">
+              <PropertyRef Name="ID_Seksi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BarangPerusahaan_Vendor">
+          <End Role="Vendor" Type="Self.Vendor" Multiplicity="0..1" />
+          <End Role="BarangPerusahaan" Type="Self.BarangPerusahaan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vendor">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BarangPerusahaan">
+              <PropertyRef Name="ID_Vendor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BarangVendor_JenisBarang">
+          <End Role="JenisBarang" Type="Self.JenisBarang" Multiplicity="0..1" />
+          <End Role="BarangVendor" Type="Self.BarangVendor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JenisBarang">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BarangVendor">
+              <PropertyRef Name="ID_JenisBarang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BarangVendor_Vendor">
+          <End Role="Vendor" Type="Self.Vendor" Multiplicity="0..1" />
+          <End Role="BarangVendor" Type="Self.BarangVendor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vendor">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BarangVendor">
+              <PropertyRef Name="ID_Vendor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Karyawan_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="Karyawan" Type="Self.Karyawan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Karyawan">
+              <PropertyRef Name="ID_Role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Karyawan_Section">
+          <End Role="Section" Type="Self.Section" Multiplicity="0..1" />
+          <End Role="Karyawan" Type="Self.Karyawan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Section">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Karyawan">
+              <PropertyRef Name="ID_Seksi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Keranjang_Barang">
+          <End Role="BarangPerusahaan" Type="Self.BarangPerusahaan" Multiplicity="0..1" />
+          <End Role="Keranjang" Type="Self.Keranjang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BarangPerusahaan">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Keranjang">
+              <PropertyRef Name="ID_Barang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Peminjaman_Karyawan">
+          <End Role="Karyawan" Type="Self.Karyawan" Multiplicity="0..1" />
+          <End Role="Peminjaman" Type="Self.Peminjaman" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Karyawan">
+              <PropertyRef Name="NPK" />
+            </Principal>
+            <Dependent Role="Peminjaman">
+              <PropertyRef Name="ID_Karyawan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pengajuan_GA">
+          <End Role="Karyawan" Type="Self.Karyawan" Multiplicity="0..1" />
+          <End Role="Pengajuan" Type="Self.Pengajuan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Karyawan">
+              <PropertyRef Name="NPK" />
+            </Principal>
+            <Dependent Role="Pengajuan">
+              <PropertyRef Name="ID_GA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vendor_JenisBank">
+          <End Role="JenisBank" Type="Self.JenisBank" Multiplicity="1" />
+          <End Role="Vendor" Type="Self.Vendor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JenisBank">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Vendor">
+              <PropertyRef Name="ID_JenisBank" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="GAISModelStoreContainer">
+          <EntitySet Name="BarangPerusahaan" EntityType="Self.BarangPerusahaan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BarangVendor" EntityType="Self.BarangVendor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DetailPeminjaman" EntityType="Self.DetailPeminjaman" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DetailPengajuan" EntityType="Self.DetailPengajuan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JenisBank" EntityType="Self.JenisBank" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JenisBarang" EntityType="Self.JenisBarang" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Karyawan" EntityType="Self.Karyawan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Keranjang" EntityType="Self.Keranjang" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Peminjaman" EntityType="Self.Peminjaman" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pengajuan" EntityType="Self.Pengajuan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reference" EntityType="Self.Reference" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Section" EntityType="Self.Section" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vendor" EntityType="Self.Vendor" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_BarangPerusahaan_JenisBarang" Association="Self.FK_BarangPerusahaan_JenisBarang">
+            <End Role="JenisBarang" EntitySet="JenisBarang" />
+            <End Role="BarangPerusahaan" EntitySet="BarangPerusahaan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BarangPerusahaan_Seksi" Association="Self.FK_BarangPerusahaan_Seksi">
+            <End Role="Section" EntitySet="Section" />
+            <End Role="BarangPerusahaan" EntitySet="BarangPerusahaan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BarangPerusahaan_Vendor" Association="Self.FK_BarangPerusahaan_Vendor">
+            <End Role="Vendor" EntitySet="Vendor" />
+            <End Role="BarangPerusahaan" EntitySet="BarangPerusahaan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BarangVendor_JenisBarang" Association="Self.FK_BarangVendor_JenisBarang">
+            <End Role="JenisBarang" EntitySet="JenisBarang" />
+            <End Role="BarangVendor" EntitySet="BarangVendor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BarangVendor_Vendor" Association="Self.FK_BarangVendor_Vendor">
+            <End Role="Vendor" EntitySet="Vendor" />
+            <End Role="BarangVendor" EntitySet="BarangVendor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Karyawan_Role" Association="Self.FK_Karyawan_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Karyawan" EntitySet="Karyawan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Karyawan_Section" Association="Self.FK_Karyawan_Section">
+            <End Role="Section" EntitySet="Section" />
+            <End Role="Karyawan" EntitySet="Karyawan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Keranjang_Barang" Association="Self.FK_Keranjang_Barang">
+            <End Role="BarangPerusahaan" EntitySet="BarangPerusahaan" />
+            <End Role="Keranjang" EntitySet="Keranjang" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Peminjaman_Karyawan" Association="Self.FK_Peminjaman_Karyawan">
+            <End Role="Karyawan" EntitySet="Karyawan" />
+            <End Role="Peminjaman" EntitySet="Peminjaman" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pengajuan_GA" Association="Self.FK_Pengajuan_GA">
+            <End Role="Karyawan" EntitySet="Karyawan" />
+            <End Role="Pengajuan" EntitySet="Pengajuan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vendor_JenisBank" Association="Self.FK_Vendor_JenisBank">
+            <End Role="JenisBank" EntitySet="JenisBank" />
+            <End Role="Vendor" EntitySet="Vendor" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GAISModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="GAISEntities" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+          <EntitySet Name="JenisBarangs" EntityType="GAISModel.JenisBarang" />
+          <EntitySet Name="BarangPerusahaans" EntityType="GAISModel.BarangPerusahaan" />
+          <EntitySet Name="BarangVendors" EntityType="GAISModel.BarangVendor" />
+          <EntitySet Name="DetailPeminjamen" EntityType="GAISModel.DetailPeminjaman" />
+          <EntitySet Name="DetailPengajuans" EntityType="GAISModel.DetailPengajuan" />
+          <EntitySet Name="JenisBanks" EntityType="GAISModel.JenisBank" />
+          <EntitySet Name="Karyawans" EntityType="GAISModel.Karyawan" />
+          <EntitySet Name="Keranjangs" EntityType="GAISModel.Keranjang" />
+          <EntitySet Name="Peminjamen" EntityType="GAISModel.Peminjaman" />
+          <EntitySet Name="Pengajuans" EntityType="GAISModel.Pengajuan" />
+          <EntitySet Name="Roles" EntityType="GAISModel.Role" />
+          <EntitySet Name="Sections" EntityType="GAISModel.Section" />
+          <EntitySet Name="Vendors" EntityType="GAISModel.Vendor" />
+          <AssociationSet Name="FK_BarangPerusahaan_JenisBarang" Association="GAISModel.FK_BarangPerusahaan_JenisBarang">
+            <End Role="JenisBarang" EntitySet="JenisBarangs" />
+            <End Role="BarangPerusahaan" EntitySet="BarangPerusahaans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BarangPerusahaan_Seksi" Association="GAISModel.FK_BarangPerusahaan_Seksi">
+            <End Role="Section" EntitySet="Sections" />
+            <End Role="BarangPerusahaan" EntitySet="BarangPerusahaans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BarangPerusahaan_Vendor" Association="GAISModel.FK_BarangPerusahaan_Vendor">
+            <End Role="Vendor" EntitySet="Vendors" />
+            <End Role="BarangPerusahaan" EntitySet="BarangPerusahaans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Keranjang_Barang" Association="GAISModel.FK_Keranjang_Barang">
+            <End Role="BarangPerusahaan" EntitySet="BarangPerusahaans" />
+            <End Role="Keranjang" EntitySet="Keranjangs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BarangVendor_JenisBarang" Association="GAISModel.FK_BarangVendor_JenisBarang">
+            <End Role="JenisBarang" EntitySet="JenisBarangs" />
+            <End Role="BarangVendor" EntitySet="BarangVendors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BarangVendor_Vendor" Association="GAISModel.FK_BarangVendor_Vendor">
+            <End Role="Vendor" EntitySet="Vendors" />
+            <End Role="BarangVendor" EntitySet="BarangVendors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vendor_JenisBank" Association="GAISModel.FK_Vendor_JenisBank">
+            <End Role="JenisBank" EntitySet="JenisBanks" />
+            <End Role="Vendor" EntitySet="Vendors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Karyawan_Role" Association="GAISModel.FK_Karyawan_Role">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="Karyawan" EntitySet="Karyawans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Karyawan_Section" Association="GAISModel.FK_Karyawan_Section">
+            <End Role="Section" EntitySet="Sections" />
+            <End Role="Karyawan" EntitySet="Karyawans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Peminjaman_Karyawan" Association="GAISModel.FK_Peminjaman_Karyawan">
+            <End Role="Karyawan" EntitySet="Karyawans" />
+            <End Role="Peminjaman" EntitySet="Peminjamen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pengajuan_GA" Association="GAISModel.FK_Pengajuan_GA">
+            <End Role="Karyawan" EntitySet="Karyawans" />
+            <End Role="Pengajuan" EntitySet="Pengajuans" />
+          </AssociationSet>
+          <EntitySet Name="References" EntityType="GAISModel.Reference" />
+          </EntityContainer>
+        <EntityType Name="JenisBarang">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nama" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Keterangan" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedTime" Type="DateTime" Precision="3" />
+          <Property Name="LastModifiedTime" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RowStatus" Type="Int32" />
+          <NavigationProperty Name="BarangPerusahaans" Relationship="GAISModel.FK_BarangPerusahaan_JenisBarang" FromRole="JenisBarang" ToRole="BarangPerusahaan" />
+          <NavigationProperty Name="BarangVendors" Relationship="GAISModel.FK_BarangVendor_JenisBarang" FromRole="JenisBarang" ToRole="BarangVendor" />
+          </EntityType>
+        <EntityType Name="BarangPerusahaan">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NamaBarang" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Name="Keterangan" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ID_JenisBarang" Type="Int32" />
+          <Property Name="ID_Seksi" Type="Int32" />
+          <Property Name="ID_Vendor" Type="Int32" />
+          <Property Name="Stok" Type="Int32" />
+          <Property Name="Harga" Type="Int32" />
+          <Property Name="CreatedTime" Type="DateTime" Precision="3" />
+          <Property Name="LastModifiedTime" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RowStatus" Type="Int32" />
+          <NavigationProperty Name="JenisBarang" Relationship="GAISModel.FK_BarangPerusahaan_JenisBarang" FromRole="BarangPerusahaan" ToRole="JenisBarang" />
+          <NavigationProperty Name="Section" Relationship="GAISModel.FK_BarangPerusahaan_Seksi" FromRole="BarangPerusahaan" ToRole="Section" />
+          <NavigationProperty Name="Vendor" Relationship="GAISModel.FK_BarangPerusahaan_Vendor" FromRole="BarangPerusahaan" ToRole="Vendor" />
+          <NavigationProperty Name="Keranjangs" Relationship="GAISModel.FK_Keranjang_Barang" FromRole="BarangPerusahaan" ToRole="Keranjang" />
+        </EntityType>
+        <EntityType Name="BarangVendor">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NamaBarang" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Keterangan" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ID_JenisBarang" Type="Int32" />
+          <Property Name="ID_Vendor" Type="Int32" />
+          <Property Name="Harga" Type="Int32" />
+          <Property Name="CreatedTime" Type="DateTime" Precision="3" />
+          <Property Name="LastModifiedTime" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RowStatus" Type="Int32" />
+          <NavigationProperty Name="JenisBarang" Relationship="GAISModel.FK_BarangVendor_JenisBarang" FromRole="BarangVendor" ToRole="JenisBarang" />
+          <NavigationProperty Name="Vendor" Relationship="GAISModel.FK_BarangVendor_Vendor" FromRole="BarangVendor" ToRole="Vendor" />
+        </EntityType>
+        <EntityType Name="DetailPeminjaman">
+          <Key>
+            <PropertyRef Name="ID_Peminjaman" />
+            <PropertyRef Name="ID_Barang" />
+          </Key>
+          <Property Name="ID_Peminjaman" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ID_Barang" Type="Int32" Nullable="false" />
+          <Property Name="Kuantitas" Type="Int32" />
+          <Property Name="HargaBarang" Type="Int32" />
+          <Property Name="Kondisi_Rusak" Type="Int32" />
+        </EntityType>
+        <EntityType Name="DetailPengajuan">
+          <Key>
+            <PropertyRef Name="ID_Pengajuan" />
+            <PropertyRef Name="ID_Barang" />
+          </Key>
+          <Property Name="ID_Pengajuan" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ID_Barang" Type="Int32" Nullable="false" />
+          <Property Name="Kuantitas" Type="Int32" />
+          <Property Name="HargaBarang" Type="Int32" />
+        </EntityType>
+        <EntityType Name="JenisBank">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nama" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Keterangan" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedTime" Type="DateTime" Precision="3" />
+          <Property Name="LastModifiedTime" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RowStatus" Type="Int32" />
+          <NavigationProperty Name="Vendors" Relationship="GAISModel.FK_Vendor_JenisBank" FromRole="JenisBank" ToRole="Vendor" />
+        </EntityType>
+        <EntityType Name="Karyawan">
+          <Key>
+            <PropertyRef Name="NPK" />
+          </Key>
+          <Property Name="NPK" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="NamaKaryawan" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="JenisKelamin" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="TanggalLahir" Type="DateTime" Precision="0" />
+          <Property Name="Alamat" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NoTelp" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="ID_Role" Type="Int32" />
+          <Property Name="ID_Seksi" Type="Int32" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedTime" Type="DateTime" Precision="3" />
+          <Property Name="LastModifiedTime" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RowStatus" Type="Int32" />
+          <Property Name="Foto" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Role" Relationship="GAISModel.FK_Karyawan_Role" FromRole="Karyawan" ToRole="Role" />
+          <NavigationProperty Name="Section" Relationship="GAISModel.FK_Karyawan_Section" FromRole="Karyawan" ToRole="Section" />
+          <NavigationProperty Name="Peminjamen" Relationship="GAISModel.FK_Peminjaman_Karyawan" FromRole="Karyawan" ToRole="Peminjaman" />
+          <NavigationProperty Name="Pengajuans" Relationship="GAISModel.FK_Pengajuan_GA" FromRole="Karyawan" ToRole="Pengajuan" />
+        </EntityType>
+        <EntityType Name="Keranjang">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Barang" Type="Int32" />
+          <Property Name="ID_Karyawan" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Qyt" Type="Int32" />
+          <NavigationProperty Name="BarangPerusahaan" Relationship="GAISModel.FK_Keranjang_Barang" FromRole="Keranjang" ToRole="BarangPerusahaan" />
+        </EntityType>
+        <EntityType Name="Peminjaman">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ID_Karyawan" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ID_GA" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="TglPeminjaman" Type="DateTime" Precision="3" />
+          <Property Name="TglPengembalian" Type="DateTime" Precision="3" />
+          <Property Name="LastModifiedTime" Type="DateTime" Precision="3" />
+          <Property Name="AcceptedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="IsLate" Type="Int32" />
+          <Property Name="Denda" Type="Int32" />
+          <NavigationProperty Name="Karyawan" Relationship="GAISModel.FK_Peminjaman_Karyawan" FromRole="Peminjaman" ToRole="Karyawan" />
+        </EntityType>
+        <EntityType Name="Pengajuan">
+          <Key>
+            <PropertyRef Name="ID_Pengajuan" />
+          </Key>
+          <Property Name="ID_Pengajuan" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ID_GA" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Tgl_Pengajuan" Type="DateTime" Precision="3" />
+          <Property Name="TotalHarga" Type="Int32" />
+          <Property Name="StatusPengajuan" Type="Int32" />
+          <Property Name="SudahDibayar" Type="Int32" />
+          <Property Name="StatusPengiriman" Type="Int32" />
+          <Property Name="StatusFinal" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastModifiedTime" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Karyawan" Relationship="GAISModel.FK_Pengajuan_GA" FromRole="Pengajuan" ToRole="Karyawan" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NamaRole" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="LastModifiedTime" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RowStatus" Type="Int32" />
+          <NavigationProperty Name="Karyawans" Relationship="GAISModel.FK_Karyawan_Role" FromRole="Role" ToRole="Karyawan" />
+        </EntityType>
+        <EntityType Name="Section">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NamaSection" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Keterangan" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedTime" Type="DateTime" Precision="3" />
+          <Property Name="LastModifiedTime" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RowStatus" Type="Int32" />
+          <NavigationProperty Name="BarangPerusahaans" Relationship="GAISModel.FK_BarangPerusahaan_Seksi" FromRole="Section" ToRole="BarangPerusahaan" />
+          <NavigationProperty Name="Karyawans" Relationship="GAISModel.FK_Karyawan_Section" FromRole="Section" ToRole="Karyawan" />
+        </EntityType>
+        <EntityType Name="Vendor">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NamaVendor" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Alamat" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NoTelp" Type="String" Nullable="false" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="NoRek" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ID_JenisBank" Type="Int32" Nullable="false" />
+          <Property Name="CreatedTime" Type="DateTime" Precision="3" />
+          <Property Name="LastModifiedTime" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RowStatus" Type="Int32" />
+          <NavigationProperty Name="BarangPerusahaans" Relationship="GAISModel.FK_BarangPerusahaan_Vendor" FromRole="Vendor" ToRole="BarangPerusahaan" />
+          <NavigationProperty Name="BarangVendors" Relationship="GAISModel.FK_BarangVendor_Vendor" FromRole="Vendor" ToRole="BarangVendor" />
+          <NavigationProperty Name="JenisBank" Relationship="GAISModel.FK_Vendor_JenisBank" FromRole="Vendor" ToRole="JenisBank" />
+        </EntityType>
+        <Association Name="FK_BarangPerusahaan_JenisBarang">
+          <End Type="GAISModel.JenisBarang" Role="JenisBarang" Multiplicity="0..1" />
+          <End Type="GAISModel.BarangPerusahaan" Role="BarangPerusahaan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JenisBarang">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BarangPerusahaan">
+              <PropertyRef Name="ID_JenisBarang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BarangPerusahaan_Seksi">
+          <End Type="GAISModel.Section" Role="Section" Multiplicity="0..1" />
+          <End Type="GAISModel.BarangPerusahaan" Role="BarangPerusahaan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Section">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BarangPerusahaan">
+              <PropertyRef Name="ID_Seksi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BarangPerusahaan_Vendor">
+          <End Type="GAISModel.Vendor" Role="Vendor" Multiplicity="0..1" />
+          <End Type="GAISModel.BarangPerusahaan" Role="BarangPerusahaan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vendor">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BarangPerusahaan">
+              <PropertyRef Name="ID_Vendor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Keranjang_Barang">
+          <End Type="GAISModel.BarangPerusahaan" Role="BarangPerusahaan" Multiplicity="0..1" />
+          <End Type="GAISModel.Keranjang" Role="Keranjang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BarangPerusahaan">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Keranjang">
+              <PropertyRef Name="ID_Barang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BarangVendor_JenisBarang">
+          <End Type="GAISModel.JenisBarang" Role="JenisBarang" Multiplicity="0..1" />
+          <End Type="GAISModel.BarangVendor" Role="BarangVendor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JenisBarang">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BarangVendor">
+              <PropertyRef Name="ID_JenisBarang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BarangVendor_Vendor">
+          <End Type="GAISModel.Vendor" Role="Vendor" Multiplicity="0..1" />
+          <End Type="GAISModel.BarangVendor" Role="BarangVendor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vendor">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BarangVendor">
+              <PropertyRef Name="ID_Vendor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vendor_JenisBank">
+          <End Type="GAISModel.JenisBank" Role="JenisBank" Multiplicity="1" />
+          <End Type="GAISModel.Vendor" Role="Vendor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JenisBank">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Vendor">
+              <PropertyRef Name="ID_JenisBank" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Karyawan_Role">
+          <End Type="GAISModel.Role" Role="Role" Multiplicity="0..1" />
+          <End Type="GAISModel.Karyawan" Role="Karyawan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Karyawan">
+              <PropertyRef Name="ID_Role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Karyawan_Section">
+          <End Type="GAISModel.Section" Role="Section" Multiplicity="0..1" />
+          <End Type="GAISModel.Karyawan" Role="Karyawan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Section">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Karyawan">
+              <PropertyRef Name="ID_Seksi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Peminjaman_Karyawan">
+          <End Type="GAISModel.Karyawan" Role="Karyawan" Multiplicity="0..1" />
+          <End Type="GAISModel.Peminjaman" Role="Peminjaman" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Karyawan">
+              <PropertyRef Name="NPK" />
+            </Principal>
+            <Dependent Role="Peminjaman">
+              <PropertyRef Name="ID_Karyawan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pengajuan_GA">
+          <End Type="GAISModel.Karyawan" Role="Karyawan" Multiplicity="0..1" />
+          <End Type="GAISModel.Pengajuan" Role="Pengajuan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Karyawan">
+              <PropertyRef Name="NPK" />
+            </Principal>
+            <Dependent Role="Pengajuan">
+              <PropertyRef Name="ID_GA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Reference">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Value" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Deskripsi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UsedFor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GAISModelStoreContainer" CdmEntityContainer="GAISEntities">
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="GAISModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="GAISModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="GAISModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="GAISModel.Store.sp_helpdiagramdefinition" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="GAISModel.Store.sp_helpdiagrams" />
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="GAISModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="GAISModel.Store.sp_upgraddiagrams" />
+          <EntitySetMapping Name="JenisBarangs">
+            <EntityTypeMapping TypeName="GAISModel.JenisBarang">
+              <MappingFragment StoreEntitySet="JenisBarang">
+                <ScalarProperty Name="RowStatus" ColumnName="RowStatus" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastModifiedTime" ColumnName="LastModifiedTime" />
+                <ScalarProperty Name="CreatedTime" ColumnName="CreatedTime" />
+                <ScalarProperty Name="Keterangan" ColumnName="Keterangan" />
+                <ScalarProperty Name="Nama" ColumnName="Nama" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BarangPerusahaans">
+            <EntityTypeMapping TypeName="GAISModel.BarangPerusahaan">
+              <MappingFragment StoreEntitySet="BarangPerusahaan">
+                <ScalarProperty Name="RowStatus" ColumnName="RowStatus" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastModifiedTime" ColumnName="LastModifiedTime" />
+                <ScalarProperty Name="CreatedTime" ColumnName="CreatedTime" />
+                <ScalarProperty Name="Harga" ColumnName="Harga" />
+                <ScalarProperty Name="Stok" ColumnName="Stok" />
+                <ScalarProperty Name="ID_Vendor" ColumnName="ID_Vendor" />
+                <ScalarProperty Name="ID_Seksi" ColumnName="ID_Seksi" />
+                <ScalarProperty Name="ID_JenisBarang" ColumnName="ID_JenisBarang" />
+                <ScalarProperty Name="Keterangan" ColumnName="Keterangan" />
+                <ScalarProperty Name="NamaBarang" ColumnName="NamaBarang" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BarangVendors">
+            <EntityTypeMapping TypeName="GAISModel.BarangVendor">
+              <MappingFragment StoreEntitySet="BarangVendor">
+                <ScalarProperty Name="RowStatus" ColumnName="RowStatus" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastModifiedTime" ColumnName="LastModifiedTime" />
+                <ScalarProperty Name="CreatedTime" ColumnName="CreatedTime" />
+                <ScalarProperty Name="Harga" ColumnName="Harga" />
+                <ScalarProperty Name="ID_Vendor" ColumnName="ID_Vendor" />
+                <ScalarProperty Name="ID_JenisBarang" ColumnName="ID_JenisBarang" />
+                <ScalarProperty Name="Keterangan" ColumnName="Keterangan" />
+                <ScalarProperty Name="NamaBarang" ColumnName="NamaBarang" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DetailPeminjamen">
+            <EntityTypeMapping TypeName="GAISModel.DetailPeminjaman">
+              <MappingFragment StoreEntitySet="DetailPeminjaman">
+                <ScalarProperty Name="Kondisi_Rusak" ColumnName="Kondisi_Rusak" />
+                <ScalarProperty Name="HargaBarang" ColumnName="HargaBarang" />
+                <ScalarProperty Name="Kuantitas" ColumnName="Kuantitas" />
+                <ScalarProperty Name="ID_Barang" ColumnName="ID_Barang" />
+                <ScalarProperty Name="ID_Peminjaman" ColumnName="ID_Peminjaman" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DetailPengajuans">
+            <EntityTypeMapping TypeName="GAISModel.DetailPengajuan">
+              <MappingFragment StoreEntitySet="DetailPengajuan">
+                <ScalarProperty Name="HargaBarang" ColumnName="HargaBarang" />
+                <ScalarProperty Name="Kuantitas" ColumnName="Kuantitas" />
+                <ScalarProperty Name="ID_Barang" ColumnName="ID_Barang" />
+                <ScalarProperty Name="ID_Pengajuan" ColumnName="ID_Pengajuan" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JenisBanks">
+            <EntityTypeMapping TypeName="GAISModel.JenisBank">
+              <MappingFragment StoreEntitySet="JenisBank">
+                <ScalarProperty Name="RowStatus" ColumnName="RowStatus" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastModifiedTime" ColumnName="LastModifiedTime" />
+                <ScalarProperty Name="CreatedTime" ColumnName="CreatedTime" />
+                <ScalarProperty Name="Keterangan" ColumnName="Keterangan" />
+                <ScalarProperty Name="Nama" ColumnName="Nama" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Karyawans">
+            <EntityTypeMapping TypeName="GAISModel.Karyawan">
+              <MappingFragment StoreEntitySet="Karyawan">
+                <ScalarProperty Name="Foto" ColumnName="Foto" />
+                <ScalarProperty Name="RowStatus" ColumnName="RowStatus" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastModifiedTime" ColumnName="LastModifiedTime" />
+                <ScalarProperty Name="CreatedTime" ColumnName="CreatedTime" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="ID_Seksi" ColumnName="ID_Seksi" />
+                <ScalarProperty Name="ID_Role" ColumnName="ID_Role" />
+                <ScalarProperty Name="NoTelp" ColumnName="NoTelp" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Alamat" ColumnName="Alamat" />
+                <ScalarProperty Name="TanggalLahir" ColumnName="TanggalLahir" />
+                <ScalarProperty Name="JenisKelamin" ColumnName="JenisKelamin" />
+                <ScalarProperty Name="NamaKaryawan" ColumnName="NamaKaryawan" />
+                <ScalarProperty Name="NPK" ColumnName="NPK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Keranjangs">
+            <EntityTypeMapping TypeName="GAISModel.Keranjang">
+              <MappingFragment StoreEntitySet="Keranjang">
+                <ScalarProperty Name="Qyt" ColumnName="Qyt" />
+                <ScalarProperty Name="ID_Karyawan" ColumnName="ID_Karyawan" />
+                <ScalarProperty Name="ID_Barang" ColumnName="ID_Barang" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Peminjamen">
+            <EntityTypeMapping TypeName="GAISModel.Peminjaman">
+              <MappingFragment StoreEntitySet="Peminjaman">
+                <ScalarProperty Name="Denda" ColumnName="Denda" />
+                <ScalarProperty Name="IsLate" ColumnName="IsLate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="AcceptedBy" ColumnName="AcceptedBy" />
+                <ScalarProperty Name="LastModifiedTime" ColumnName="LastModifiedTime" />
+                <ScalarProperty Name="TglPengembalian" ColumnName="TglPengembalian" />
+                <ScalarProperty Name="TglPeminjaman" ColumnName="TglPeminjaman" />
+                <ScalarProperty Name="ID_GA" ColumnName="ID_GA" />
+                <ScalarProperty Name="ID_Karyawan" ColumnName="ID_Karyawan" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pengajuans">
+            <EntityTypeMapping TypeName="GAISModel.Pengajuan">
+              <MappingFragment StoreEntitySet="Pengajuan">
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="LastModifiedTime" ColumnName="LastModifiedTime" />
+                <ScalarProperty Name="StatusFinal" ColumnName="StatusFinal" />
+                <ScalarProperty Name="StatusPengiriman" ColumnName="StatusPengiriman" />
+                <ScalarProperty Name="SudahDibayar" ColumnName="SudahDibayar" />
+                <ScalarProperty Name="StatusPengajuan" ColumnName="StatusPengajuan" />
+                <ScalarProperty Name="TotalHarga" ColumnName="TotalHarga" />
+                <ScalarProperty Name="Tgl_Pengajuan" ColumnName="Tgl_Pengajuan" />
+                <ScalarProperty Name="ID_GA" ColumnName="ID_GA" />
+                <ScalarProperty Name="ID_Pengajuan" ColumnName="ID_Pengajuan" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="GAISModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="RowStatus" ColumnName="RowStatus" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastModifiedTime" ColumnName="LastModifiedTime" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="NamaRole" ColumnName="NamaRole" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sections">
+            <EntityTypeMapping TypeName="GAISModel.Section">
+              <MappingFragment StoreEntitySet="Section">
+                <ScalarProperty Name="RowStatus" ColumnName="RowStatus" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastModifiedTime" ColumnName="LastModifiedTime" />
+                <ScalarProperty Name="CreatedTime" ColumnName="CreatedTime" />
+                <ScalarProperty Name="Keterangan" ColumnName="Keterangan" />
+                <ScalarProperty Name="NamaSection" ColumnName="NamaSection" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vendors">
+            <EntityTypeMapping TypeName="GAISModel.Vendor">
+              <MappingFragment StoreEntitySet="Vendor">
+                <ScalarProperty Name="RowStatus" ColumnName="RowStatus" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastModifiedTime" ColumnName="LastModifiedTime" />
+                <ScalarProperty Name="CreatedTime" ColumnName="CreatedTime" />
+                <ScalarProperty Name="ID_JenisBank" ColumnName="ID_JenisBank" />
+                <ScalarProperty Name="NoRek" ColumnName="NoRek" />
+                <ScalarProperty Name="NoTelp" ColumnName="NoTelp" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Alamat" ColumnName="Alamat" />
+                <ScalarProperty Name="NamaVendor" ColumnName="NamaVendor" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="References">
+            <EntityTypeMapping TypeName="GAISModel.Reference">
+              <MappingFragment StoreEntitySet="Reference">
+                <ScalarProperty Name="UsedFor" ColumnName="UsedFor" />
+                <ScalarProperty Name="Deskripsi" ColumnName="Deskripsi" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f4667f24b7e04c7da001bcabdd074d96" Name="Diagram1">
+        <EntityTypeShape EntityType="GAISModel.JenisBarang" Width="1.5" PointX="0.75" PointY="15.375" />
+        <EntityTypeShape EntityType="GAISModel.BarangPerusahaan" Width="1.5" PointX="3.375" PointY="12" />
+        <EntityTypeShape EntityType="GAISModel.BarangVendor" Width="1.5" PointX="3.375" PointY="18.375" />
+        <EntityTypeShape EntityType="GAISModel.DetailPeminjaman" Width="1.5" PointX="7.75" PointY="1.625" />
+        <EntityTypeShape EntityType="GAISModel.DetailPengajuan" Width="1.5" PointX="7.75" PointY="4.625" />
+        <EntityTypeShape EntityType="GAISModel.JenisBank" Width="1.5" PointX="1.125" PointY="25.75" />
+        <EntityTypeShape EntityType="GAISModel.Karyawan" Width="1.5" PointX="3" PointY="6" />
+        <EntityTypeShape EntityType="GAISModel.Keranjang" Width="1.5" PointX="5.625" PointY="13.125" />
+        <EntityTypeShape EntityType="GAISModel.Peminjaman" Width="1.5" PointX="5.25" PointY="0.75" />
+        <EntityTypeShape EntityType="GAISModel.Pengajuan" Width="1.5" PointX="5.25" PointY="4.875" />
+        <EntityTypeShape EntityType="GAISModel.Role" Width="1.5" PointX="0.75" PointY="3.25" />
+        <EntityTypeShape EntityType="GAISModel.Section" Width="1.5" PointX="0.75" PointY="7" />
+        <EntityTypeShape EntityType="GAISModel.Vendor" Width="1.5" PointX="1.125" PointY="20.125" />
+        <AssociationConnector Association="GAISModel.FK_BarangPerusahaan_JenisBarang" />
+        <AssociationConnector Association="GAISModel.FK_BarangPerusahaan_Seksi" />
+        <AssociationConnector Association="GAISModel.FK_BarangPerusahaan_Vendor" />
+        <AssociationConnector Association="GAISModel.FK_Keranjang_Barang" />
+        <AssociationConnector Association="GAISModel.FK_BarangVendor_JenisBarang" />
+        <AssociationConnector Association="GAISModel.FK_BarangVendor_Vendor" />
+        <AssociationConnector Association="GAISModel.FK_Vendor_JenisBank" />
+        <AssociationConnector Association="GAISModel.FK_Karyawan_Role" />
+        <AssociationConnector Association="GAISModel.FK_Karyawan_Section" />
+        <AssociationConnector Association="GAISModel.FK_Peminjaman_Karyawan" />
+        <AssociationConnector Association="GAISModel.FK_Pengajuan_GA" />
+        <EntityTypeShape EntityType="GAISModel.Reference" Width="1.5" PointX="7.375" PointY="7.75" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,83 @@
+﻿@model GAIS.Models.BarangPerusahaan
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<header class="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
+    <div class="container-fluid">
+        <div class="page-header-content">
+            <div class="row align-items-center justify-content-between pt-3">
+                <div class="col-auto mb-3">
+                    <ol class="breadcrumb gais-breadcrumb" style="background-color: #fff">
+                        <li class="breadcrumb-item">Home</li>
+                        <li class="breadcrumb-item">Admin</li>
+                        <li class="breadcrumb-item">Barang Perusahaan</li>
+                        <li class="breadcrumb-item text-blue">@ViewBag.Title</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="container mt-4">
+        <div class="card mb-4">
+            <div class="card-header" style="font-size: 1.1rem;">
+                Form Barang Perusahaan
+            </div>
+            <div class="card-body">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    <label class="control-label" for="NamaBarang">Item Name<span style="color: red">*</span></label>
+                    @Html.EditorFor(model => model.NamaBarang, new { htmlAttributes = new { @class = "form-control", placeholder = "Item Name" } })
+                    @Html.ValidationMessageFor(model => model.NamaBarang, "", new { @class = "text-danger small" })
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="Keterangan">Description<span style="color: red">*</span></label>
+                    @Html.EditorFor(model => model.Keterangan, new { htmlAttributes = new { @class = "form-control", placeholder = "Description" } })
+                    @Html.ValidationMessageFor(model => model.Keterangan, "", new { @class = "text-danger small" })
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="ID_JenisBarang">Category Item<span style="color: red">*</span></label>
+                    @Html.DropDownListFor(model => model.ID_JenisBarang, (SelectList)ViewBag.ID_JenisBarang, "Choose Category Item", htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ID_JenisBarang, "", new { @class = "text-danger small" })
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="ID_Seksi">Section<span style="color: red">*</span></label>
+                    @Html.DropDownListFor(model => model.ID_Seksi, (SelectList)ViewBag.ID_Seksi, "Choose Section", htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ID_Seksi, "", new { @class = "text-danger small" })
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="ID_Vendor">Vendor<span style="color: red">*</span></label>
+                    @Html.DropDownListFor(model => model.ID_Vendor, (SelectList)ViewBag.ID_Vendor, "Choose Vendor", htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ID_Vendor, "", new { @class = "text-danger small" })
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="Stok">Stock<span style="color: red">*</span></label>
+                    @Html.EditorFor(model => model.Stok, new { htmlAttributes = new { @class = "form-control", placeholder = "Stock" } })
+                    @Html.ValidationMessageFor(model => model.Stok, "", new { @class = "text-danger small" })
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="Harga">Price<span style="color: red">*</span></label>
+                    @Html.EditorFor(model => model.Harga, new { htmlAttributes = new { @class = "form-control", placeholder = "Price" } })
+                    @Html.ValidationMessageFor(model => model.Harga, "", new { @class = "text-danger small" })
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                    <a href="~/BarangPerusahaan" class="btn btn-outline-primary">Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+}

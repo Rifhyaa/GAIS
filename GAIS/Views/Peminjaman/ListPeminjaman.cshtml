@@ -1,0 +1,90 @@
+﻿@model IEnumerable<GAIS.Models.Peminjaman>
+
+@{
+    ViewBag.Title = "ListPeminjaman";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<header class="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
+    <div class="container-fluid">
+        <div class="page-header-content">
+            <div class="row align-items-center justify-content-between pt-3">
+                <div class="col-auto mb-3">
+                    <ol class="breadcrumb gais-breadcrumb" style="background-color: #fff">
+                        <li class="breadcrumb-item">Home</li>
+                        <li class="breadcrumb-item">Admin</li>
+                        <li class="breadcrumb-item">Peminjaman</li>
+                        <li class="breadcrumb-item text-blue">Daftar Peminjaman</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="container-fluid mt-4">
+    <div class="card mb-4">
+        <div class="card-header" style="font-size: 1.1rem; ">
+            Riwayat Peminjaman
+        </div>
+        <div class="card-body">
+            <div class="row form-group">
+            </div>
+            <div class="datatable">
+                <table class="table table-bordered table-hover table-striped" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>@Html.DisplayNameFor(model => model.ID)</th>
+                            <th>@Html.DisplayNameFor(model => model.TglPeminjaman)</th>
+                            <th>@Html.DisplayNameFor(model => model.TglPengembalian)</th>
+                            <th>@Html.DisplayNameFor(model => model.AcceptedBy)</th>
+                            <th>@Html.DisplayNameFor(model => model.Status)</th>
+                            <th>@Html.DisplayNameFor(model => model.Denda)</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{int numRow = 0;}
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@(numRow += 1)</td>
+                                <td>@Html.DisplayFor(modelItem => item.ID)</td>
+                                <td>@Html.DisplayFor(modelItem => item.TglPeminjaman)</td>
+                                <td>@Html.DisplayFor(modelItem => item.TglPengembalian)</td>
+                                <td>@Html.DisplayFor(modelItem => item.AcceptedBy)</td>
+                                @if (item.Status == 0)
+                                {
+                                    <td>Menunggu Konfimasi GA</td>
+                                }
+                                @if (item.Status == 1)
+                                {
+                                    <td>Meminjam</td>
+                                }
+                                @if (item.Denda == null)
+                                {
+                                    <td>-</td>
+                                }
+                                else
+                                {
+                                    <td>@Html.DisplayFor(modelItem => item.Denda)</td>
+                                }
+                                <td>
+                                    <a href="~/Peminjaman/Details/@Html.DisplayFor(modelItem => item.ID)" data-toggle="tooltip" title="Details" class="btn btn-datatable btn-icon btn-transparent-dark mr-2" te><i data-feather="list"></i></a>
+                                    @if (item.Status == 0)
+                                    {
+                                        <a onclick="return confirm('Confirmation borrowing?')" href="~/Peminjaman/ConfirmationBorrowing/@Html.DisplayFor(modelItem => item.ID)" data-toggle="tooltip" title="Confirmation Borrowing" class="btn btn-datatable btn-icon btn-transparent-dark mr-2" te><i data-feather="check"></i></a>
+                                    }
+                                    @if (item.Status == 1)
+                                    {
+                                        <a onclick="return confirm('Return confirmation?')" href="~/Peminjaman/ConfirmationReturning/@Html.DisplayFor(modelItem => item.ID)" data-toggle="tooltip" title="Return Confirmation" class="btn btn-datatable btn-icon btn-transparent-dark mr-2" te><i data-feather="check"></i></a>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

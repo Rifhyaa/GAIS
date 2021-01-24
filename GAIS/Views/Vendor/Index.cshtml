@@ -1,0 +1,70 @@
+﻿@model IEnumerable<GAIS.Models.Vendor>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<header class="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
+    <div class="container-fluid">
+        <div class="page-header-content">
+            <div class="row align-items-center justify-content-between pt-3">
+                <div class="col-auto mb-3">
+                    <ol class="breadcrumb gais-breadcrumb" style="background-color: #fff">
+                        <li class="breadcrumb-item">Home</li>
+                        <li class="breadcrumb-item">Admin</li>
+                        <li class="breadcrumb-item text-blue">Vendor</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="container-fluid mt-4">
+    <div class="card mb-4">
+        <div class="card-header" style="font-size: 1.1rem; ">
+            DataTable Vendor
+        </div>
+        <div class="card-body">
+            <div class="row form-group">
+                <div class="col-sm-12 col-md-6">
+                    <a href="~/Vendor/Create" class="btn btn-primary">Add New</a>
+                </div>
+            </div>
+            <div class="datatable">
+                <table class="table table-bordered table-hover table-striped" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>@Html.DisplayNameFor(model => model.NamaVendor)</th>
+                            <th>@Html.DisplayNameFor(model => model.Alamat)</th>
+                            <th>@Html.DisplayNameFor(model => model.Email)</th>
+                            <th>@Html.DisplayNameFor(model => model.NoTelp)</th>
+                            <th>@Html.DisplayNameFor(model => model.ID_JenisBank)</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{int numRow = 0;}
+                        @foreach (var item in Model)
+                        {
+                        <tr>
+                            <td>@(numRow += 1)</td>
+                            <td>@Html.DisplayFor(modelItem => item.NamaVendor)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Alamat)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                            <td>@Html.DisplayFor(modelItem => item.NoTelp)</td>
+                            <td>@Html.DisplayFor(modelItem => item.JenisBank.Nama)</td>
+                            <td>
+                                <a href="~/Vendor/Details/@Html.DisplayFor(modelItem => item.ID)" data-toggle="tooltip" title="Details" class="btn btn-datatable btn-icon btn-transparent-dark mr-2" te><i data-feather="list"></i></a>
+                                <a href="~/Vendor/Edit/@Html.DisplayFor(modelItem => item.ID)" data-toggle="tooltip" title="Edit" class="btn btn-datatable btn-icon btn-transparent-dark mr-2" te><i data-feather="edit"></i></a>
+                                <a onClick="return confirm('Are you sure you want to delete this record?');" href="~/Vendor/Delete/@Html.DisplayFor(modelItem => item.ID)" data-toggle="tooltip" title="Delete" class="btn btn-datatable btn-icon btn-transparent-dark mr-2" te><i data-feather="trash-2"></i></a>
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

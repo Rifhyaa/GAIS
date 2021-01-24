@@ -1,0 +1,64 @@
+﻿@model GAIS.Models.JenisBank
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<header class="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
+    <div class="container-fluid">
+        <div class="page-header-content">
+            <div class="row align-items-center justify-content-between pt-3">
+                <div class="col-auto mb-3">
+                    <ol class="breadcrumb gais-breadcrumb" style="background-color: #fff">
+                        <li class="breadcrumb-item">Home</li>
+                        <li class="breadcrumb-item">Admin</li>
+                        <li class="breadcrumb-item">Bank</li>
+                        <li class="breadcrumb-item text-blue">@ViewBag.Title</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="container mt-4">
+        <div class="card mb-4">
+            <div class="card-header" style="font-size: 1.1rem;">
+                Form Bank
+            </div>
+            <div class="card-body">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.ID)
+                <div class="form-group">
+                    <label class="control-label" for="Nama">Bank<span style="color: red">*</span></label>
+                    @Html.EditorFor(model => model.Nama, new { htmlAttributes = new { @class = "form-control", maxlength = 50, placeholder = "Bank" } })
+                    @Html.ValidationMessageFor(model => model.Nama, "", new { @class = "text-danger small" })
+                    @Html.Hidden("check_names", Model.Nama, new { @id = "check_names" })
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="Keterangan">Keterangan<span style="color: red">*</span></label>
+                    @Html.EditorFor(model => model.Keterangan, new { htmlAttributes = new { @class = "form-control", maxlength = 255, placeholder = "Description" } })
+                    @Html.ValidationMessageFor(model => model.Keterangan, "", new { @class = "text-danger small" })
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Edit" class="btn btn-primary" />
+                    <a href="~/JenisBank" class="btn btn-outline-primary">Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@if (ViewBag.Validasi != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            alert("@ViewBag.Validasi");
+        }
+    </script>
+}

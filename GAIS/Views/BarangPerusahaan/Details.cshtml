@@ -1,0 +1,75 @@
+﻿@model GAIS.Models.BarangPerusahaan
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<header class="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
+    <div class="container-fluid">
+        <div class="page-header-content">
+            <div class="row align-items-center justify-content-between pt-3">
+                <div class="col-auto mb-3">
+                    <ol class="breadcrumb gais-breadcrumb" style="background-color: #fff">
+                        <li class="breadcrumb-item">Home</li>
+                        <li class="breadcrumb-item">Admin</li>
+                        <li class="breadcrumb-item">Barang Perusahaan</li>
+                        <li class="breadcrumb-item text-blue">@ViewBag.Title</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="container mt-4">
+    <div class="card mb-4">
+        <div class="card-header" style="font-size: 1.1rem;">
+            Details Barang Perusahaan
+        </div>
+        <div class="card-body">
+            <table class="table table-hover" width="100%" cellspacing="0">
+                <tbody>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.NamaBarang)</td>
+                        <td>@Html.DisplayFor(model => model.NamaBarang)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.Keterangan)</td>
+                        <td>@Html.DisplayFor(model => model.Keterangan)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.ID_JenisBarang)</td>
+                        <td>@Html.DisplayFor(model => model.JenisBarang.Nama)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.ID_Seksi)</td>
+                        <td>@Html.DisplayFor(model => model.Section.NamaSection)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.ID_Vendor)</td>
+                        <td>@Html.DisplayFor(model => model.Vendor.NamaVendor)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.Stok)</td>
+                        <td>@Html.DisplayFor(model => model.Stok)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.Harga)</td>
+                        <td>@Html.DisplayFor(model => model.Harga)</td>
+                    </tr>
+                    <tr>
+                        <td>Created</td>
+                        <td>@Html.DisplayFor(model => model.CreatedTime)</td>
+                    </tr>
+                    <tr>
+                        <td>Modified</td>
+                        <td>@Html.DisplayFor(model => model.LastModifiedTime)</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="form-group">
+                <a href="~/BarangPerusahaan" class="btn btn-outline-primary">Back to List</a>
+            </div>
+        </div>
+    </div>
+</div>

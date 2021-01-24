@@ -1,0 +1,71 @@
+﻿@model GAIS.Models.Vendor
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<header class="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
+    <div class="container-fluid">
+        <div class="page-header-content">
+            <div class="row align-items-center justify-content-between pt-3">
+                <div class="col-auto mb-3">
+                    <ol class="breadcrumb gais-breadcrumb" style="background-color: #fff">
+                        <li class="breadcrumb-item">Home</li>
+                        <li class="breadcrumb-item">Admin</li>
+                        <li class="breadcrumb-item">Vendor</li>
+                        <li class="breadcrumb-item text-blue">@ViewBag.Title</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="container mt-4">
+    <div class="card mb-4">
+        <div class="card-header" style="font-size: 1.1rem;">
+            Details Vendor
+        </div>
+        <div class="card-body">
+            <table class="table table-hover" width="100%" cellspacing="0">
+                <tbody>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.NamaVendor)</td>
+                        <td>@Html.DisplayFor(model => model.NamaVendor)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.Alamat)</td>
+                        <td>@Html.DisplayFor(model => model.Alamat)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.Email)</td>
+                        <td>@Html.DisplayFor(model => model.Email)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.NoTelp)</td>
+                        <td>@Html.DisplayFor(model => model.NoTelp)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.NoRek)</td>
+                        <td>@Html.DisplayFor(model => model.NoRek)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.ID_JenisBank)</td>
+                        <td>@Html.DisplayFor(model => model.JenisBank.Nama)</td>
+                    </tr>
+                    <tr>
+                        <td>Created</td>
+                        <td>@Html.DisplayFor(model => model.CreatedTime)</td>
+                    </tr>
+                    <tr>
+                        <td>Modified</td>
+                        <td>@Html.DisplayFor(model => model.LastModifiedTime)</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="form-group">
+                <a href="~/Vendor" class="btn btn-outline-primary">Back to List</a>
+            </div>
+        </div>
+    </div>
+</div>

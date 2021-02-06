@@ -12,15 +12,15 @@ namespace GAIS.Models
         [Key]
         public int ID { get; set; }
 
-        [DisplayName("Bank")]
-        [Required(ErrorMessage = "Bank field is required.")]
-        [MaxLength(50, ErrorMessage = "Bank must be under 50 characters")]
+        [DisplayName("Nama Bank")]
+        [Required(ErrorMessage = "Nama Bank wajib diisi")]
+        [MaxLength(50, ErrorMessage = "Nama Bank tidak boleh melebihi 50 karakter")]
         public string Nama { get; set; }
 
-        [DisplayName("Description")]
-        [Required(ErrorMessage = "Description field is required.")]
+        [DisplayName("Deskripsi")]
+        [Required(ErrorMessage = "Deskripsi wajib diisi")]
         [DataType(DataType.MultilineText)]
-        [MaxLength(255, ErrorMessage = "Description must be under 255 characters")]
+        [MaxLength(255, ErrorMessage = "Deskripsi tidak boleh melebihi 255 karakter")]
         public string Keterangan { get; set; }
 
         public Nullable<System.DateTime> CreatedTime { get; set; }

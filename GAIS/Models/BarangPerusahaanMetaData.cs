@@ -12,36 +12,36 @@ namespace GAIS.Models
         [Key]
         public int ID { get; set; }
 
-        [DisplayName("Item Name")]
-        [Required(ErrorMessage = "Item Name field is required")]
-        [MaxLength(75, ErrorMessage = "Item Name must be under 75 characters")]
+        [DisplayName("Nama Barang")]
+        [Required(ErrorMessage = "Nama Barang wajib diisi")]
+        [MaxLength(100, ErrorMessage = "Nama Barang tidak boleh melebihi 100 karakter")]
         public string NamaBarang { get; set; }
 
-        [DisplayName("Description")]
-        [Required(ErrorMessage = "Description field is required")]
+        [DisplayName("Deskripsi")]
+        [Required(ErrorMessage = "Deskripsi wajib diisi")]
         [DataType(DataType.MultilineText)]
-        [MaxLength(255, ErrorMessage = "Description must be under 255 characters")]
+        [MaxLength(255, ErrorMessage = "Deskripsi tidak boleh melebihi 255 karakter")]
         public string Keterangan { get; set; }
 
-        [DisplayName("Category Item")]
-        [Required(ErrorMessage = "Category Item is not selected")]
+        [DisplayName("Jenis Barang")]
+        [Required(ErrorMessage = "Jenis Barang belum dipilih")]
         public int ID_JenisBarang { get; set; }
 
         [DisplayName("Vendor")]
-        [Required(ErrorMessage = "Vendor is not selected")]
+        [Required(ErrorMessage = "Vendor belum dipilih")]
         public int ID_Vendor { get; set; }
 
         [DisplayName("Section")]
-        [Required(ErrorMessage = "Section is not selected")]
+        [Required(ErrorMessage = "Section belum dipilih")]
         public int ID_Seksi { get; set; }
 
-        [DisplayName("Price")]
-        [Required(ErrorMessage = "Price field is required")]
+        [DisplayName("Harga")]
+        [Required(ErrorMessage = "Harga wajib diisi")]
         public int Harga { get; set; }
 
-        [DisplayName("Stock")]
-        [Required(ErrorMessage = "Stock is required")]
-        [Range(1, 1000, ErrorMessage = "Range should be between 1 & 1000") ]
+        [DisplayName("Stok")]
+        [Required(ErrorMessage = "Stok wajib diisi")]
+        [Range(1, 1000, ErrorMessage = "Rentang Stok harus antara 1 sampai 1000") ]
         public int Stok { get; set; }
 
         public Nullable<System.DateTime> CreatedTime { get; set; }

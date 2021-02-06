@@ -31,6 +31,7 @@
         <AssociationConnector Association="GAISModel.FK_Pengajuan_GA" />
         <EntityTypeShape EntityType="GAISModel.Keranjang" Width="1.5" PointX="5.25" PointY="17" />
         <AssociationConnector Association="GAISModel.FK_Keranjang_Barang" />
+        <AssociationConnector Association="GAISModel.FK_DetailPengajuan_Barang" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -12,7 +12,6 @@
                 <div class="col-auto mb-3">
                     <ol class="breadcrumb gais-breadcrumb" style="background-color: #fff">
                         <li class="breadcrumb-item">Home</li>
-                        <li class="breadcrumb-item">Admin</li>
                         <li class="breadcrumb-item">Karyawan</li>
                         <li class="breadcrumb-item text-blue">@ViewBag.Title</li>
                     </ol>
@@ -30,50 +29,50 @@
             <div class="card-body">
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="form-group">
-                    @Html.LabelFor(model => model.NamaKaryawan, htmlAttributes: new { @class = "control-label" })
-                    @Html.EditorFor(model => model.NamaKaryawan, new { htmlAttributes = new { @class = "form-control" } })
+                    <label class="control-label">@Html.DisplayNameFor(model => model.NamaKaryawan)<span style="color: red">*</span></label>
+                    @Html.EditorFor(model => model.NamaKaryawan, new { htmlAttributes = new { @class = "form-control", placeholder = "Masukkan Nama Karyawan" } })
                     @Html.ValidationMessageFor(model => model.NamaKaryawan, "", new { @class = "text-danger small" })
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.JenisKelamin, htmlAttributes: new { @class = "control-label" })
-                    @Html.DropDownListFor(model => model.JenisKelamin, (SelectList)ViewBag.Jenis_Kelamin, "Choose Gender", htmlAttributes: new { @class = "form-control" })
+                    <label class="control-label">@Html.DisplayNameFor(model => model.JenisKelamin)<span style="color: red">*</span></label>
+                    @Html.DropDownListFor(model => model.JenisKelamin, (SelectList)ViewBag.Jenis_Kelamin, "Pilih Jenis Kelamin", htmlAttributes: new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.JenisKelamin, "", new { @class = "text-danger small" })
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.TanggalLahir, htmlAttributes: new { @class = "control-label" })
+                    <label class="control-label">@Html.DisplayNameFor(model => model.TanggalLahir)<span style="color: red">*</span></label>
                     @Html.EditorFor(model => model.TanggalLahir, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.TanggalLahir, "", new { @class = "text-danger small" })
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.Alamat, htmlAttributes: new { @class = "control-label" })
-                    @Html.EditorFor(model => model.Alamat, new { htmlAttributes = new { @class = "form-control" } })
+                    <label class="control-label">@Html.DisplayNameFor(model => model.Alamat)<span style="color: red">*</span></label>
+                    @Html.EditorFor(model => model.Alamat, new { htmlAttributes = new { @class = "form-control", placeholder = "Masukkan Alamat" } })
                     @Html.ValidationMessageFor(model => model.Alamat, "", new { @class = "text-danger small" })
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label" })
-                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                    <label class="control-label">@Html.DisplayNameFor(model => model.Email)<span style="color: red">*</span></label>
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "Masukkan Email" } })
                     @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger small" })
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.NoTelp, htmlAttributes: new { @class = "control-label" })
-                    @Html.EditorFor(model => model.NoTelp, new { htmlAttributes = new { @class = "form-control" } })
+                    <label class="control-label">@Html.DisplayNameFor(model => model.NoTelp)<span style="color: red">*</span></label>
+                    @Html.EditorFor(model => model.NoTelp, new { htmlAttributes = new { @class = "form-control", placeholder = "Masukkan Telepon" } })
                     @Html.ValidationMessageFor(model => model.NoTelp, "", new { @class = "text-danger small" })
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.ID_Role, htmlAttributes: new { @class = "control-label" })
-                    @Html.DropDownListFor(model => model.ID_Role, (SelectList)ViewBag.ID_Role, "Choose Role", htmlAttributes: new { @class = "form-control" })
+                    <label class="control-label">@Html.DisplayNameFor(model => model.ID_Role)<span style="color: red">*</span></label>
+                    @Html.DropDownListFor(model => model.ID_Role, (SelectList)ViewBag.ID_Role, "Pilih Role", htmlAttributes: new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.ID_Role, "", new { @class = "text-danger small" })
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.ID_Seksi, htmlAttributes: new { @class = "control-label" })
-                    @Html.DropDownListFor(model => model.ID_Seksi, (SelectList)ViewBag.ID_Section, "Choose Sedtion", htmlAttributes: new { @class = "form-control" })
+                    <label class="control-label">@Html.DisplayNameFor(model => model.ID_Seksi)<span style="color: red">*</span></label>
+                    @Html.DropDownListFor(model => model.ID_Seksi, (SelectList)ViewBag.ID_Section, "Pilih Section", htmlAttributes: new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.ID_Seksi, "", new { @class = "text-danger small" })
                 </div>
 
@@ -87,8 +86,8 @@
                 </div>
 
                 <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-primary" />
-                    <a href="~/Karyawan" class="btn btn-outline-primary">Back</a>
+                    <input type="submit" value="Simpan" class="btn btn-primary" />
+                    <a href="@Url.Action("Index", "Karyawan")" class="btn btn-outline-primary">Kembali</a>
                 </div>
             </div>
         </div>

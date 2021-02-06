@@ -12,7 +12,6 @@
                 <div class="col-auto mb-3">
                     <ol class="breadcrumb gais-breadcrumb" style="background-color: #fff">
                         <li class="breadcrumb-item">Home</li>
-                        <li class="breadcrumb-item">Admin</li>
                         <li class="breadcrumb-item">Vendor</li>
                         <li class="breadcrumb-item text-blue">@ViewBag.Title</li>
                     </ol>
@@ -32,44 +31,44 @@
             <div class="card-body">
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="form-group">
-                    <label class="control-label" for="NamaVendor">Vendor Name<span style="color: red">*</span></label>
-                    @Html.EditorFor(model => model.NamaVendor, new { htmlAttributes = new { @class = "form-control", placeholder = "Vendor Name" } })
+                    <label class="control-label">@Html.DisplayNameFor(model => model.NamaVendor)<span style="color: red">*</span></label>
+                    @Html.EditorFor(model => model.NamaVendor, new { htmlAttributes = new { @class = "form-control", placeholder = "Masukkan Nama Vendor" } })
                     @Html.ValidationMessageFor(model => model.NamaVendor, "", new { @class = "text-danger small" })
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label" for="Alamat">Vendor Address<span style="color: red">*</span></label>
-                    @Html.EditorFor(model => model.Alamat, new { htmlAttributes = new { @class = "form-control", placeholder = "Vendor Address" } })
+                    <label class="control-label">@Html.DisplayNameFor(model => model.Alamat)<span style="color: red">*</span></label>
+                    @Html.EditorFor(model => model.Alamat, new { htmlAttributes = new { @class = "form-control", placeholder = "Masukkan Alamat Vendor" } })
                     @Html.ValidationMessageFor(model => model.Alamat, "", new { @class = "text-danger small" })
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label" for="Email">Email<span style="color: red">*</span></label>
-                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "Email" } })
+                    <label class="control-label">@Html.DisplayNameFor(model => model.Email)<span style="color: red">*</span></label>
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "Masukkan Email" } })
                     @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger small" })
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label" for="NoTelp">Phone Number<span style="color: red">*</span></label>
-                    @Html.EditorFor(model => model.NoTelp, new { htmlAttributes = new { @class = "form-control", placeholder = "Phone Number", @onkeypress = "return isNumberKey(event)" } })
+                    <label class="control-label">@Html.DisplayNameFor(model => model.NoTelp)<span style="color: red">*</span></label>
+                    @Html.EditorFor(model => model.NoTelp, new { htmlAttributes = new { @class = "form-control", placeholder = "Masukkan Telepon", @onkeypress = "return isNumberKey(event)" } })
                     @Html.ValidationMessageFor(model => model.NoTelp, "", new { @class = "text-danger small" })
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label" for="NoRek">Account Number<span style="color: red">*</span></label>
-                    @Html.EditorFor(model => model.NoRek, new { htmlAttributes = new { @class = "form-control number", placeholder = "Account Number", @onkeypress = "return isNumberKey(event)" } })
+                    <label class="control-label">@Html.DisplayNameFor(model => model.NoRek)<span style="color: red">*</span></label>
+                    @Html.EditorFor(model => model.NoRek, new { htmlAttributes = new { @class = "form-control number", placeholder = "Masukkan Nomor Rekening", @onkeypress = "return isNumberKey(event)" } })
                     @Html.ValidationMessageFor(model => model.NoRek, "", new { @class = "text-danger small" })
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label" for="ID_JenisBank">Bank<span style="color: red">*</span></label>
-                    @Html.DropDownListFor(model => model.ID_JenisBank, (SelectList)ViewBag.ID_JenisBank, "Choose Bank", htmlAttributes: new { @class = "form-control" })
+                    <label class="control-label">@Html.DisplayNameFor(model => model.ID_JenisBank)<span style="color: red">*</span></label>
+                    @Html.DropDownListFor(model => model.ID_JenisBank, (SelectList)ViewBag.ID_JenisBank, "Pilih Bank", htmlAttributes: new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.ID_JenisBank, "", new { @class = "text-danger small" })
                 </div>
 
                 <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-primary" />
-                    <a href="~/Vendor" class="btn btn-outline-primary">Back</a>
+                    <input type="submit" value="Simpan" class="btn btn-primary" />
+                    <a href="@Url.Action("Index", "Vendor")" class="btn btn-outline-primary">Kembali</a>
                 </div>
             </div>
         </div>

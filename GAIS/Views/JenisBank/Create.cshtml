@@ -12,8 +12,7 @@
                 <div class="col-auto mb-3">
                     <ol class="breadcrumb gais-breadcrumb" style="background-color: #fff">
                         <li class="breadcrumb-item">Home</li>
-                        <li class="breadcrumb-item">Admin</li>
-                        <li class="breadcrumb-item">Bank</li>
+                        <li class="breadcrumb-item">Jenis Bank</li>
                         <li class="breadcrumb-item text-blue">@ViewBag.Title</li>
                     </ol>
                 </div>
@@ -32,20 +31,20 @@
             <div class="card-body">
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="form-group">
-                    <label class="control-label" for="Nama">Bank<span style="color: red">*</span></label>
-                    @Html.EditorFor(model => model.Nama, new { htmlAttributes = new { @class = "form-control", placeholder = "Bank" } })
+                    <label class="control-label">@Html.DisplayNameFor(model => model.Nama)<span style="color: red">*</span></label>
+                    @Html.EditorFor(model => model.Nama, new { htmlAttributes = new { @class = "form-control", placeholder = "Masukkan Nama Bank" } })
                     @Html.ValidationMessageFor(model => model.Nama, "", new { @class = "text-danger small" })
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label" for="Keterangan">Description<span style="color: red">*</span></label>
-                    @Html.EditorFor(model => model.Keterangan, new { htmlAttributes = new { @class = "form-control", placeholder = "Description" } })
+                    <label class="control-label">@Html.DisplayNameFor(model => model.Keterangan)<span style="color: red">*</span></label>
+                    @Html.EditorFor(model => model.Keterangan, new { htmlAttributes = new { @class = "form-control", placeholder = "Masukkan Deskripsi" } })
                     @Html.ValidationMessageFor(model => model.Keterangan, "", new { @class = "text-danger small" })
                 </div>
 
                 <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-primary" />
-                    <a href="~/JenisBank" class="btn btn-outline-primary">Back</a>
+                    <input type="submit" value="Simpan" class="btn btn-primary" />
+                    <a href="@Url.Action("Index", "JenisBank")" class="btn btn-outline-primary">Kembali</a>
                 </div>
             </div>
         </div>

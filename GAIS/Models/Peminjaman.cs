@@ -11,7 +11,8 @@ namespace GAIS.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
+    [System.ComponentModel.DataAnnotations.MetadataType(typeof(PeminjamanMetaData))]
     public partial class Peminjaman
     {
         public string ID { get; set; }

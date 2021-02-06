@@ -12,8 +12,8 @@
                 <div class="col-auto mb-3">
                     <ol class="breadcrumb gais-breadcrumb" style="background-color: #fff">
                         <li class="breadcrumb-item">Home</li>
-                        <li class="breadcrumb-item">Admin</li>
-                        <li class="breadcrumb-item text-blue">Barang Perusahaan</li>
+                        <li class="breadcrumb-item">Barang Perusahaan</li>
+                        <li class="breadcrumb-item text-blue">List</li>
                     </ol>
                 </div>
             </div>
@@ -35,15 +35,15 @@
                 <table class="table table-bordered table-hover table-striped" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>No</th>
-                            <th>@Html.DisplayNameFor(model => model.NamaBarang)</th>
-                            <th>@Html.DisplayNameFor(model => model.Keterangan)</th>
-                            <th>@Html.DisplayNameFor(model => model.ID_JenisBarang)</th>
-                            <th>@Html.DisplayNameFor(model => model.ID_Vendor)</th>
-                            <th>@Html.DisplayNameFor(model => model.ID_Seksi)</th>
-                            <th>@Html.DisplayNameFor(model => model.Stok)</th>
-                            <th>@Html.DisplayNameFor(model => model.Harga)</th>
-                            <th>Action</th>
+                            <th class="text-center">No</th>
+                            <th class="text-center">@Html.DisplayNameFor(model => model.NamaBarang)</th>
+                            <th class="text-center">@Html.DisplayNameFor(model => model.Keterangan)</th>
+                            <th class="text-center">@Html.DisplayNameFor(model => model.ID_JenisBarang)</th>
+                            <th class="text-center">@Html.DisplayNameFor(model => model.ID_Vendor)</th>
+                            <th class="text-center">@Html.DisplayNameFor(model => model.ID_Seksi)</th>
+                            <th class="text-center">@Html.DisplayNameFor(model => model.Stok)</th>
+                            <th class="text-center">@Html.DisplayNameFor(model => model.Harga)</th>
+                            <th class="text-center">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -59,7 +59,7 @@
                                 <td>@Html.DisplayFor(modelItem => item.Section.NamaSection)</td>
                                 <td class="text-right">@Html.DisplayFor(modelItem => item.Stok)</td>
                                 <td class="text-right">@Html.DisplayFor(modelItem => item.Harga)</td>
-                                <td>
+                                <td class="text-center">
                                     <a href="~/BarangPerusahaan/Details/@Html.DisplayFor(modelItem => item.ID)" data-toggle="tooltip" title="Details" class="btn btn-datatable btn-icon btn-transparent-dark mr-2" te><i data-feather="list"></i></a>
                                     <a href="~/BarangPerusahaan/Edit/@Html.DisplayFor(modelItem => item.ID)" data-toggle="tooltip" title="Edit" class="btn btn-datatable btn-icon btn-transparent-dark mr-2" te><i data-feather="edit"></i></a>
                                     <a onClick="return confirm('Are you sure you want to delete this record?');" href="~/BarangPerusahaan/Delete/@Html.DisplayFor(modelItem => item.ID)" data-toggle="tooltip" title="Delete" class="btn btn-datatable btn-icon btn-transparent-dark mr-2" te><i data-feather="trash-2"></i></a>

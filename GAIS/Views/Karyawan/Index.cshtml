@@ -12,8 +12,8 @@
                 <div class="col-auto mb-3">
                     <ol class="breadcrumb gais-breadcrumb" style="background-color: #fff">
                         <li class="breadcrumb-item">Home</li>
-                        <li class="breadcrumb-item">Admin</li>
-                        <li class="breadcrumb-item text-blue">Karyawan</li>
+                        <li class="breadcrumb-item">Karyawan</li>
+                        <li class="breadcrumb-item text-blue">List</li>
                     </ol>
                 </div>
             </div>
@@ -35,14 +35,14 @@
                 <table class="table table-bordered table-hover table-striped" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>No</th>
-                            <td>@Html.DisplayNameFor(model => model.NPK)</td>
-                            <td>@Html.DisplayNameFor(model => model.NamaKaryawan)</td>
-                            <td>@Html.DisplayNameFor(model => model.JenisKelamin)</td>
-                            <td>@Html.DisplayNameFor(model => model.Email)</td>
-                            <td>@Html.DisplayNameFor(model => model.NoTelp)</td>
-                            <td>@Html.DisplayNameFor(model => model.ID_Role)</td>
-                            <th>Action</th>
+                            <th class="text-center">No</th>
+                            <td class="text-center">@Html.DisplayNameFor(model => model.NPK)</td>
+                            <td class="text-center">@Html.DisplayNameFor(model => model.NamaKaryawan)</td>
+                            <td class="text-center">@Html.DisplayNameFor(model => model.JenisKelamin)</td>
+                            <td class="text-center">@Html.DisplayNameFor(model => model.Email)</td>
+                            <td class="text-center">@Html.DisplayNameFor(model => model.NoTelp)</td>
+                            <td class="text-center">@Html.DisplayNameFor(model => model.ID_Role)</td>
+                            <th class="text-center">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -64,12 +64,12 @@
                             <td>@Html.DisplayFor(modelItem => item.Email)</td>
                             <td>@Html.DisplayFor(modelItem => item.NoTelp)</td>
                             <td>@Html.DisplayFor(modelItem => item.Role.NamaRole)</td>
-                            <td>
+                            <td class="text-center">
                                 <a href="~/Karyawan/Details/@Html.DisplayFor(modelItem => item.NPK)" data-toggle="tooltip" title="Details" class="btn btn-datatable btn-icon btn-transparent-dark mr-2" te><i data-feather="list"></i></a>
                                 <a href="~/Karyawan/Edit/@Html.DisplayFor(modelItem => item.NPK)" data-toggle="tooltip" title="Edit" class="btn btn-datatable btn-icon btn-transparent-dark mr-2" te><i data-feather="edit"></i></a>
                                 <a onClick="return confirm('Yakin akan dihapus?');" href="~/Karyawan/Delete/@Html.DisplayFor(modelItem => item.NPK)" data-toggle="tooltip" title="Delete" class="btn btn-datatable btn-icon btn-transparent-dark mr-2" te><i data-feather="trash-2"></i></a>
                             </td>
-                            </tr>
+                        </tr>
                         }
                     </tbody>
                 </table>

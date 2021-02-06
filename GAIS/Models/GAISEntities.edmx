@@ -10,7 +10,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="NamaBarang" Type="varchar" MaxLength="75" />
+          <Property Name="NamaBarang" Type="varchar" MaxLength="100" />
           <Property Name="Keterangan" Type="varchar" MaxLength="255" />
           <Property Name="ID_JenisBarang" Type="int" />
           <Property Name="ID_Seksi" Type="int" />
@@ -49,6 +49,7 @@
           <Property Name="Kuantitas" Type="int" />
           <Property Name="HargaBarang" Type="int" />
           <Property Name="Kondisi_Rusak" Type="int" />
+          <Property Name="Keterangan" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="DetailPengajuan">
           <Key>
@@ -59,6 +60,7 @@
           <Property Name="ID_Barang" Type="int" Nullable="false" />
           <Property Name="Kuantitas" Type="int" />
           <Property Name="HargaBarang" Type="int" />
+          <Property Name="StatusBarang" Type="varchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="JenisBank">
           <Key>
@@ -143,7 +145,6 @@
           <Property Name="TotalHarga" Type="int" />
           <Property Name="StatusPengajuan" Type="int" />
           <Property Name="SudahDibayar" Type="int" />
-          <Property Name="StatusPengiriman" Type="int" />
           <Property Name="StatusFinal" Type="varchar" MaxLength="50" />
           <Property Name="LastModifiedTime" Type="datetime" />
           <Property Name="ModifiedBy" Type="varchar" MaxLength="50" />
@@ -267,6 +268,18 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="DetailPeminjaman">
+              <PropertyRef Name="ID_Barang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetailPengajuan_Barang">
+          <End Role="BarangVendor" Type="Self.BarangVendor" Multiplicity="1" />
+          <End Role="DetailPengajuan" Type="Self.DetailPengajuan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BarangVendor">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DetailPengajuan">
               <PropertyRef Name="ID_Barang" />
             </Dependent>
           </ReferentialConstraint>
@@ -413,6 +426,10 @@
             <End Role="BarangPerusahaan" EntitySet="BarangPerusahaan" />
             <End Role="DetailPeminjaman" EntitySet="DetailPeminjaman" />
           </AssociationSet>
+          <AssociationSet Name="FK_DetailPengajuan_Barang" Association="Self.FK_DetailPengajuan_Barang">
+            <End Role="BarangVendor" EntitySet="BarangVendor" />
+            <End Role="DetailPengajuan" EntitySet="DetailPengajuan" />
+          </AssociationSet>
           <AssociationSet Name="FK_Karyawan_Role" Association="Self.FK_Karyawan_Role">
             <End Role="Role" EntitySet="Role" />
             <End Role="Karyawan" EntitySet="Karyawan" />
@@ -535,13 +552,17 @@
             <End Role="BarangPerusahaan" EntitySet="BarangPerusahaans" />
             <End Role="Keranjang" EntitySet="Keranjangs" />
           </AssociationSet>
+          <AssociationSet Name="FK_DetailPengajuan_Barang" Association="GAISModel.FK_DetailPengajuan_Barang">
+            <End Role="BarangVendor" EntitySet="BarangVendors" />
+            <End Role="DetailPengajuan" EntitySet="DetailPengajuans" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="BarangPerusahaan">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NamaBarang" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Name="NamaBarang" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Keterangan" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="ID_JenisBarang" Type="Int32" />
           <Property Name="ID_Seksi" Type="Int32" />
@@ -576,6 +597,7 @@
           <Property Name="RowStatus" Type="Int32" />
           <NavigationProperty Name="JenisBarang" Relationship="GAISModel.FK_BarangVendor_JenisBarang" FromRole="BarangVendor" ToRole="JenisBarang" />
           <NavigationProperty Name="Vendor" Relationship="GAISModel.FK_BarangVendor_Vendor" FromRole="BarangVendor" ToRole="Vendor" />
+          <NavigationProperty Name="DetailPengajuans" Relationship="GAISModel.FK_DetailPengajuan_Barang" FromRole="BarangVendor" ToRole="DetailPengajuan" />
         </EntityType>
         <EntityType Name="DetailPeminjaman">
           <Key>
@@ -588,6 +610,7 @@
           <Property Name="HargaBarang" Type="Int32" />
           <Property Name="Kondisi_Rusak" Type="Int32" />
           <NavigationProperty Name="BarangPerusahaan" Relationship="GAISModel.FK_DetailPeminjaman_Barang" FromRole="DetailPeminjaman" ToRole="BarangPerusahaan" />
+          <Property Name="Keterangan" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="DetailPengajuan">
           <Key>
@@ -598,6 +621,8 @@
           <Property Name="ID_Barang" Type="Int32" Nullable="false" />
           <Property Name="Kuantitas" Type="Int32" />
           <Property Name="HargaBarang" Type="Int32" />
+          <Property Name="StatusBarang" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="BarangVendor" Relationship="GAISModel.FK_DetailPengajuan_Barang" FromRole="DetailPengajuan" ToRole="BarangVendor" />
         </EntityType>
         <EntityType Name="JenisBank">
           <Key>
@@ -681,7 +706,6 @@
           <Property Name="TotalHarga" Type="Int32" />
           <Property Name="StatusPengajuan" Type="Int32" />
           <Property Name="SudahDibayar" Type="Int32" />
-          <Property Name="StatusPengiriman" Type="Int32" />
           <Property Name="StatusFinal" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="LastModifiedTime" Type="DateTime" Precision="3" />
           <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -898,6 +922,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DetailPengajuan_Barang">
+          <End Type="GAISModel.BarangVendor" Role="BarangVendor" Multiplicity="1" />
+          <End Type="GAISModel.DetailPengajuan" Role="DetailPengajuan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BarangVendor">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DetailPengajuan">
+              <PropertyRef Name="ID_Barang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -950,6 +986,7 @@
           <EntitySetMapping Name="DetailPeminjamen">
             <EntityTypeMapping TypeName="GAISModel.DetailPeminjaman">
               <MappingFragment StoreEntitySet="DetailPeminjaman">
+                <ScalarProperty Name="Keterangan" ColumnName="Keterangan" />
                 <ScalarProperty Name="Kondisi_Rusak" ColumnName="Kondisi_Rusak" />
                 <ScalarProperty Name="HargaBarang" ColumnName="HargaBarang" />
                 <ScalarProperty Name="Kuantitas" ColumnName="Kuantitas" />
@@ -961,6 +998,7 @@
           <EntitySetMapping Name="DetailPengajuans">
             <EntityTypeMapping TypeName="GAISModel.DetailPengajuan">
               <MappingFragment StoreEntitySet="DetailPengajuan">
+                <ScalarProperty Name="StatusBarang" ColumnName="StatusBarang" />
                 <ScalarProperty Name="HargaBarang" ColumnName="HargaBarang" />
                 <ScalarProperty Name="Kuantitas" ColumnName="Kuantitas" />
                 <ScalarProperty Name="ID_Barang" ColumnName="ID_Barang" />
@@ -1042,7 +1080,6 @@
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="LastModifiedTime" ColumnName="LastModifiedTime" />
                 <ScalarProperty Name="StatusFinal" ColumnName="StatusFinal" />
-                <ScalarProperty Name="StatusPengiriman" ColumnName="StatusPengiriman" />
                 <ScalarProperty Name="SudahDibayar" ColumnName="SudahDibayar" />
                 <ScalarProperty Name="StatusPengajuan" ColumnName="StatusPengajuan" />
                 <ScalarProperty Name="TotalHarga" ColumnName="TotalHarga" />

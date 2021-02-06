@@ -20,7 +20,6 @@ namespace GAIS.Models
         public Nullable<int> TotalHarga { get; set; }
         public Nullable<int> StatusPengajuan { get; set; }
         public Nullable<int> SudahDibayar { get; set; }
-        public Nullable<int> StatusPengiriman { get; set; }
         public string StatusFinal { get; set; }
         public Nullable<System.DateTime> LastModifiedTime { get; set; }
         public string ModifiedBy { get; set; }

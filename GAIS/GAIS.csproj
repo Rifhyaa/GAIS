@@ -221,6 +221,7 @@
     <Content Include="assets\demo\datatables-demo.js" />
     <Content Include="assets\demo\date-range-picker-demo-single.js" />
     <Content Include="assets\demo\date-range-picker-demo.js" />
+    <Content Include="assets\img\app-logo.png" />
     <Content Include="assets\img\backgrounds\bg-angles.svg" />
     <Content Include="assets\img\backgrounds\bg-pattern-shapes.png" />
     <Content Include="assets\img\backgrounds\bg-waves.svg" />
@@ -233,7 +234,6 @@
     <Content Include="assets\img\demo\demo-ocean-lg.jpg" />
     <Content Include="assets\img\demo\demo-ocean-sm.jpg" />
     <Content Include="assets\img\demo\pug.svg" />
-    <Content Include="assets\img\favicon.png" />
     <Content Include="assets\img\illustrations\400-error-bad-request.svg" />
     <Content Include="assets\img\illustrations\401-error-unauthorized.svg" />
     <Content Include="assets\img\illustrations\403-error-forbidden.svg" />
@@ -262,7 +262,6 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="css\bootstrap-icons.css" />
     <Content Include="css\bootstrap.css" />
     <Content Include="css\styles.css" />
     <Content Include="favicon.ico" />
@@ -371,13 +370,13 @@
     <Content Include="Views\Karyawan\Details.cshtml" />
     <Content Include="Views\Karyawan\Create.cshtml" />
     <Content Include="Views\Karyawan\Edit.cshtml" />
-    <Content Include="Views\Peminjaman\Index.cshtml" />
+    <Content Include="Views\Peminjaman\Riwayat.cshtml" />
     <Content Include="Views\Peminjaman\Form.cshtml" />
     <Content Include="Views\Peminjaman\Submit.cshtml" />
     <Content Include="Views\Peminjaman\Details.cshtml" />
-    <Content Include="Views\Peminjaman\ListPeminjaman.cshtml" />
-    <Content Include="Views\Peminjaman\ViewAll.cshtml" />
-    <Content Include="Views\Peminjaman\ChangesItem.cshtml" />
+    <Content Include="Views\Peminjaman\DaftarPeminjaman.cshtml" />
+    <Content Include="Views\Peminjaman\LaporanPeminjaman.cshtml" />
+    <Content Include="Views\Peminjaman\FormBarangRusak.cshtml" />
     <Content Include="Views\Shared\_Dashboard.cshtml" />
     <Content Include="Views\User\MyProfile.cshtml" />
   </ItemGroup>

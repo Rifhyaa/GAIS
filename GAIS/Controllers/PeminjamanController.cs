@@ -163,7 +163,12 @@ namespace GAIS.Controllers
             mdat.TglPengembalian = returned;
             mdat.AcceptedBy = "-";
             mdat.Status = 0;
-            
+
+            // Status Late
+            mdat.IsLate = 0;
+            mdat.Denda = 0;
+            mdat.StatusDenda = "-";
+
             entities.Peminjamen.Add(mdat);
 
             var detail = entities.Keranjangs.Where(x => x.ID_Karyawan == npk);
@@ -215,6 +220,58 @@ namespace GAIS.Controllers
             return View(data);
         }
 
+        [HttpGet]
+        public ActionResult ChangesItem(string ID, int Item)
+        {
+            string npk = this.Session["NPK"].ToString();
+
+            var data = entities.DetailPeminjamen.Where(x => x.ID_Peminjaman == ID && x.ID_Barang == Item).FirstOrDefault();
+
+            // Session Username & Role
+            ViewBag.NamaUser = this.Session["NamaUser"];
+            ViewBag.Role = this.Session["Role"];
+            return View(data);
+        }
+
+        [HttpPost]
+        public ActionResult ChangesItem(DetailPeminjaman mdat)
+        {
+            // Get Data By ID
+            var myData = entities.DetailPeminjamen.Where(x => x.ID_Peminjaman == mdat.ID_Peminjaman &&
+                x.ID_Barang == mdat.ID_Barang).FirstOrDefault();
+
+            if (ModelState.IsValid)
+            {
+                // Change Data
+                var data = entities.Peminjamen.Where(x => x.ID == mdat.ID_Peminjaman).FirstOrDefault();
+                myData.Kondisi_Rusak = mdat.Kondisi_Rusak;
+
+                if (data.IsLate == 1)
+                {
+                    var total = mdat.Kondisi_Rusak * mdat.HargaBarang;
+                    data.Denda = data.Denda + total;
+                }
+                else
+                {
+                    var total = (mdat.Kondisi_Rusak * mdat.HargaBarang) / 2;
+                    data.Denda = data.Denda + total;
+                }
+                entities.SaveChanges();
+
+                // Session Username & Role
+                ViewBag.NamaUser = this.Session["NamaUser"];
+                ViewBag.Role = this.Session["Role"];
+                return RedirectToAction("ViewAll");
+            }
+            else
+            {
+                // Session Username & Role
+                ViewBag.NamaUser = this.Session["NamaUser"];
+                ViewBag.Role = this.Session["Role"];
+                return View(mdat);
+            }
+        }
+
         public ActionResult ConfirmationBorrowing(string id)
         {
             string npk = this.Session["NPK"].ToString();
@@ -241,15 +298,13 @@ namespace GAIS.Controllers
             data.ModifiedBy = this.Session["NamaUser"].ToString();
             data.Status = 2;
             data.LastModifiedTime = DateTime.Now;
-
-            //TimeSpan ts = DateTime.Now.Subtract(data.TglPengembalian.Value);
-            //int NumberOfDays = Convert.ToInt32(ts.TotalDays);
         
             // Check Denda
             if (data.TglPengembalian < DateTime.Today)
             {
                 data.IsLate = 1;
                 data.Denda = 50000;
+                data.StatusDenda = "Belum Lunas";
             }
             entities.SaveChanges();
             

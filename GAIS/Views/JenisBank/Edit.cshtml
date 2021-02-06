@@ -34,14 +34,14 @@
                 @Html.HiddenFor(model => model.ID)
                 <div class="form-group">
                     <label class="control-label" for="Nama">Bank<span style="color: red">*</span></label>
-                    @Html.EditorFor(model => model.Nama, new { htmlAttributes = new { @class = "form-control", maxlength = 50, placeholder = "Bank" } })
+                    @Html.EditorFor(model => model.Nama, new { htmlAttributes = new { @class = "form-control", placeholder = "Bank" } })
                     @Html.ValidationMessageFor(model => model.Nama, "", new { @class = "text-danger small" })
                     @Html.Hidden("check_names", Model.Nama, new { @id = "check_names" })
                 </div>
 
                 <div class="form-group">
                     <label class="control-label" for="Keterangan">Keterangan<span style="color: red">*</span></label>
-                    @Html.EditorFor(model => model.Keterangan, new { htmlAttributes = new { @class = "form-control", maxlength = 255, placeholder = "Description" } })
+                    @Html.EditorFor(model => model.Keterangan, new { htmlAttributes = new { @class = "form-control", placeholder = "Description" } })
                     @Html.ValidationMessageFor(model => model.Keterangan, "", new { @class = "text-danger small" })
                 </div>
 

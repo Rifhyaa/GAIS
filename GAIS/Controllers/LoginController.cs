@@ -27,7 +27,8 @@ namespace GAIS.Controllers
                     var obj = entities.Karyawans.Where(x => x.Password == password && x.NPK == npk).FirstOrDefault();
                     if (obj == null)
                     {
-                        ViewBag.Validasi = "1";
+                        ViewBag.Type = "danger";
+                        ViewBag.Validasi = "Username or password is wrong";
                         return View();
                     }
                     else
@@ -37,7 +38,7 @@ namespace GAIS.Controllers
                         this.Session["Role"] = obj.Role.NamaRole;
                         this.Session["isLogged"] = true;
 
-                        return RedirectToAction("Index", "JenisBank");
+                        return RedirectToAction("Admin", "Dashboard");
 
                         // disini di cek rolenya buat pindah2 halaman
                     }
@@ -53,6 +54,9 @@ namespace GAIS.Controllers
             this.Session["NamaUser"] = null;
             this.Session["Role"] = null;
             this.Session["isLogged"] = null;
+
+            ViewBag.Type = "success";
+            ViewBag.Validasi = "You have been logged out!";
 
             return View("Index");
         }

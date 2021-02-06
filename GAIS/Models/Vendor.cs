@@ -11,8 +11,7 @@ namespace GAIS.Models
 {
     using System;
     using System.Collections.Generic;
-
-    [System.ComponentModel.DataAnnotations.MetadataType(typeof(VendorMetaData))]
+    
     public partial class Vendor
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]

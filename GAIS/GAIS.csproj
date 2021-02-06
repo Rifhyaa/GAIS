@@ -134,6 +134,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\BarangPerusahaanController.cs" />
     <Compile Include="Controllers\BarangVendorController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JenisBankController.cs" />
@@ -141,6 +142,7 @@
     <Compile Include="Controllers\KaryawanController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PeminjamanController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\VendorController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -193,6 +195,7 @@
     <Compile Include="Models\Peminjaman.cs">
       <DependentUpon>GAISEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PeminjamanMetaData.cs" />
     <Compile Include="Models\Pengajuan.cs">
       <DependentUpon>GAISEntities.tt</DependentUpon>
     </Compile>
@@ -319,6 +322,8 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Views\Dashboard\Admin.cshtml" />
+    <Content Include="Views\Dashboard\User.cshtml" />
     <None Include="Views\Error\BadRequest.cshtml" />
     <Content Include="Views\Error\error-401.html" />
     <Content Include="Views\Error\error-403.html" />
@@ -372,6 +377,9 @@
     <Content Include="Views\Peminjaman\Details.cshtml" />
     <Content Include="Views\Peminjaman\ListPeminjaman.cshtml" />
     <Content Include="Views\Peminjaman\ViewAll.cshtml" />
+    <Content Include="Views\Peminjaman\ChangesItem.cshtml" />
+    <Content Include="Views\Shared\_Dashboard.cshtml" />
+    <Content Include="Views\User\MyProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Upload\" />

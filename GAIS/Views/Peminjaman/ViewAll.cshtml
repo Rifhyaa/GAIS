@@ -24,12 +24,12 @@
 <div class="container-fluid mt-4">
     <div class="card mb-4">
         <div class="card-header" style="font-size: 1.1rem; ">
-            Riwayat Peminjaman
+            Daftar Semua Peminjaman
         </div>
         <div class="card-body">
             <div class="row form-group">
                 <div class="col-sm-12 col-md-6">
-                    <a href="~/Peminjaman/Form" class="btn btn-primary">Add New</a>
+
                 </div>
             </div>
             <div class="datatable">
@@ -37,12 +37,14 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>@Html.DisplayNameFor(model => model.ID)</th>
-                            <th>@Html.DisplayNameFor(model => model.TglPeminjaman)</th>
-                            <th>@Html.DisplayNameFor(model => model.TglPengembalian)</th>
-                            <th>@Html.DisplayNameFor(model => model.AcceptedBy)</th>
-                            <th>@Html.DisplayNameFor(model => model.Status)</th>
-                            <th>@Html.DisplayNameFor(model => model.Denda)</th>
+                            <th>ID Transaction</th>
+                            <th>Borrow Date</th>
+                            <th>Date Returned</th>
+                            <th>Created By</th>
+                            <th>Confirmed By</th>
+                            <th>Status</th>
+                            <th>Fine</th>
+                            <th>Fine Status</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -55,6 +57,7 @@
                             <td>@Html.DisplayFor(modelItem => item.ID)</td>
                             <td>@Html.DisplayFor(modelItem => item.TglPeminjaman)</td>
                             <td>@Html.DisplayFor(modelItem => item.TglPengembalian)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Karyawan.NamaKaryawan)</td>
                             <td>@Html.DisplayFor(modelItem => item.AcceptedBy)</td>
                             @if (item.Status == 0)
                             {
@@ -68,7 +71,7 @@
                             {
                                 <td>Dikembalikan</td>
                             }
-                            @if (item.Denda == null)
+                            @if (item.Denda == 0)
                             {
                                 <td>-</td>
                             }
@@ -76,6 +79,7 @@
                             {
                                 <td>@Html.DisplayFor(modelItem => item.Denda)</td>
                             }
+                            <td>@Html.DisplayFor(modelItem => item.StatusDenda)</td>
                             <td>
                                 <a href="~/Peminjaman/Details/@Html.DisplayFor(modelItem => item.ID)" data-toggle="tooltip" title="Details" class="btn btn-datatable btn-icon btn-transparent-dark mr-2" te><i data-feather="list"></i></a>
                             </td>

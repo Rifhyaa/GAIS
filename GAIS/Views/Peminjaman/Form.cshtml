@@ -34,11 +34,10 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>@Html.DisplayNameFor(model => model.NamaBarang)</th>
-                                    <th>@Html.DisplayNameFor(model => model.Keterangan)</th>
-                                    <th>@Html.DisplayNameFor(model => model.ID_JenisBarang)</th>
-                                    <th>@Html.DisplayNameFor(model => model.ID_Vendor)</th>
-                                    <th>@Html.DisplayNameFor(model => model.Stok)</th>
+                                    <th>Item Name</th>
+                                    <th>Description</th>
+                                    <th>Category</th>
+                                    <th>Stock</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -51,7 +50,6 @@
                                         <td>@Html.DisplayFor(modelItem => item.NamaBarang)</td>
                                         <td>@Html.DisplayFor(modelItem => item.Keterangan)</td>
                                         <td>@Html.DisplayFor(modelItem => item.JenisBarang.Nama)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Vendor.NamaVendor)</td>
                                         <td>@Html.DisplayFor(modelItem => item.Stok)</td>
                                         <td>
                                             <a href="~/Peminjaman/Add/@Html.DisplayFor(modelItem => item.ID)" data-toggle="tooltip" title="Add" class="btn btn-datatable btn-icon btn-transparent-dark mr-2" te><i data-feather="plus"></i></a>

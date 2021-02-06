@@ -17,7 +17,7 @@ namespace GAIS.Models
         public int ID { get; set; }
         public int ID_Barang { get; set; }
         public string ID_Karyawan { get; set; }
-        public Nullable<int> Qyt { get; set; }
+        public int Qyt { get; set; }
     
         public virtual BarangPerusahaan BarangPerusahaan { get; set; }
     }

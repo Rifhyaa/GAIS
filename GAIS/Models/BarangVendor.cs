@@ -11,8 +11,7 @@ namespace GAIS.Models
 {
     using System;
     using System.Collections.Generic;
-
-    [System.ComponentModel.DataAnnotations.MetadataType(typeof(BarangVendorMetaData))]
+    
     public partial class BarangVendor
     {
         public int ID { get; set; }

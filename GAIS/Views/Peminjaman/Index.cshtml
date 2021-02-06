@@ -36,12 +36,14 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>@Html.DisplayNameFor(model => model.ID)</th>
-                            <th>@Html.DisplayNameFor(model => model.TglPeminjaman)</th>
-                            <th>@Html.DisplayNameFor(model => model.TglPengembalian)</th>
-                            <th>@Html.DisplayNameFor(model => model.AcceptedBy)</th>
-                            <th>@Html.DisplayNameFor(model => model.Status)</th>
-                            <th>@Html.DisplayNameFor(model => model.Denda)</th>
+                            <th>ID Transaction</th>
+                            <th>Borrow Date</th>
+                            <th>Date Returned</th>
+                            <th>Created By</th>
+                            <th>Confirmed By</th>
+                            <th>Status</th>
+                            <th>Fine</th>
+                            <th>Fine Status</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -54,6 +56,7 @@
                             <td>@Html.DisplayFor(modelItem => item.ID)</td>
                             <td>@Html.DisplayFor(modelItem => item.TglPeminjaman)</td>
                             <td>@Html.DisplayFor(modelItem => item.TglPengembalian)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Karyawan.NamaKaryawan)</td>
                             <td>@Html.DisplayFor(modelItem => item.AcceptedBy)</td>
                             @if (item.Status == 0)
                             {
@@ -67,7 +70,15 @@
                             {
                                 <td>Dikembalikan</td>
                             }
-                            <td>@Html.DisplayFor(modelItem => item.Denda)</td>
+                            @if (item.Denda == 0)
+                            {
+                                <td>-</td>
+                            }
+                            else
+                            {
+                                <td>@Html.DisplayFor(modelItem => item.Denda)</td>
+                            }
+                            <td>@Html.DisplayFor(modelItem => item.StatusDenda)</td>
                             <td>
                                 <a href="~/Peminjaman/Details/@Html.DisplayFor(modelItem => item.ID)" data-toggle="tooltip" title="Details" class="btn btn-datatable btn-icon btn-transparent-dark mr-2" te><i data-feather="list"></i></a>
                             </td>

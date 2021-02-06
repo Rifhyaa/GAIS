@@ -11,13 +11,13 @@ namespace GAIS.Models
 {
     using System;
     using System.Collections.Generic;
-
-    [System.ComponentModel.DataAnnotations.MetadataType(typeof(BarangPerusahaanMetaData))]
+    
     public partial class BarangPerusahaan
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public BarangPerusahaan()
         {
+            this.DetailPeminjamen = new HashSet<DetailPeminjaman>();
             this.Keranjangs = new HashSet<Keranjang>();
         }
     
@@ -38,6 +38,8 @@ namespace GAIS.Models
         public virtual JenisBarang JenisBarang { get; set; }
         public virtual Section Section { get; set; }
         public virtual Vendor Vendor { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DetailPeminjaman> DetailPeminjamen { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Keranjang> Keranjangs { get; set; }
     }

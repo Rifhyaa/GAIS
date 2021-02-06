@@ -19,5 +19,7 @@ namespace GAIS.Models
         public Nullable<int> Kuantitas { get; set; }
         public Nullable<int> HargaBarang { get; set; }
         public Nullable<int> Kondisi_Rusak { get; set; }
+    
+        public virtual BarangPerusahaan BarangPerusahaan { get; set; }
     }
 }

@@ -1,0 +1,68 @@
+﻿@model GAIS.Models.DetailPeminjaman
+
+@{
+    ViewBag.Title = "ChangesItem";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<header class="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
+    <div class="container-fluid">
+        <div class="page-header-content">
+            <div class="row align-items-center justify-content-between pt-3">
+                <div class="col-auto mb-3">
+                    <ol class="breadcrumb gais-breadcrumb" style="background-color: #fff">
+                        <li class="breadcrumb-item">Home</li>
+                        <li class="breadcrumb-item">Admin</li>
+                        <li class="breadcrumb-item">Peminjaman</li>
+                        <li class="breadcrumb-item">Details</li>
+                        <li class="breadcrumb-item text-blue">Changes Item</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="container mt-4">
+        <div class="card mb-4">
+            <div class="card-header" style="font-size: 1.1rem;">
+                Form Broken Item
+            </div>
+            <div class="card-body">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    <label class="control-label">ID Transaction</label>
+                    @Html.EditorFor(model => model.ID_Peminjaman, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Item</label>
+                    @Html.HiddenFor(model => model.ID_Barang)
+                    @Html.EditorFor(model => model.BarangPerusahaan.NamaBarang, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } });
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Quantity</label>
+                    @Html.EditorFor(model => model.Kuantitas, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } });
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Price</label>
+                    @Html.EditorFor(model => model.HargaBarang, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } });
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Broken</label>
+                    @Html.EditorFor(model => model.Kondisi_Rusak, new { htmlAttributes = new { @class = "form-control", placeholder = "Fill Quantity Broken Item" } });
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Submit" class="btn btn-primary" />
+                    <a onclick="history.back()" class="btn btn-outline-primary">Back to list</a>
+                </div>
+            </div>
+        </div>
+    </div>
+}

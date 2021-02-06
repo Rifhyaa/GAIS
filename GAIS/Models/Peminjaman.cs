@@ -25,6 +25,7 @@ namespace GAIS.Models
         public Nullable<int> Status { get; set; }
         public Nullable<int> IsLate { get; set; }
         public Nullable<int> Denda { get; set; }
+        public string StatusDenda { get; set; }
     
         public virtual Karyawan Karyawan { get; set; }
     }

@@ -33,7 +33,7 @@
                 @Html.HiddenFor(model => model.ID)
                 <div class="form-group">
                     <label class="control-label">@Html.DisplayNameFor(model => model.NamaVendor)<span style="color: red">*</span></label>
-                    @Html.EditorFor(model => model.NamaVendor, new { htmlAttributes = new { @class = "form-control", placeholder = "Masukkan Nama Vendor" } })
+                    @Html.EditorFor(model => model.NamaVendor, new { htmlAttributes = new { @class = "form-control", placeholder = "Masukkan Nama Vendor", @onkeypress = "return isCharKey(event)" } })
                     @Html.ValidationMessageFor(model => model.NamaVendor, "", new { @class = "text-danger small" })
                 </div>
 
@@ -74,13 +74,4 @@
             </div>
         </div>
     </div>
-    <script>
-        function isNumberKey(evt) {
-            var charCode = (evt.which) ? evt.which : event.keyCode
-            if (charCode > 31 && (charCode < 48 || charCode > 57))
-                return false;
-
-            return true;
-        }
-    </script>
 }

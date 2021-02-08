@@ -33,5 +33,13 @@ namespace GAIS.Controllers
         {
             return View();
         }
+
+        public ActionResult User()
+        {
+            // Session Username & Role
+            ViewBag.NamaUser = this.Session["NamaUser"];
+            ViewBag.Role = this.Session["Role"];
+            return View();
+        }
     }
 }

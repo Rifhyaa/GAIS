@@ -47,7 +47,6 @@ namespace GAIS.Controllers
 
             ViewBag.ID_JenisBarang = new SelectList(entities.JenisBarangs.Where(x => x.RowStatus == 0), "ID", "Nama");
             ViewBag.ID_Vendor = new SelectList(entities.Vendors.Where(x => x.RowStatus == 0), "ID", "NamaVendor");
-            ViewBag.ID_Seksi = new SelectList(entities.Sections.Where(x => x.RowStatus == 0), "ID", "NamaSection");
             return View();
         }
 
@@ -61,6 +60,7 @@ namespace GAIS.Controllers
                 mdat.CreatedTime = DateTime.Now;
                 mdat.RowStatus = 0;
                 mdat.CreatedBy = this.Session["NamaUser"].ToString();
+                mdat.ID_Seksi = 5;
                 entities.BarangPerusahaans.Add(mdat);
                 entities.SaveChanges();
 
@@ -73,7 +73,6 @@ namespace GAIS.Controllers
             {
                 ViewBag.ID_JenisBarang = new SelectList(entities.JenisBarangs.Where(x => x.RowStatus == 0), "ID", "Nama", mdat.ID_JenisBarang);
                 ViewBag.ID_Vendor = new SelectList(entities.Vendors.Where(x => x.RowStatus == 0), "ID", "NamaVendor", mdat.ID_Vendor);
-                ViewBag.ID_Seksi = new SelectList(entities.Sections.Where(x => x.RowStatus == 0), "ID", "NamaSection", mdat.ID_Seksi);
 
                 // Session Username & Role
                 ViewBag.NamaUser = this.Session["NamaUser"];
@@ -94,7 +93,6 @@ namespace GAIS.Controllers
 
             ViewBag.ID_JenisBarang = new SelectList(entities.JenisBarangs.Where(x => x.RowStatus == 0), "ID", "Nama", myData.ID_JenisBarang);
             ViewBag.ID_Vendor = new SelectList(entities.Vendors.Where(x => x.RowStatus == 0), "ID", "NamaVendor", myData.ID_Vendor);
-            ViewBag.ID_Seksi = new SelectList(entities.Sections.Where(x => x.RowStatus == 0), "ID", "NamaSection", myData.ID_Seksi);
             return View(myData);
         }
 
@@ -110,7 +108,6 @@ namespace GAIS.Controllers
                 myData.NamaBarang = mdat.NamaBarang;
                 myData.Keterangan = mdat.Keterangan;
                 myData.ID_JenisBarang = mdat.ID_JenisBarang;
-                myData.ID_Seksi = mdat.ID_Seksi;
                 myData.ID_Vendor = mdat.ID_Vendor;
                 myData.Stok = mdat.Stok;
                 myData.Harga = mdat.Harga;
@@ -127,7 +124,6 @@ namespace GAIS.Controllers
             {
                 ViewBag.ID_JenisBarang = new SelectList(entities.JenisBarangs.Where(x => x.RowStatus == 0), "ID", "Nama", mdat.ID_JenisBarang);
                 ViewBag.ID_Vendor = new SelectList(entities.Vendors.Where(x => x.RowStatus == 0), "ID", "NamaVendor", mdat.ID_Vendor);
-                ViewBag.ID_Seksi = new SelectList(entities.Sections.Where(x => x.RowStatus == 0), "ID", "NamaSection", mdat.ID_Seksi);
 
                 // Session Username & Role
                 ViewBag.NamaUser = this.Session["NamaUser"];

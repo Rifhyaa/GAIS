@@ -60,6 +60,7 @@
           <Property Name="ID_Barang" Type="int" Nullable="false" />
           <Property Name="Kuantitas" Type="int" />
           <Property Name="HargaBarang" Type="int" />
+          <Property Name="ID_Vendor" Type="int" Nullable="false" />
           <Property Name="StatusBarang" Type="varchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="JenisBank">
@@ -90,9 +91,10 @@
         </EntityType>
         <EntityType Name="Karyawan">
           <Key>
-            <PropertyRef Name="NPK" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="NPK" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NPK" Type="varchar" MaxLength="10" />
           <Property Name="NamaKaryawan" Type="varchar" MaxLength="100" />
           <Property Name="JenisKelamin" Type="char" MaxLength="1" />
           <Property Name="TanggalLahir" Type="date" />
@@ -117,6 +119,15 @@
           <Property Name="ID_Barang" Type="int" Nullable="false" />
           <Property Name="ID_Karyawan" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="Qyt" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="KeranjangPengajuan">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Barang" Type="int" Nullable="false" />
+          <Property Name="ID_Karyawan" Type="varchar" MaxLength="10" />
+          <Property Name="Qyt" Type="int" />
         </EntityType>
         <EntityType Name="Peminjaman">
           <Key>
@@ -284,6 +295,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DetailPengajuan_Vendor">
+          <End Role="Vendor" Type="Self.Vendor" Multiplicity="1" />
+          <End Role="DetailPengajuan" Type="Self.DetailPengajuan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vendor">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DetailPengajuan">
+              <PropertyRef Name="ID_Vendor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Karyawan_Role">
           <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
           <End Role="Karyawan" Type="Self.Karyawan" Multiplicity="*" />
@@ -320,27 +343,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Peminjaman_Karyawan">
-          <End Role="Karyawan" Type="Self.Karyawan" Multiplicity="0..1" />
-          <End Role="Peminjaman" Type="Self.Peminjaman" Multiplicity="*" />
+        <Association Name="FK_KeranjangPengajuan_BarangVendor">
+          <End Role="BarangVendor" Type="Self.BarangVendor" Multiplicity="1" />
+          <End Role="KeranjangPengajuan" Type="Self.KeranjangPengajuan" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Karyawan">
-              <PropertyRef Name="NPK" />
+            <Principal Role="BarangVendor">
+              <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="Peminjaman">
-              <PropertyRef Name="ID_Karyawan" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Pengajuan_GA">
-          <End Role="Karyawan" Type="Self.Karyawan" Multiplicity="0..1" />
-          <End Role="Pengajuan" Type="Self.Pengajuan" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Karyawan">
-              <PropertyRef Name="NPK" />
-            </Principal>
-            <Dependent Role="Pengajuan">
-              <PropertyRef Name="ID_GA" />
+            <Dependent Role="KeranjangPengajuan">
+              <PropertyRef Name="ID_Barang" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -396,6 +407,7 @@
           <EntitySet Name="JenisBarang" EntityType="Self.JenisBarang" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Karyawan" EntityType="Self.Karyawan" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Keranjang" EntityType="Self.Keranjang" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KeranjangPengajuan" EntityType="Self.KeranjangPengajuan" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Peminjaman" EntityType="Self.Peminjaman" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pengajuan" EntityType="Self.Pengajuan" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Reference" EntityType="Self.Reference" Schema="dbo" store:Type="Tables" />
@@ -430,6 +442,10 @@
             <End Role="BarangVendor" EntitySet="BarangVendor" />
             <End Role="DetailPengajuan" EntitySet="DetailPengajuan" />
           </AssociationSet>
+          <AssociationSet Name="FK_DetailPengajuan_Vendor" Association="Self.FK_DetailPengajuan_Vendor">
+            <End Role="Vendor" EntitySet="Vendor" />
+            <End Role="DetailPengajuan" EntitySet="DetailPengajuan" />
+          </AssociationSet>
           <AssociationSet Name="FK_Karyawan_Role" Association="Self.FK_Karyawan_Role">
             <End Role="Role" EntitySet="Role" />
             <End Role="Karyawan" EntitySet="Karyawan" />
@@ -442,13 +458,9 @@
             <End Role="BarangPerusahaan" EntitySet="BarangPerusahaan" />
             <End Role="Keranjang" EntitySet="Keranjang" />
           </AssociationSet>
-          <AssociationSet Name="FK_Peminjaman_Karyawan" Association="Self.FK_Peminjaman_Karyawan">
-            <End Role="Karyawan" EntitySet="Karyawan" />
-            <End Role="Peminjaman" EntitySet="Peminjaman" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Pengajuan_GA" Association="Self.FK_Pengajuan_GA">
-            <End Role="Karyawan" EntitySet="Karyawan" />
-            <End Role="Pengajuan" EntitySet="Pengajuan" />
+          <AssociationSet Name="FK_KeranjangPengajuan_BarangVendor" Association="Self.FK_KeranjangPengajuan_BarangVendor">
+            <End Role="BarangVendor" EntitySet="BarangVendor" />
+            <End Role="KeranjangPengajuan" EntitySet="KeranjangPengajuan" />
           </AssociationSet>
           <AssociationSet Name="FK_Vendor_JenisBank" Association="Self.FK_Vendor_JenisBank">
             <End Role="JenisBank" EntitySet="JenisBank" />
@@ -497,6 +509,8 @@
           <EntitySet Name="JenisBanks" EntityType="GAISModel.JenisBank" />
           <EntitySet Name="JenisBarangs" EntityType="GAISModel.JenisBarang" />
           <EntitySet Name="Karyawans" EntityType="GAISModel.Karyawan" />
+          <EntitySet Name="Keranjangs" EntityType="GAISModel.Keranjang" />
+          <EntitySet Name="KeranjangPengajuans" EntityType="GAISModel.KeranjangPengajuan" />
           <EntitySet Name="Peminjamen" EntityType="GAISModel.Peminjaman" />
           <EntitySet Name="Pengajuans" EntityType="GAISModel.Pengajuan" />
           <EntitySet Name="References" EntityType="GAISModel.Reference" />
@@ -519,6 +533,10 @@
             <End Role="BarangPerusahaan" EntitySet="BarangPerusahaans" />
             <End Role="DetailPeminjaman" EntitySet="DetailPeminjamen" />
           </AssociationSet>
+          <AssociationSet Name="FK_Keranjang_Barang" Association="GAISModel.FK_Keranjang_Barang">
+            <End Role="BarangPerusahaan" EntitySet="BarangPerusahaans" />
+            <End Role="Keranjang" EntitySet="Keranjangs" />
+          </AssociationSet>
           <AssociationSet Name="FK_BarangVendor_JenisBarang" Association="GAISModel.FK_BarangVendor_JenisBarang">
             <End Role="JenisBarang" EntitySet="JenisBarangs" />
             <End Role="BarangVendor" EntitySet="BarangVendors" />
@@ -526,6 +544,18 @@
           <AssociationSet Name="FK_BarangVendor_Vendor" Association="GAISModel.FK_BarangVendor_Vendor">
             <End Role="Vendor" EntitySet="Vendors" />
             <End Role="BarangVendor" EntitySet="BarangVendors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetailPengajuan_Barang" Association="GAISModel.FK_DetailPengajuan_Barang">
+            <End Role="BarangVendor" EntitySet="BarangVendors" />
+            <End Role="DetailPengajuan" EntitySet="DetailPengajuans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KeranjangPengajuan_BarangVendor" Association="GAISModel.FK_KeranjangPengajuan_BarangVendor">
+            <End Role="BarangVendor" EntitySet="BarangVendors" />
+            <End Role="KeranjangPengajuan" EntitySet="KeranjangPengajuans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetailPengajuan_Vendor" Association="GAISModel.FK_DetailPengajuan_Vendor">
+            <End Role="Vendor" EntitySet="Vendors" />
+            <End Role="DetailPengajuan" EntitySet="DetailPengajuans" />
           </AssociationSet>
           <AssociationSet Name="FK_Vendor_JenisBank" Association="GAISModel.FK_Vendor_JenisBank">
             <End Role="JenisBank" EntitySet="JenisBanks" />
@@ -538,23 +568,6 @@
           <AssociationSet Name="FK_Karyawan_Section" Association="GAISModel.FK_Karyawan_Section">
             <End Role="Section" EntitySet="Sections" />
             <End Role="Karyawan" EntitySet="Karyawans" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Peminjaman_Karyawan" Association="GAISModel.FK_Peminjaman_Karyawan">
-            <End Role="Karyawan" EntitySet="Karyawans" />
-            <End Role="Peminjaman" EntitySet="Peminjamen" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Pengajuan_GA" Association="GAISModel.FK_Pengajuan_GA">
-            <End Role="Karyawan" EntitySet="Karyawans" />
-            <End Role="Pengajuan" EntitySet="Pengajuans" />
-          </AssociationSet>
-          <EntitySet Name="Keranjangs" EntityType="GAISModel.Keranjang" />
-          <AssociationSet Name="FK_Keranjang_Barang" Association="GAISModel.FK_Keranjang_Barang">
-            <End Role="BarangPerusahaan" EntitySet="BarangPerusahaans" />
-            <End Role="Keranjang" EntitySet="Keranjangs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DetailPengajuan_Barang" Association="GAISModel.FK_DetailPengajuan_Barang">
-            <End Role="BarangVendor" EntitySet="BarangVendors" />
-            <End Role="DetailPengajuan" EntitySet="DetailPengajuans" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="BarangPerusahaan">
@@ -598,6 +611,7 @@
           <NavigationProperty Name="JenisBarang" Relationship="GAISModel.FK_BarangVendor_JenisBarang" FromRole="BarangVendor" ToRole="JenisBarang" />
           <NavigationProperty Name="Vendor" Relationship="GAISModel.FK_BarangVendor_Vendor" FromRole="BarangVendor" ToRole="Vendor" />
           <NavigationProperty Name="DetailPengajuans" Relationship="GAISModel.FK_DetailPengajuan_Barang" FromRole="BarangVendor" ToRole="DetailPengajuan" />
+          <NavigationProperty Name="KeranjangPengajuans" Relationship="GAISModel.FK_KeranjangPengajuan_BarangVendor" FromRole="BarangVendor" ToRole="KeranjangPengajuan" />
         </EntityType>
         <EntityType Name="DetailPeminjaman">
           <Key>
@@ -609,8 +623,8 @@
           <Property Name="Kuantitas" Type="Int32" />
           <Property Name="HargaBarang" Type="Int32" />
           <Property Name="Kondisi_Rusak" Type="Int32" />
-          <NavigationProperty Name="BarangPerusahaan" Relationship="GAISModel.FK_DetailPeminjaman_Barang" FromRole="DetailPeminjaman" ToRole="BarangPerusahaan" />
           <Property Name="Keterangan" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="BarangPerusahaan" Relationship="GAISModel.FK_DetailPeminjaman_Barang" FromRole="DetailPeminjaman" ToRole="BarangPerusahaan" />
         </EntityType>
         <EntityType Name="DetailPengajuan">
           <Key>
@@ -621,8 +635,10 @@
           <Property Name="ID_Barang" Type="Int32" Nullable="false" />
           <Property Name="Kuantitas" Type="Int32" />
           <Property Name="HargaBarang" Type="Int32" />
+          <Property Name="ID_Vendor" Type="Int32" Nullable="false" />
           <Property Name="StatusBarang" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="BarangVendor" Relationship="GAISModel.FK_DetailPengajuan_Barang" FromRole="DetailPengajuan" ToRole="BarangVendor" />
+          <NavigationProperty Name="Vendor" Relationship="GAISModel.FK_DetailPengajuan_Vendor" FromRole="DetailPengajuan" ToRole="Vendor" />
         </EntityType>
         <EntityType Name="JenisBank">
           <Key>
@@ -655,9 +671,10 @@
         </EntityType>
         <EntityType Name="Karyawan">
           <Key>
-            <PropertyRef Name="NPK" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="NPK" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NPK" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="NamaKaryawan" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="JenisKelamin" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="TanggalLahir" Type="DateTime" Precision="0" />
@@ -675,8 +692,26 @@
           <Property Name="Foto" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Role" Relationship="GAISModel.FK_Karyawan_Role" FromRole="Karyawan" ToRole="Role" />
           <NavigationProperty Name="Section" Relationship="GAISModel.FK_Karyawan_Section" FromRole="Karyawan" ToRole="Section" />
-          <NavigationProperty Name="Peminjamen" Relationship="GAISModel.FK_Peminjaman_Karyawan" FromRole="Karyawan" ToRole="Peminjaman" />
-          <NavigationProperty Name="Pengajuans" Relationship="GAISModel.FK_Pengajuan_GA" FromRole="Karyawan" ToRole="Pengajuan" />
+        </EntityType>
+        <EntityType Name="Keranjang">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Barang" Type="Int32" Nullable="false" />
+          <Property Name="ID_Karyawan" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Qyt" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="BarangPerusahaan" Relationship="GAISModel.FK_Keranjang_Barang" FromRole="Keranjang" ToRole="BarangPerusahaan" />
+        </EntityType>
+        <EntityType Name="KeranjangPengajuan">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Barang" Type="Int32" Nullable="false" />
+          <Property Name="ID_Karyawan" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Qyt" Type="Int32" />
+          <NavigationProperty Name="BarangVendor" Relationship="GAISModel.FK_KeranjangPengajuan_BarangVendor" FromRole="KeranjangPengajuan" ToRole="BarangVendor" />
         </EntityType>
         <EntityType Name="Peminjaman">
           <Key>
@@ -694,7 +729,6 @@
           <Property Name="IsLate" Type="Int32" />
           <Property Name="Denda" Type="Int32" />
           <Property Name="StatusDenda" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Karyawan" Relationship="GAISModel.FK_Peminjaman_Karyawan" FromRole="Peminjaman" ToRole="Karyawan" />
         </EntityType>
         <EntityType Name="Pengajuan">
           <Key>
@@ -709,7 +743,6 @@
           <Property Name="StatusFinal" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="LastModifiedTime" Type="DateTime" Precision="3" />
           <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Karyawan" Relationship="GAISModel.FK_Pengajuan_GA" FromRole="Pengajuan" ToRole="Karyawan" />
         </EntityType>
         <EntityType Name="Reference">
           <Key>
@@ -766,6 +799,7 @@
           <Property Name="RowStatus" Type="Int32" />
           <NavigationProperty Name="BarangPerusahaans" Relationship="GAISModel.FK_BarangPerusahaan_Vendor" FromRole="Vendor" ToRole="BarangPerusahaan" />
           <NavigationProperty Name="BarangVendors" Relationship="GAISModel.FK_BarangVendor_Vendor" FromRole="Vendor" ToRole="BarangVendor" />
+          <NavigationProperty Name="DetailPengajuans" Relationship="GAISModel.FK_DetailPengajuan_Vendor" FromRole="Vendor" ToRole="DetailPengajuan" />
           <NavigationProperty Name="JenisBank" Relationship="GAISModel.FK_Vendor_JenisBank" FromRole="Vendor" ToRole="JenisBank" />
         </EntityType>
         <Association Name="FK_BarangPerusahaan_JenisBarang">
@@ -816,6 +850,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Keranjang_Barang">
+          <End Type="GAISModel.BarangPerusahaan" Role="BarangPerusahaan" Multiplicity="1" />
+          <End Type="GAISModel.Keranjang" Role="Keranjang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BarangPerusahaan">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Keranjang">
+              <PropertyRef Name="ID_Barang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_BarangVendor_JenisBarang">
           <End Type="GAISModel.JenisBarang" Role="JenisBarang" Multiplicity="0..1" />
           <End Type="GAISModel.BarangVendor" Role="BarangVendor" Multiplicity="*" />
@@ -836,6 +882,42 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="BarangVendor">
+              <PropertyRef Name="ID_Vendor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetailPengajuan_Barang">
+          <End Type="GAISModel.BarangVendor" Role="BarangVendor" Multiplicity="1" />
+          <End Type="GAISModel.DetailPengajuan" Role="DetailPengajuan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BarangVendor">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DetailPengajuan">
+              <PropertyRef Name="ID_Barang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KeranjangPengajuan_BarangVendor">
+          <End Type="GAISModel.BarangVendor" Role="BarangVendor" Multiplicity="1" />
+          <End Type="GAISModel.KeranjangPengajuan" Role="KeranjangPengajuan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BarangVendor">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="KeranjangPengajuan">
+              <PropertyRef Name="ID_Barang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetailPengajuan_Vendor">
+          <End Type="GAISModel.Vendor" Role="Vendor" Multiplicity="1" />
+          <End Type="GAISModel.DetailPengajuan" Role="DetailPengajuan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vendor">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DetailPengajuan">
               <PropertyRef Name="ID_Vendor" />
             </Dependent>
           </ReferentialConstraint>
@@ -873,64 +955,6 @@
             </Principal>
             <Dependent Role="Karyawan">
               <PropertyRef Name="ID_Seksi" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Peminjaman_Karyawan">
-          <End Type="GAISModel.Karyawan" Role="Karyawan" Multiplicity="0..1" />
-          <End Type="GAISModel.Peminjaman" Role="Peminjaman" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Karyawan">
-              <PropertyRef Name="NPK" />
-            </Principal>
-            <Dependent Role="Peminjaman">
-              <PropertyRef Name="ID_Karyawan" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Pengajuan_GA">
-          <End Type="GAISModel.Karyawan" Role="Karyawan" Multiplicity="0..1" />
-          <End Type="GAISModel.Pengajuan" Role="Pengajuan" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Karyawan">
-              <PropertyRef Name="NPK" />
-            </Principal>
-            <Dependent Role="Pengajuan">
-              <PropertyRef Name="ID_GA" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Keranjang">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ID_Barang" Type="Int32" Nullable="false" />
-          <Property Name="ID_Karyawan" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Qyt" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="BarangPerusahaan" Relationship="GAISModel.FK_Keranjang_Barang" FromRole="Keranjang" ToRole="BarangPerusahaan" />
-        </EntityType>
-        <Association Name="FK_Keranjang_Barang">
-          <End Type="GAISModel.BarangPerusahaan" Role="BarangPerusahaan" Multiplicity="1" />
-          <End Type="GAISModel.Keranjang" Role="Keranjang" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BarangPerusahaan">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Keranjang">
-              <PropertyRef Name="ID_Barang" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DetailPengajuan_Barang">
-          <End Type="GAISModel.BarangVendor" Role="BarangVendor" Multiplicity="1" />
-          <End Type="GAISModel.DetailPengajuan" Role="DetailPengajuan" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BarangVendor">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="DetailPengajuan">
-              <PropertyRef Name="ID_Barang" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -999,6 +1023,7 @@
             <EntityTypeMapping TypeName="GAISModel.DetailPengajuan">
               <MappingFragment StoreEntitySet="DetailPengajuan">
                 <ScalarProperty Name="StatusBarang" ColumnName="StatusBarang" />
+                <ScalarProperty Name="ID_Vendor" ColumnName="ID_Vendor" />
                 <ScalarProperty Name="HargaBarang" ColumnName="HargaBarang" />
                 <ScalarProperty Name="Kuantitas" ColumnName="Kuantitas" />
                 <ScalarProperty Name="ID_Barang" ColumnName="ID_Barang" />
@@ -1053,6 +1078,27 @@
                 <ScalarProperty Name="JenisKelamin" ColumnName="JenisKelamin" />
                 <ScalarProperty Name="NamaKaryawan" ColumnName="NamaKaryawan" />
                 <ScalarProperty Name="NPK" ColumnName="NPK" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Keranjangs">
+            <EntityTypeMapping TypeName="GAISModel.Keranjang">
+              <MappingFragment StoreEntitySet="Keranjang">
+                <ScalarProperty Name="Qyt" ColumnName="Qyt" />
+                <ScalarProperty Name="ID_Karyawan" ColumnName="ID_Karyawan" />
+                <ScalarProperty Name="ID_Barang" ColumnName="ID_Barang" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KeranjangPengajuans">
+            <EntityTypeMapping TypeName="GAISModel.KeranjangPengajuan">
+              <MappingFragment StoreEntitySet="KeranjangPengajuan">
+                <ScalarProperty Name="Qyt" ColumnName="Qyt" />
+                <ScalarProperty Name="ID_Karyawan" ColumnName="ID_Karyawan" />
+                <ScalarProperty Name="ID_Barang" ColumnName="ID_Barang" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1140,16 +1186,6 @@
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Alamat" ColumnName="Alamat" />
                 <ScalarProperty Name="NamaVendor" ColumnName="NamaVendor" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Keranjangs">
-            <EntityTypeMapping TypeName="GAISModel.Keranjang">
-              <MappingFragment StoreEntitySet="Keranjang">
-                <ScalarProperty Name="Qyt" ColumnName="Qyt" />
-                <ScalarProperty Name="ID_Karyawan" ColumnName="ID_Karyawan" />
-                <ScalarProperty Name="ID_Barang" ColumnName="ID_Barang" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

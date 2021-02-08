@@ -1,4 +1,4 @@
-﻿@model IEnumerable<GAIS.Models.Keranjang>
+﻿@model IEnumerable<GAIS.Models.KeranjangPengajuan>
 
 @{
     ViewBag.Title = "Submit";
@@ -13,9 +13,8 @@
                     <ol class="breadcrumb gais-breadcrumb" style="background-color: #fff">
                         <li class="breadcrumb-item">Home</li>
                         <li class="breadcrumb-item">Admin</li>
-                        <li class="breadcrumb-item">Peminjaman</li>
-                        <li class="breadcrumb-item">Form</li>
-                        <li class="breadcrumb-item text-blue">Submit</li>
+                        <li class="breadcrumb-item">Pengajuan</li>
+                        <li class="breadcrumb-item text-blue">Form</li>
                     </ol>
                 </div>
             </div>
@@ -28,13 +27,18 @@
             <div class="card mb-4">
                 <div class="card-header">Daftar Barang</div>
                 <div class="card-body">
+                    <div class="form-group">
+                        <a href="@Url.Action("Form", "Pengajuan")" class="btn btn-primary">Kembali</a>
+                    </div>
                     <div class="datatable">
                         <table class="table table-hover" width="100%" cellspacing="0">
                             <thead>
                                 <tr class="text-primary">
-                                    <th>No</th>
-                                    <th>Nama Barang</th>
-                                    <th>Kuantitas</th>
+                                    <th class="text-center">No</th>
+                                    <th class="text-center">Nama Barang</th>
+                                    <th class="text-center">Kuantitas</th>
+                                    <th class="text-center">Harga</th>
+                                    <th class="text-center">Total</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -43,8 +47,10 @@
                                 {
                                     <tr>
                                         <td>@(numRow += 1)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.BarangPerusahaan.NamaBarang)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.BarangVendor.NamaBarang)</td>
                                         <td>@Html.DisplayFor(modelItem => item.Qyt)</td>
+                                        <td class="text-right">@Html.DisplayFor(modelItem => item.BarangVendor.Harga)</td>
+                                        <td class="text-right">@string.Format("{0:N}", (item.BarangVendor.Harga * item.Qyt))</td>
                                     </tr>
                                 }
                             </tbody>
@@ -55,30 +61,17 @@
         </div>
         <div class="col-lg-4">
             <div class="card mb-4">
-                <div class="card-header text-secondary">Pilih Waktu Pengembalian</div>
+                <div class="card-header text-secondary">Konfirmasi</div>
                 <div class="card-body">
-                    @using (Html.BeginForm("Submit", "Peminjaman", FormMethod.Post, new { name = "frm", id = "frm" }))
+                    <div class="alert alert-secondary">
+                        <small>Pastikan anda sudah mengecek barang yang akan diajukan sebelum menekan tombol "Simpan" dibawah ini.</small>
+                    </div>
+                    @using (Html.BeginForm("Submit", "Pengajuan", FormMethod.Post, new { name = "frm", id = "frm" }))
                     {
-                        <!-- Form Group (npk)-->
-                        <div class="form-group">
-                            <label class="text-gray-600 small" for="borrow">Tanggal Peminjaman</label>
-                            <input class="form-control" id="borrow" name="borrow" type="date" required />
-                        </div>
-                        <!-- Form Group (password)-->
-                        <div class="form-group">
-                            <label class="text-gray-600 small" for="returned">Tanggal Pengembalian</label>
-                            <input class="form-control" id="returned" name="returned" type="date" required />
-                        </div>
-
                         <input type="submit" value="Simpan" class="btn btn-secondary" />
-                        <a href="~/Peminjaman/Form" class="btn btn-outline-secondary">Kembali</a>
                     }
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-<script>
-    document.getElementById('borrow').valueAsDate = new Date();
-</script>

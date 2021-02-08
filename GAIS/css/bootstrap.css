@@ -20505,3 +20505,11 @@ pre[class*=language-] {
 .title-card {
     font-size: 1.1rem;
 }
+
+.min-wd-25 {
+    min-width: 25px;
+}
+
+.min-wd-75 {
+    min-width: 75px;
+}

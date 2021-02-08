@@ -23,47 +23,49 @@
 <div class="container-fluid mt-4">
     <div class="card mb-4">
         <div class="card-header" style="font-size: 1.1rem; ">
-            DataTable Vendor
+            Tabel Vendor
         </div>
         <div class="card-body">
             <div class="row form-group">
                 <div class="col-sm-12 col-md-6">
-                    <a href="~/Vendor/Create" class="btn btn-primary">Add New</a>
+                    <a href="@Url.Action("Create", "Vendor")" class="btn btn-primary">Tambah Data</a>
                 </div>
             </div>
-            <div class="datatable">
-                <table class="table table-bordered table-hover table-striped" id="dataTable" width="100%" cellspacing="0">
-                    <thead>
-                        <tr>
-                            <th class="text-center">No</th>
-                            <th class="text-center">@Html.DisplayNameFor(model => model.NamaVendor)</th>
-                            <th class="text-center">@Html.DisplayNameFor(model => model.Alamat)</th>
-                            <th class="text-center">@Html.DisplayNameFor(model => model.Email)</th>
-                            <th class="text-center">@Html.DisplayNameFor(model => model.NoTelp)</th>
-                            <th class="text-center">@Html.DisplayNameFor(model => model.ID_JenisBank)</th>
-                            <th class="text-center">Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @{int numRow = 0;}
-                        @foreach (var item in Model)
-                        {
-                        <tr>
-                            <td>@(numRow += 1)</td>
-                            <td>@Html.DisplayFor(modelItem => item.NamaVendor)</td>
-                            <td>@Html.DisplayFor(modelItem => item.Alamat)</td>
-                            <td>@Html.DisplayFor(modelItem => item.Email)</td>
-                            <td>@Html.DisplayFor(modelItem => item.NoTelp)</td>
-                            <td>@Html.DisplayFor(modelItem => item.JenisBank.Nama)</td>
-                            <td class="text-center">
-                                <a href="~/Vendor/Details/@Html.DisplayFor(modelItem => item.ID)" data-toggle="tooltip" title="Details" class="btn btn-datatable btn-icon btn-transparent-dark mr-2" te><i data-feather="list"></i></a>
-                                <a href="~/Vendor/Edit/@Html.DisplayFor(modelItem => item.ID)" data-toggle="tooltip" title="Edit" class="btn btn-datatable btn-icon btn-transparent-dark mr-2" te><i data-feather="edit"></i></a>
-                                <a onclick="deleteConfirm('Vendor/Delete/@Html.DisplayFor(modelItem => item.ID)')" data-toggle="tooltip" title="Delete" class="btn btn-datatable btn-icon btn-transparent-dark mr-2" te><i data-feather="trash-2"></i></a>
-                            </td>
-                        </tr>
-                        }
-                    </tbody>
-                </table>
+            <div class="table-responsive pt-2 pl-2">
+                <div class="datatable">
+                    <table class="table table-bordered table-hover table-striped" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th class="text-center min-wd-25">No</th>
+                                <th class="text-center">@Html.DisplayNameFor(model => model.NamaVendor)</th>
+                                <th class="text-center">@Html.DisplayNameFor(model => model.Alamat)</th>
+                                <th class="text-center">@Html.DisplayNameFor(model => model.Email)</th>
+                                <th class="text-center">@Html.DisplayNameFor(model => model.NoTelp)</th>
+                                <th class="text-center">@Html.DisplayNameFor(model => model.ID_JenisBank)</th>
+                                <th class="text-center min-wd-75">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{int numRow = 0;}
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@(numRow += 1)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.NamaVendor)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Alamat)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.NoTelp)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.JenisBank.Nama)</td>
+                                    <td class="text-center min-wd-75">
+                                        <a href="~/Vendor/Details/@Html.DisplayFor(modelItem => item.ID)" data-toggle="tooltip" title="Lihat Detail Data" class="btn btn-datatable btn-icon btn-transparent-dark mr-2" te><i data-feather="list"></i></a>
+                                        <a href="~/Vendor/Edit/@Html.DisplayFor(modelItem => item.ID)" data-toggle="tooltip" title="Ubah Data" class="btn btn-datatable btn-icon btn-transparent-dark mr-2" te><i data-feather="edit"></i></a>
+                                        <a onclick="deleteConfirm('Vendor/Delete/@Html.DisplayFor(modelItem => item.ID)')" data-toggle="tooltip" title="Hapus Data" class="btn btn-datatable btn-icon btn-transparent-dark mr-2" te><i data-feather="trash-2"></i></a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

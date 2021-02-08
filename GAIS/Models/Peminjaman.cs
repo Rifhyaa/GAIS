@@ -11,8 +11,7 @@ namespace GAIS.Models
 {
     using System;
     using System.Collections.Generic;
-
-    [System.ComponentModel.DataAnnotations.MetadataType(typeof(PeminjamanMetaData))]
+    
     public partial class Peminjaman
     {
         public string ID { get; set; }
@@ -27,7 +26,5 @@ namespace GAIS.Models
         public Nullable<int> IsLate { get; set; }
         public Nullable<int> Denda { get; set; }
         public string StatusDenda { get; set; }
-    
-        public virtual Karyawan Karyawan { get; set; }
     }
 }

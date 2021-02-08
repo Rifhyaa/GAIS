@@ -89,11 +89,11 @@ namespace GAIS.Controllers
             ViewBag.NamaUser = this.Session["NamaUser"];
             ViewBag.Role = this.Session["Role"];
 
-            ViewBag.ID_JenisBarang = new SelectList(entities.JenisBarangs.Where(x => x.RowStatus == 0), "ID", "Nama");
-            ViewBag.ID_Vendor = new SelectList(entities.Vendors.Where(x => x.RowStatus == 0), "ID", "NamaVendor");
-
             // Get Data By ID
             BarangVendor myData = entities.BarangVendors.Where(x => x.ID.Equals(ID)).FirstOrDefault();
+            ViewBag.ID_JenisBarang = new SelectList(entities.JenisBarangs.Where(x => x.RowStatus == 0), "ID", "Nama", myData.ID_JenisBarang);
+            ViewBag.ID_Vendor = new SelectList(entities.Vendors.Where(x => x.RowStatus == 0), "ID", "NamaVendor", myData.ID_Vendor);
+
             return View(myData);
         }
 

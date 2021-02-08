@@ -142,6 +142,7 @@
     <Compile Include="Controllers\KaryawanController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PeminjamanController.cs" />
+    <Compile Include="Controllers\PengajuanController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\VendorController.cs" />
     <Compile Include="Global.asax.cs">
@@ -190,6 +191,9 @@
     </Compile>
     <Compile Include="Models\KaryawanMetaData.cs" />
     <Compile Include="Models\Keranjang.cs">
+      <DependentUpon>GAISEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\KeranjangPengajuan.cs">
       <DependentUpon>GAISEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Peminjaman.cs">
@@ -267,7 +271,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="js\sb-customizer.js" />
+    <Content Include="js\jquery.dataTables.min.js" />
     <Content Include="js\scripts.js" />
     <Content Include="Models\GAISEntities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -378,7 +382,20 @@
     <Content Include="Views\Peminjaman\LaporanPeminjaman.cshtml" />
     <Content Include="Views\Peminjaman\FormBarangRusak.cshtml" />
     <Content Include="Views\Shared\_Dashboard.cshtml" />
+    <Content Include="Views\User\EditProfile.cshtml" />
+    <Content Include="Views\Pengajuan\Form.cshtml" />
+    <Content Include="Views\Pengajuan\Submit.cshtml" />
+    <Content Include="Views\Pengajuan\Riwayat.cshtml" />
+    <Content Include="Views\Pengajuan\Details.cshtml" />
+    <Content Include="Views\Pengajuan\LampiranPengajuan.cshtml" />
+    <Content Include="Views\Pengajuan\LampiranPembayaran.cshtml" />
+    <Content Include="Views\Login\Vendor.cshtml" />
+    <Content Include="Views\Pengajuan\Pemesanan.cshtml" />
+    <Content Include="Views\Shared\_LayoutVendor.cshtml" />
+    <Content Include="Views\Pengajuan\BarangMasuk.cshtml" />
+    <Content Include="Views\Pengajuan\DetailBarangMasuk.cshtml" />
     <Content Include="Views\User\MyProfile.cshtml" />
+    <Content Include="Views\User\Security.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Upload\" />

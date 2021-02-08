@@ -1,6 +1,9 @@
-﻿@{
+﻿
+@{
+    ViewBag.Title = "Vendor";
     Layout = "";
 }
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -46,12 +49,12 @@
                                         </div>
                                     }
                                     <!-- Login form-->
-                                    @using (Html.BeginForm("Index", "Login", FormMethod.Post, new { name = "frm", id = "frm" }))
+                                    @using (Html.BeginForm("Vendor", "Login", FormMethod.Post, new { name = "frm", id = "frm" }))
                                     {
-                                        <!-- Form Group (npk)-->
+                                        <!-- Form Group (id )-->
                                         <div class="form-group">
-                                            <label class="text-gray-600 small" for="npk">NPK</label>
-                                            <input class="form-control form-control-solid" name="npk" type="text" placeholder="NPK" />
+                                            <label class="text-gray-600 small" for="id">ID Vendor</label>
+                                            <input class="form-control form-control-solid" name="id" type="text" placeholder="ID Vendor" />
                                         </div>
                                         <!-- Form Group (password)-->
                                         <div class="form-group">
@@ -72,9 +75,9 @@
                                 <hr class="my-0" />
                                 <div class="card-body px-5 py-4">
                                     <div class="small text-center">
-                                        Vendor?
-                                        <a href="@Url.Action("Vendor", "Login")">Login sebagai vendor!</a>
-                                    </div> 
+                                        Karyawan?
+                                        <a href="@Url.Action("Index", "Login")">Login sebagai karyawan!</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -105,9 +108,9 @@
             $("form[name='frm']").validate({
                 // Define validation rules
                 rules: {
-                    npk: "required",
+                    id: "required",
                     password: "required",
-                    npk: {
+                    id: {
                         required: true
                     },
                     password: {
@@ -116,7 +119,7 @@
                 },
                 // Specify validation error messages
                 messages: {
-                    npk: "NPK field is required",
+                    id: "id field is required",
                     password: "Password field is required",
                 },
                 submitHandler: function (form) {

@@ -23,41 +23,43 @@
 <div class="container-fluid mt-4">
     <div class="card mb-4">
         <div class="card-header" style="font-size: 1.1rem; ">
-            DataTable Bank
+            Tabel Jenis Bank
         </div>
         <div class="card-body">
             <div class="row form-group">
                 <div class="col-sm-12 col-md-6">
-                    <a href="~/JenisBank/Create" class="btn btn-primary">Add New</a>
+                    <a href="@Url.Action("Create", "JenisBank")" class="btn btn-primary">Tambah Data</a>
                 </div>
             </div>
-            <div class="datatable">
-                <table class="table table-bordered table-hover table-striped" id="dataTable" width="100%" cellspacing="0">
-                    <thead>
-                        <tr>
-                            <th class="text-center">No</th>
-                            <th class="text-center">@Html.DisplayNameFor(model => model.Nama)</th>
-                            <th class="text-center">@Html.DisplayNameFor(model => model.Keterangan)</th>
-                            <th class="text-center">Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @{int numRow = 0;}
-                        @foreach (var item in Model)
-                        {
+            <div class="table-responsive pt-2 pl-2">
+                <div class="datatable">
+                    <table class="table table-bordered table-hover table-striped" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
                             <tr>
-                                <td>@(numRow += 1)</td>
-                                <td>@Html.DisplayFor(modelItem => item.Nama)</td>
-                                <td>@Html.DisplayFor(modelItem => item.Keterangan)</td>
-                                <td class="text-center">
-                                    <a href="~/JenisBank/Details/@Html.DisplayFor(modelItem => item.ID)" data-toggle="tooltip" title="Details" class="btn btn-datatable btn-icon btn-transparent-dark mr-2" te><i data-feather="list"></i></a>
-                                    <a href="~/JenisBank/Edit/@Html.DisplayFor(modelItem => item.ID)" data-toggle="tooltip" title="Edit" class="btn btn-datatable btn-icon btn-transparent-dark mr-2" te><i data-feather="edit"></i></a>
-                                    <a onClick="return confirm('Are you sure you want to delete this record?');" href="~/JenisBank/Delete/@Html.DisplayFor(modelItem => item.ID)" data-toggle="tooltip" title="Delete" class="btn btn-datatable btn-icon btn-transparent-dark mr-2" te><i data-feather="trash-2"></i></a>
-                                </td>
+                                <th class="text-center min-wd-25">No</th>
+                                <th class="text-center">@Html.DisplayNameFor(model => model.Nama)</th>
+                                <th class="text-center">@Html.DisplayNameFor(model => model.Keterangan)</th>
+                                <th class="text-center min-wd-75">Aksi</th>
                             </tr>
-                        }
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @{int numRow = 0;}
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@(numRow += 1)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Nama)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Keterangan)</td>
+                                    <td class="text-center min-wd-75">
+                                        <a href="~/JenisBank/Details/@Html.DisplayFor(modelItem => item.ID)" data-toggle="tooltip" title="Lihat Detail Data" class="btn btn-datatable btn-icon btn-transparent-dark mr-2" te><i data-feather="list"></i></a>
+                                        <a href="~/JenisBank/Edit/@Html.DisplayFor(modelItem => item.ID)" data-toggle="tooltip" title="Ubah Data" class="btn btn-datatable btn-icon btn-transparent-dark mr-2" te><i data-feather="edit"></i></a>
+                                        <a onclick="deleteConfirm('JenisBank/Delete/@Html.DisplayFor(modelItem => item.ID)')" data-toggle="tooltip" title="Hapus Data" class="btn btn-datatable btn-icon btn-transparent-dark mr-2" te><i data-feather="trash-2"></i></a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

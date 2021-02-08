@@ -14,7 +14,7 @@ namespace GAIS.Controllers
         // Entities
         GAISEntities entities = new GAISEntities();
 
-        public ActionResult Index()
+        public ActionResult Riwayat()
         {
             string npk = this.Session["NPK"].ToString();
 
@@ -193,10 +193,10 @@ namespace GAIS.Controllers
             // Session Username & Role
             ViewBag.NamaUser = this.Session["NamaUser"];
             ViewBag.Role = this.Session["Role"];
-            return View("Index", data);
+            return View("Riwayat", data);
         }
 
-        public ActionResult ViewAll()
+        public ActionResult LaporanPeminjaman()
         {
             string npk = this.Session["NPK"].ToString();
 
@@ -208,7 +208,7 @@ namespace GAIS.Controllers
             return View(data);
         }
 
-        public ActionResult ListPeminjaman()
+        public ActionResult DaftarPeminjaman()
         {
             string npk = this.Session["NPK"].ToString();
 

@@ -11,17 +11,10 @@ namespace GAIS.Models
 {
     using System;
     using System.Collections.Generic;
-
-    [System.ComponentModel.DataAnnotations.MetadataType(typeof(KaryawanMetaData))]
+    
     public partial class Karyawan
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Karyawan()
-        {
-            this.Peminjamen = new HashSet<Peminjaman>();
-            this.Pengajuans = new HashSet<Pengajuan>();
-        }
-    
+        public int ID { get; set; }
         public string NPK { get; set; }
         public string NamaKaryawan { get; set; }
         public string JenisKelamin { get; set; }
@@ -41,9 +34,5 @@ namespace GAIS.Models
     
         public virtual Role Role { get; set; }
         public virtual Section Section { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Peminjaman> Peminjamen { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Pengajuan> Pengajuans { get; set; }
     }
 }

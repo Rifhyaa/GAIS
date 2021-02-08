@@ -1,0 +1,95 @@
+﻿@model IEnumerable<GAIS.Models.Pengajuan>
+
+@{
+    ViewBag.Title = "BarangMasuk";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    string pengajuan_0 = "Belum disetujui Kepala Divisi";
+    string pengajuan_1 = "Telah disetujui Kepala Divisi";
+    string empty = "-";
+    string bayar_0 = "Belum dibayar";
+    string bayar_1 = "Sudah dibayar";
+}
+
+<header class="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
+    <div class="container-fluid">
+        <div class="page-header-content">
+            <div class="row align-items-center justify-content-between pt-3">
+                <div class="col-auto mb-3">
+                    <ol class="breadcrumb gais-breadcrumb" style="background-color: #fff">
+                        <li class="breadcrumb-item">Home</li>
+                        <li class="breadcrumb-item">Admin</li>
+                        <li class="breadcrumb-item text-blue">Peminjaman</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="container-fluid mt-4">
+    <div class="card mb-4">
+        <div class="card-header" style="font-size: 1.1rem; ">
+            Riwayat Peminjaman
+        </div>
+        <div class="card-body">
+            <div class="row form-group">
+                <div class="col-sm-12 col-md-6">
+                    <a href="~/Peminjaman/Form" class="btn btn-primary">Add New</a>
+                </div>
+            </div>
+            <div class="datatable">
+                <table class="table table-bordered table-hover table-striped" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>ID Pengajuan</th>
+                            <th>Tanggal Pengajuan</th>
+                            <th>Pengajuan</th>
+                            <th>Pembayaran</th>
+                            <th>Status</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{int numRow = 0;}
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@(numRow += 1)</td>
+                                <td>@Html.DisplayFor(modelItem => item.ID_Pengajuan)</td>
+                                <td>@string.Format("{0:dd/MM/yyyy HH:mm}", item.Tgl_Pengajuan)</td>
+                                <td>
+                                    @if (item.StatusPengajuan == 0)
+                                    {
+                                        @pengajuan_0;
+                                    }
+                                    else
+                                    {
+                                        @pengajuan_1;
+                                    }
+                                </td>
+                                <td>
+                                    @if (item.SudahDibayar == 0 && item.StatusPengajuan == 0)
+                                    {
+                                        @empty;
+                                    }
+                                    else if (item.SudahDibayar == 0)
+                                    {
+                                        @bayar_0;
+                                    }
+                                    else
+                                    {
+                                        @bayar_1;
+                                    }
+                                </td>
+                                <td>@Html.DisplayFor(modelItem => item.StatusFinal)</td>
+                                <td>
+                                    <a href="~/Pengajuan/DetailBarangMasuk/@Html.DisplayFor(modelItem => item.ID_Pengajuan)" data-toggle="tooltip" title="Details" class="btn btn-datatable btn-icon btn-transparent-dark mr-2" te><i data-feather="list"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

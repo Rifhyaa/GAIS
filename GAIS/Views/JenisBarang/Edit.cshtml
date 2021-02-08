@@ -33,7 +33,7 @@
                 @Html.HiddenFor(model => model.ID)
                 <div class="form-group">
                     <label class="control-label">@Html.DisplayNameFor(model => model.Nama)<span style="color: red">*</span></label>
-                    @Html.EditorFor(model => model.Nama, new { htmlAttributes = new { @class = "form-control", placeholder = "Masukkan Jenis Barang" } })
+                    @Html.EditorFor(model => model.Nama, new { htmlAttributes = new { @class = "form-control", placeholder = "Masukkan Jenis Barang", @onkeypress = "return isCharKey(event)" } })
                     @Html.ValidationMessageFor(model => model.Nama, "", new { @class = "text-danger small" })
                 </div>
 

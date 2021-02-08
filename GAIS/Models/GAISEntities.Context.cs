@@ -34,13 +34,14 @@ namespace GAIS.Models
         public virtual DbSet<JenisBank> JenisBanks { get; set; }
         public virtual DbSet<JenisBarang> JenisBarangs { get; set; }
         public virtual DbSet<Karyawan> Karyawans { get; set; }
+        public virtual DbSet<Keranjang> Keranjangs { get; set; }
+        public virtual DbSet<KeranjangPengajuan> KeranjangPengajuans { get; set; }
         public virtual DbSet<Peminjaman> Peminjamen { get; set; }
         public virtual DbSet<Pengajuan> Pengajuans { get; set; }
         public virtual DbSet<Reference> References { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<Section> Sections { get; set; }
         public virtual DbSet<Vendor> Vendors { get; set; }
-        public virtual DbSet<Keranjang> Keranjangs { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

@@ -32,11 +32,11 @@ namespace GAIS.Models
         public int ID_Vendor { get; set; }
 
         [DisplayName("Section")]
-        [Required(ErrorMessage = "Section belum dipilih")]
         public int ID_Seksi { get; set; }
 
         [DisplayName("Harga")]
         [Required(ErrorMessage = "Harga wajib diisi")]
+        [DisplayFormat(DataFormatString = "{0:N}", ApplyFormatInEditMode = false)]
         public int Harga { get; set; }
 
         [DisplayName("Stok")]

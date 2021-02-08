@@ -23,7 +23,5 @@ namespace GAIS.Models
         public string StatusFinal { get; set; }
         public Nullable<System.DateTime> LastModifiedTime { get; set; }
         public string ModifiedBy { get; set; }
-    
-        public virtual Karyawan Karyawan { get; set; }
     }
 }

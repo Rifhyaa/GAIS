@@ -21,8 +21,8 @@ namespace GAIS.Controllers
         // GET: User
         public ActionResult MyProfile()
         {
-            string ID = this.Session["NPK"].ToString();
             // Get Data By ID
+            string ID = this.Session["NPK"].ToString();
             Karyawan myData = entities.Karyawans.Where(x => x.NPK == ID).FirstOrDefault();
 
             if (myData == null)
@@ -37,9 +37,32 @@ namespace GAIS.Controllers
             return View(myData);
         }
 
-        public ActionResult ChangesPassword()
+        public ActionResult Security()
         {
+            
+
+            // Session Username & Role
+            ViewBag.NamaUser = this.Session["NamaUser"];
+            ViewBag.Role = this.Session["Role"];
             return View();
+        }
+
+        public ActionResult EditProfile()
+        {
+            // Get Data By ID
+            string ID = this.Session["NPK"].ToString();
+            Karyawan myData = entities.Karyawans.Where(x => x.NPK == ID).FirstOrDefault();
+
+            if (myData == null)
+            {
+                // Error 404
+                return RedirectToAction("NotFound", "Error");
+            }
+
+            // Session Username & Role
+            ViewBag.NamaUser = this.Session["NamaUser"];
+            ViewBag.Role = this.Session["Role"];
+            return View(myData);
         }
     }
 }

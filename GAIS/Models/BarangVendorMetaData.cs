@@ -33,6 +33,7 @@ namespace GAIS.Models
 
         [DisplayName("Harga")]
         [Required(ErrorMessage = "Harga wajib diisi")]
+        [DisplayFormat(DataFormatString = "{0:N}", ApplyFormatInEditMode = false)]
         public int Harga { get; set; }
 
         public Nullable<System.DateTime> CreatedTime { get; set; }

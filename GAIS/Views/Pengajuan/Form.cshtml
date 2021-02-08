@@ -1,4 +1,4 @@
-﻿@model IEnumerable<GAIS.Models.BarangPerusahaan>
+﻿@model IEnumerable<GAIS.Models.BarangVendor>
 
 @{
     ViewBag.Title = "Form";
@@ -13,7 +13,7 @@
                     <ol class="breadcrumb gais-breadcrumb" style="background-color: #fff">
                         <li class="breadcrumb-item">Home</li>
                         <li class="breadcrumb-item">Admin</li>
-                        <li class="breadcrumb-item">Peminjaman</li>
+                        <li class="breadcrumb-item">Pengajuan</li>
                         <li class="breadcrumb-item text-blue">Form</li>
                     </ol>
                 </div>
@@ -35,7 +35,7 @@
                                     <th>Nama Barang</th>
                                     <th>Deskripsi</th>
                                     <th>Kategori</th>
-                                    <th>Stok</th>
+                                    <th>Harga</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -48,9 +48,9 @@
                                         <td>@Html.DisplayFor(modelItem => item.NamaBarang)</td>
                                         <td>@Html.DisplayFor(modelItem => item.Keterangan)</td>
                                         <td>@Html.DisplayFor(modelItem => item.JenisBarang.Nama)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Stok)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Harga)</td>
                                         <td>
-                                            <a href="~/Peminjaman/Add/@Html.DisplayFor(modelItem => item.ID)" data-toggle="tooltip" title="Tambah Barang Ke Keranjang" class="btn btn-datatable btn-icon btn-transparent-dark mr-2" te><i data-feather="plus"></i></a>
+                                            <a href="~/Pengajuan/Add/@Html.DisplayFor(modelItem => item.ID)" data-toggle="tooltip" title="Tambah Barang Ke Keranjang" class="btn btn-datatable btn-icon btn-transparent-dark mr-2" te><i data-feather="plus"></i></a>
                                         </td>
                                     </tr>
                                 }
@@ -65,14 +65,15 @@
                 <div class="card-header">Keranjang Barang</div>
                 <div class="card-body">
                     <div class="form-group">
-                        <a href="~/Peminjaman/Submit" class="btn btn-outline-secondary">Selanjutnya</a>
+                        <a href="~/Pengajuan/Submit" class="btn btn-outline-secondary">Selanjutnya</a>
                     </div>
                     <div class="datatable">
                         <table class="table table-hover" width="100%" cellspacing="0">
                             <thead>
                                 <tr class="text-secondary">
                                     <th>Nama Barang</th>
-                                    <th>Stok</th>
+                                    <th>Kuantitas</th>
+                                    <th>Harga</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -80,12 +81,13 @@
                                 @foreach (var item in ViewBag.Cart)
                                 {
                                     <tr>
-                                        <td>@item.BarangPerusahaan.NamaBarang</td>
+                                        <td>@item.BarangVendor.NamaBarang</td>
                                         <td>@item.Qyt</td>
+                                        <td>@item.BarangVendor.Harga</td>
                                         <td>
-                                            <a href="~/Peminjaman/Plus/@item.ID_Barang" data-toggle="tooltip" title="Tambah Kuantitas" class="btn btn-datatable btn-icon btn-transparent-dark mr-2" te><i data-feather="plus"></i></a>
-                                            <a href="~/Peminjaman/Minus/@item.ID_Barang" data-toggle="tooltip" title="Kurang Kuantitas" class="btn btn-datatable btn-icon btn-transparent-dark mr-2" te><i data-feather="minus"></i></a>
-                                            <a href="~/Peminjaman/Delete/@item.ID_Barang" data-toggle="tooltip" title="Hapus Barang Dari Keranjang" class="btn btn-datatable btn-icon btn-transparent-dark mr-2" te><i data-feather="trash-2"></i></a>
+                                            <a href="~/Pengajuan/Plus/@item.ID_Barang" data-toggle="tooltip" title="Tambah Kuantitas" class="btn btn-datatable btn-icon btn-transparent-dark mr-2" te><i data-feather="plus"></i></a>
+                                            <a href="~/Pengajuan/Minus/@item.ID_Barang" data-toggle="tooltip" title="Kurang Kuantitas" class="btn btn-datatable btn-icon btn-transparent-dark mr-2" te><i data-feather="minus"></i></a>
+                                            <a href="~/Pengajuan/Delete/@item.ID_Barang" data-toggle="tooltip" title="Hapus Barang Dari Keranjang" class="btn btn-datatable btn-icon btn-transparent-dark mr-2" te><i data-feather="trash-2"></i></a>
                                         </td>
                                     </tr>
                                 }

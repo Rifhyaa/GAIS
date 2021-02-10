@@ -12,16 +12,11 @@ namespace GAIS.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class DetailPeminjaman
+    public partial class View_StatusPengajuan
     {
-        public string ID_Peminjaman { get; set; }
-        public int ID_Barang { get; set; }
-        public Nullable<int> Kuantitas { get; set; }
-        public Nullable<int> HargaBarang { get; set; }
-        public Nullable<int> Kondisi_Rusak { get; set; }
-        public string Keterangan { get; set; }
-    
-        public virtual BarangPerusahaan BarangPerusahaan { get; set; }
-        public virtual Peminjaman Peminjaman { get; set; }
+        public int ID { get; set; }
+        public int StatusPengajuan { get; set; }
+        public string DeskripsiTrans { get; set; }
+        public Nullable<int> jumlah { get; set; }
     }
 }

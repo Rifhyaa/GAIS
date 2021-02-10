@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
 using GAIS.Models;
+using Microsoft.Reporting.WebForms;
 
 namespace GAIS.Controllers
 {
@@ -208,6 +210,11 @@ namespace GAIS.Controllers
         {
             var data = entities.Pengajuans.Where(x => x.ID_Pengajuan == ID).First();
             data.StatusPengajuan = 1;
+            var detail = entities.DetailPengajuans.Where(x => x.ID_Pengajuan == ID);
+            foreach (var item in detail)
+            {
+                
+            }
             entities.SaveChanges();
 
             // Session Username & Role
@@ -255,6 +262,7 @@ namespace GAIS.Controllers
         {
             int id = Convert.ToInt32(this.Session["ID_Vendor"]);
             var data = entities.DetailPengajuans.Where(x => x.ID_Vendor == id && x.StatusBarang != "Sudah diterima gudang");
+            ViewBag.Transaksi = entities.Pengajuans.Where(x => x.StatusPengajuan == 1).ToList();
 
             // Session Username & Role
             ViewBag.NamaVendor = this.Session["Nama_Vendor"];
@@ -299,7 +307,7 @@ namespace GAIS.Controllers
         public ActionResult KonfirmasiBarangMasuk(string ID, int item)
         {
             var detail = entities.DetailPengajuans.Where(x => x.ID_Pengajuan == ID && x.ID_Barang == item).First();
-            detail.StatusBarang = "Barang Telah Diterima Bagian Gudang";
+            detail.StatusBarang = "Barang Telah Diterima";
             entities.SaveChanges();
 
             // Mengecek Detail
@@ -313,19 +321,71 @@ namespace GAIS.Controllers
                 entities.SaveChanges();
             }
 
+            var fill = entities.Pengajuans.Where(x => x.StatusPengajuan == 1 && x.SudahDibayar == 1);
             // Session Username & Role
             ViewBag.NamaUser = this.Session["NamaUser"];
             ViewBag.Role = this.Session["Role"];
-            return RedirectToAction("BarangMasuk");
+            return RedirectToAction("BarangMasuk", fill);
         }
 
-        public ActionResult DetailPemesanan()
+        public ActionResult LaporanPengajuan()
         {
+            var data = entities.Pengajuans.ToList();
+
             // Session Username & Role
             ViewBag.NamaUser = this.Session["NamaUser"];
             ViewBag.Role = this.Session["Role"];
-            return View();
+            return View(data);
         }
+
+        public ActionResult Report(string id)
+        {
+            LocalReport lr = new LocalReport();
+            string path = Path.Combine(Server.MapPath("~/Report"), "ReportPengajuan.rdlc");
+            if (System.IO.File.Exists(path))
+            {
+                lr.ReportPath = path;
+            }
+            else
+            {
+                return View("LaporanPengajuan");
+            }
+
+            var data = entities.Pengajuans.ToList();
+
+            ReportDataSource rd = new ReportDataSource("MyDataset", data);
+            lr.DataSources.Add(rd);
+            string reportType = id;
+            string mimeType;
+            string encoding;
+            string fileNameExtension;
+            string deviceInfo =
+                "<DeviceInfo>" +
+                "   <OutputFormat>" + id + "</OutputFormat>" +
+                "   <PageWidth>8.5in</PageWidth>" +
+                "   <PageHeight>11in</PageHeight>" +
+                "   <MarginTop>0.5in</MarginTop>" +
+                "   <MarginLeft>0.3in</MarginLeft>" +
+                "   <MarginRight>0.3in</MarginRight>" +
+                "   <MarginBottom>0.5</MarginBottom>" +
+                "   <EmbedFonts>None</EmbedFonts>" +
+                "</DeviceInfo>";
+            Warning[] warnings;
+            string[] streams;
+            byte[] renderedBytes;
+
+            renderedBytes = lr.Render(
+                reportType,
+                deviceInfo,
+                out mimeType,
+                out encoding,
+                out fileNameExtension,
+                out streams,
+                out warnings
+                );
+            return File(renderedBytes, mimeType);
+        }
+
 
         public void RemoveCart(int? id_barang, string npk)
         {

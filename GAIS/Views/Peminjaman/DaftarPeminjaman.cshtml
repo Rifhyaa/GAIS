@@ -12,9 +12,8 @@
                 <div class="col-auto mb-3">
                     <ol class="breadcrumb gais-breadcrumb" style="background-color: #fff">
                         <li class="breadcrumb-item">Home</li>
-                        <li class="breadcrumb-item">Admin</li>
                         <li class="breadcrumb-item">Peminjaman</li>
-                        <li class="breadcrumb-item text-blue">Daftar Peminjaman</li>
+                        <li class="breadcrumb-item text-blue">Permintaan Peminjaman</li>
                     </ol>
                 </div>
             </div>
@@ -81,7 +80,7 @@
                                     }
                                     @if (item.Status == 1)
                                     {
-                                        <a onclick="return confirm('Return confirmation?')" href="~/Peminjaman/ConfirmationReturning/@Html.DisplayFor(modelItem => item.ID)" data-toggle="tooltip" title="Return Confirmation" class="btn btn-datatable btn-icon btn-transparent-dark mr-2" te><i data-feather="check"></i></a>
+                                        <a onclick="return confirm('Return confirmation?')" href="~/Peminjaman/ConfirmationReturning/@Html.DisplayFor(modelItem => item.ID)" data-toggle="tooltip" title="Return Confirmation" class="btn btn-datatable btn-icon btn-transparent-dark mr-2" te><i data-feather="check-circle"></i></a>
                                     }
                                 </td>
                             </tr>

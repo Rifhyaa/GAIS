@@ -61,7 +61,7 @@
           <Property Name="Kuantitas" Type="int" />
           <Property Name="HargaBarang" Type="int" />
           <Property Name="ID_Vendor" Type="int" Nullable="false" />
-          <Property Name="StatusBarang" Type="varchar" MaxLength="20" />
+          <Property Name="StatusBarang" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="JenisBank">
           <Key>
@@ -91,10 +91,9 @@
         </EntityType>
         <EntityType Name="Karyawan">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="NPK" />
           </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="NPK" Type="varchar" MaxLength="10" />
+          <Property Name="NPK" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="NamaKaryawan" Type="varchar" MaxLength="100" />
           <Property Name="JenisKelamin" Type="char" MaxLength="1" />
           <Property Name="TanggalLahir" Type="date" />
@@ -154,7 +153,7 @@
           <Property Name="ID_GA" Type="varchar" MaxLength="10" />
           <Property Name="Tgl_Pengajuan" Type="datetime" />
           <Property Name="TotalHarga" Type="int" />
-          <Property Name="StatusPengajuan" Type="int" />
+          <Property Name="StatusPengajuan" Type="int" Nullable="false" />
           <Property Name="SudahDibayar" Type="int" />
           <Property Name="StatusFinal" Type="varchar" MaxLength="50" />
           <Property Name="LastModifiedTime" Type="datetime" />
@@ -210,6 +209,18 @@
           <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
           <Property Name="ModifiedBy" Type="varchar" MaxLength="50" />
           <Property Name="RowStatus" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'GAIS.dbo.View_StatusPengajuan' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="View_StatusPengajuan">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="StatusPengajuan" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="StatusPengajuan" Type="int" Nullable="false" />
+          <Property Name="DeskripsiTrans" Type="varchar" MaxLength="41" />
+          <Property Name="jumlah" Type="int" />
         </EntityType>
         <Association Name="FK_BarangPerusahaan_JenisBarang">
           <End Role="JenisBarang" Type="Self.JenisBarang" Multiplicity="0..1" />
@@ -283,6 +294,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DetailPeminjaman_Peminjaman">
+          <End Role="Peminjaman" Type="Self.Peminjaman" Multiplicity="1" />
+          <End Role="DetailPeminjaman" Type="Self.DetailPeminjaman" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Peminjaman">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DetailPeminjaman">
+              <PropertyRef Name="ID_Peminjaman" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_DetailPengajuan_Barang">
           <End Role="BarangVendor" Type="Self.BarangVendor" Multiplicity="1" />
           <End Role="DetailPengajuan" Type="Self.DetailPengajuan" Multiplicity="*" />
@@ -292,6 +315,18 @@
             </Principal>
             <Dependent Role="DetailPengajuan">
               <PropertyRef Name="ID_Barang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetailPengajuan_Pengajuan">
+          <End Role="Pengajuan" Type="Self.Pengajuan" Multiplicity="1" />
+          <End Role="DetailPengajuan" Type="Self.DetailPengajuan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pengajuan">
+              <PropertyRef Name="ID_Pengajuan" />
+            </Principal>
+            <Dependent Role="DetailPengajuan">
+              <PropertyRef Name="ID_Pengajuan" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -355,6 +390,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Peminjaman_Karyawan">
+          <End Role="Karyawan" Type="Self.Karyawan" Multiplicity="0..1" />
+          <End Role="Peminjaman" Type="Self.Peminjaman" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Karyawan">
+              <PropertyRef Name="NPK" />
+            </Principal>
+            <Dependent Role="Peminjaman">
+              <PropertyRef Name="ID_Karyawan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Vendor_JenisBank">
           <End Role="JenisBank" Type="Self.JenisBank" Multiplicity="1" />
           <End Role="Vendor" Type="Self.Vendor" Multiplicity="*" />
@@ -367,37 +414,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
-        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="GAISModelStoreContainer">
           <EntitySet Name="BarangPerusahaan" EntityType="Self.BarangPerusahaan" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BarangVendor" EntityType="Self.BarangVendor" Schema="dbo" store:Type="Tables" />
@@ -414,6 +430,14 @@
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Section" EntityType="Self.Section" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Vendor" EntityType="Self.Vendor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="View_StatusPengajuan" EntityType="Self.View_StatusPengajuan" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [View_StatusPengajuan].[ID] AS [ID], 
+    [View_StatusPengajuan].[StatusPengajuan] AS [StatusPengajuan], 
+    [View_StatusPengajuan].[DeskripsiTrans] AS [DeskripsiTrans], 
+    [View_StatusPengajuan].[jumlah] AS [jumlah]
+    FROM [dbo].[View_StatusPengajuan] AS [View_StatusPengajuan]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_BarangPerusahaan_JenisBarang" Association="Self.FK_BarangPerusahaan_JenisBarang">
             <End Role="JenisBarang" EntitySet="JenisBarang" />
             <End Role="BarangPerusahaan" EntitySet="BarangPerusahaan" />
@@ -438,8 +462,16 @@
             <End Role="BarangPerusahaan" EntitySet="BarangPerusahaan" />
             <End Role="DetailPeminjaman" EntitySet="DetailPeminjaman" />
           </AssociationSet>
+          <AssociationSet Name="FK_DetailPeminjaman_Peminjaman" Association="Self.FK_DetailPeminjaman_Peminjaman">
+            <End Role="Peminjaman" EntitySet="Peminjaman" />
+            <End Role="DetailPeminjaman" EntitySet="DetailPeminjaman" />
+          </AssociationSet>
           <AssociationSet Name="FK_DetailPengajuan_Barang" Association="Self.FK_DetailPengajuan_Barang">
             <End Role="BarangVendor" EntitySet="BarangVendor" />
+            <End Role="DetailPengajuan" EntitySet="DetailPengajuan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetailPengajuan_Pengajuan" Association="Self.FK_DetailPengajuan_Pengajuan">
+            <End Role="Pengajuan" EntitySet="Pengajuan" />
             <End Role="DetailPengajuan" EntitySet="DetailPengajuan" />
           </AssociationSet>
           <AssociationSet Name="FK_DetailPengajuan_Vendor" Association="Self.FK_DetailPengajuan_Vendor">
@@ -462,6 +494,10 @@
             <End Role="BarangVendor" EntitySet="BarangVendor" />
             <End Role="KeranjangPengajuan" EntitySet="KeranjangPengajuan" />
           </AssociationSet>
+          <AssociationSet Name="FK_Peminjaman_Karyawan" Association="Self.FK_Peminjaman_Karyawan">
+            <End Role="Karyawan" EntitySet="Karyawan" />
+            <End Role="Peminjaman" EntitySet="Peminjaman" />
+          </AssociationSet>
           <AssociationSet Name="FK_Vendor_JenisBank" Association="Self.FK_Vendor_JenisBank">
             <End Role="JenisBank" EntitySet="JenisBank" />
             <End Role="Vendor" EntitySet="Vendor" />
@@ -472,36 +508,6 @@
     <edmx:ConceptualModels>
       <Schema Namespace="GAISModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="GAISEntities" annotation:LazyLoadingEnabled="true">
-          <FunctionImport Name="sp_alterdiagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="version" Mode="In" Type="Int32" />
-            <Parameter Name="definition" Mode="In" Type="Binary" />
-          </FunctionImport>
-          <FunctionImport Name="sp_creatediagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="version" Mode="In" Type="Int32" />
-            <Parameter Name="definition" Mode="In" Type="Binary" />
-          </FunctionImport>
-          <FunctionImport Name="sp_dropdiagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_helpdiagramdefinition">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_helpdiagrams">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_renamediagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="new_diagramname" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="sp_upgraddiagrams" />
           <EntitySet Name="BarangPerusahaans" EntityType="GAISModel.BarangPerusahaan" />
           <EntitySet Name="BarangVendors" EntityType="GAISModel.BarangVendor" />
           <EntitySet Name="DetailPeminjamen" EntityType="GAISModel.DetailPeminjaman" />
@@ -517,6 +523,7 @@
           <EntitySet Name="Roles" EntityType="GAISModel.Role" />
           <EntitySet Name="Sections" EntityType="GAISModel.Section" />
           <EntitySet Name="Vendors" EntityType="GAISModel.Vendor" />
+          <EntitySet Name="View_StatusPengajuan" EntityType="GAISModel.View_StatusPengajuan" />
           <AssociationSet Name="FK_BarangPerusahaan_JenisBarang" Association="GAISModel.FK_BarangPerusahaan_JenisBarang">
             <End Role="JenisBarang" EntitySet="JenisBarangs" />
             <End Role="BarangPerusahaan" EntitySet="BarangPerusahaans" />
@@ -553,6 +560,14 @@
             <End Role="BarangVendor" EntitySet="BarangVendors" />
             <End Role="KeranjangPengajuan" EntitySet="KeranjangPengajuans" />
           </AssociationSet>
+          <AssociationSet Name="FK_DetailPeminjaman_Peminjaman" Association="GAISModel.FK_DetailPeminjaman_Peminjaman">
+            <End Role="Peminjaman" EntitySet="Peminjamen" />
+            <End Role="DetailPeminjaman" EntitySet="DetailPeminjamen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetailPengajuan_Pengajuan" Association="GAISModel.FK_DetailPengajuan_Pengajuan">
+            <End Role="Pengajuan" EntitySet="Pengajuans" />
+            <End Role="DetailPengajuan" EntitySet="DetailPengajuans" />
+          </AssociationSet>
           <AssociationSet Name="FK_DetailPengajuan_Vendor" Association="GAISModel.FK_DetailPengajuan_Vendor">
             <End Role="Vendor" EntitySet="Vendors" />
             <End Role="DetailPengajuan" EntitySet="DetailPengajuans" />
@@ -569,7 +584,11 @@
             <End Role="Section" EntitySet="Sections" />
             <End Role="Karyawan" EntitySet="Karyawans" />
           </AssociationSet>
-          </EntityContainer>
+          <AssociationSet Name="FK_Peminjaman_Karyawan" Association="GAISModel.FK_Peminjaman_Karyawan">
+            <End Role="Karyawan" EntitySet="Karyawans" />
+            <End Role="Peminjaman" EntitySet="Peminjamen" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="BarangPerusahaan">
           <Key>
             <PropertyRef Name="ID" />
@@ -625,6 +644,7 @@
           <Property Name="Kondisi_Rusak" Type="Int32" />
           <Property Name="Keterangan" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="BarangPerusahaan" Relationship="GAISModel.FK_DetailPeminjaman_Barang" FromRole="DetailPeminjaman" ToRole="BarangPerusahaan" />
+          <NavigationProperty Name="Peminjaman" Relationship="GAISModel.FK_DetailPeminjaman_Peminjaman" FromRole="DetailPeminjaman" ToRole="Peminjaman" />
         </EntityType>
         <EntityType Name="DetailPengajuan">
           <Key>
@@ -636,8 +656,9 @@
           <Property Name="Kuantitas" Type="Int32" />
           <Property Name="HargaBarang" Type="Int32" />
           <Property Name="ID_Vendor" Type="Int32" Nullable="false" />
-          <Property Name="StatusBarang" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="StatusBarang" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="BarangVendor" Relationship="GAISModel.FK_DetailPengajuan_Barang" FromRole="DetailPengajuan" ToRole="BarangVendor" />
+          <NavigationProperty Name="Pengajuan" Relationship="GAISModel.FK_DetailPengajuan_Pengajuan" FromRole="DetailPengajuan" ToRole="Pengajuan" />
           <NavigationProperty Name="Vendor" Relationship="GAISModel.FK_DetailPengajuan_Vendor" FromRole="DetailPengajuan" ToRole="Vendor" />
         </EntityType>
         <EntityType Name="JenisBank">
@@ -671,10 +692,9 @@
         </EntityType>
         <EntityType Name="Karyawan">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="NPK" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NPK" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="NPK" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="NamaKaryawan" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="JenisKelamin" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="TanggalLahir" Type="DateTime" Precision="0" />
@@ -692,6 +712,7 @@
           <Property Name="Foto" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Role" Relationship="GAISModel.FK_Karyawan_Role" FromRole="Karyawan" ToRole="Role" />
           <NavigationProperty Name="Section" Relationship="GAISModel.FK_Karyawan_Section" FromRole="Karyawan" ToRole="Section" />
+          <NavigationProperty Name="Peminjamen" Relationship="GAISModel.FK_Peminjaman_Karyawan" FromRole="Karyawan" ToRole="Peminjaman" />
         </EntityType>
         <EntityType Name="Keranjang">
           <Key>
@@ -729,6 +750,8 @@
           <Property Name="IsLate" Type="Int32" />
           <Property Name="Denda" Type="Int32" />
           <Property Name="StatusDenda" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DetailPeminjamen" Relationship="GAISModel.FK_DetailPeminjaman_Peminjaman" FromRole="Peminjaman" ToRole="DetailPeminjaman" />
+          <NavigationProperty Name="Karyawan" Relationship="GAISModel.FK_Peminjaman_Karyawan" FromRole="Peminjaman" ToRole="Karyawan" />
         </EntityType>
         <EntityType Name="Pengajuan">
           <Key>
@@ -738,11 +761,12 @@
           <Property Name="ID_GA" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Tgl_Pengajuan" Type="DateTime" Precision="3" />
           <Property Name="TotalHarga" Type="Int32" />
-          <Property Name="StatusPengajuan" Type="Int32" />
+          <Property Name="StatusPengajuan" Type="Int32" Nullable="false" />
           <Property Name="SudahDibayar" Type="Int32" />
           <Property Name="StatusFinal" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="LastModifiedTime" Type="DateTime" Precision="3" />
           <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DetailPengajuans" Relationship="GAISModel.FK_DetailPengajuan_Pengajuan" FromRole="Pengajuan" ToRole="DetailPengajuan" />
         </EntityType>
         <EntityType Name="Reference">
           <Key>
@@ -801,6 +825,16 @@
           <NavigationProperty Name="BarangVendors" Relationship="GAISModel.FK_BarangVendor_Vendor" FromRole="Vendor" ToRole="BarangVendor" />
           <NavigationProperty Name="DetailPengajuans" Relationship="GAISModel.FK_DetailPengajuan_Vendor" FromRole="Vendor" ToRole="DetailPengajuan" />
           <NavigationProperty Name="JenisBank" Relationship="GAISModel.FK_Vendor_JenisBank" FromRole="Vendor" ToRole="JenisBank" />
+        </EntityType>
+        <EntityType Name="View_StatusPengajuan">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="StatusPengajuan" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="StatusPengajuan" Type="Int32" Nullable="false" />
+          <Property Name="DeskripsiTrans" Type="String" MaxLength="41" FixedLength="false" Unicode="false" />
+          <Property Name="jumlah" Type="Int32" />
         </EntityType>
         <Association Name="FK_BarangPerusahaan_JenisBarang">
           <End Type="GAISModel.JenisBarang" Role="JenisBarang" Multiplicity="0..1" />
@@ -910,6 +944,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DetailPeminjaman_Peminjaman">
+          <End Type="GAISModel.Peminjaman" Role="Peminjaman" Multiplicity="1" />
+          <End Type="GAISModel.DetailPeminjaman" Role="DetailPeminjaman" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Peminjaman">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DetailPeminjaman">
+              <PropertyRef Name="ID_Peminjaman" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetailPengajuan_Pengajuan">
+          <End Type="GAISModel.Pengajuan" Role="Pengajuan" Multiplicity="1" />
+          <End Type="GAISModel.DetailPengajuan" Role="DetailPengajuan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pengajuan">
+              <PropertyRef Name="ID_Pengajuan" />
+            </Principal>
+            <Dependent Role="DetailPengajuan">
+              <PropertyRef Name="ID_Pengajuan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_DetailPengajuan_Vendor">
           <End Type="GAISModel.Vendor" Role="Vendor" Multiplicity="1" />
           <End Type="GAISModel.DetailPengajuan" Role="DetailPengajuan" Multiplicity="*" />
@@ -958,19 +1016,24 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Peminjaman_Karyawan">
+          <End Type="GAISModel.Karyawan" Role="Karyawan" Multiplicity="0..1" />
+          <End Type="GAISModel.Peminjaman" Role="Peminjaman" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Karyawan">
+              <PropertyRef Name="NPK" />
+            </Principal>
+            <Dependent Role="Peminjaman">
+              <PropertyRef Name="ID_Karyawan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="GAISModelStoreContainer" CdmEntityContainer="GAISEntities">
-          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="GAISModel.Store.sp_alterdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="GAISModel.Store.sp_creatediagram" />
-          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="GAISModel.Store.sp_dropdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="GAISModel.Store.sp_helpdiagramdefinition" />
-          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="GAISModel.Store.sp_helpdiagrams" />
-          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="GAISModel.Store.sp_renamediagram" />
-          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="GAISModel.Store.sp_upgraddiagrams" />
           <EntitySetMapping Name="BarangPerusahaans">
             <EntityTypeMapping TypeName="GAISModel.BarangPerusahaan">
               <MappingFragment StoreEntitySet="BarangPerusahaan">
@@ -1078,7 +1141,6 @@
                 <ScalarProperty Name="JenisKelamin" ColumnName="JenisKelamin" />
                 <ScalarProperty Name="NamaKaryawan" ColumnName="NamaKaryawan" />
                 <ScalarProperty Name="NPK" ColumnName="NPK" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1190,7 +1252,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          </EntityContainerMapping>
+          <EntitySetMapping Name="View_StatusPengajuan">
+            <EntityTypeMapping TypeName="GAISModel.View_StatusPengajuan">
+              <MappingFragment StoreEntitySet="View_StatusPengajuan">
+                <ScalarProperty Name="jumlah" ColumnName="jumlah" />
+                <ScalarProperty Name="DeskripsiTrans" ColumnName="DeskripsiTrans" />
+                <ScalarProperty Name="StatusPengajuan" ColumnName="StatusPengajuan" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

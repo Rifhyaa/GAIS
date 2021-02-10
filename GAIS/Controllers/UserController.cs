@@ -39,8 +39,6 @@ namespace GAIS.Controllers
 
         public ActionResult Security()
         {
-            
-
             // Session Username & Role
             ViewBag.NamaUser = this.Session["NamaUser"];
             ViewBag.Role = this.Session["Role"];

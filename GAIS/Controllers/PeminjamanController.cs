@@ -221,7 +221,7 @@ namespace GAIS.Controllers
         }
 
         [HttpGet]
-        public ActionResult ChangesItem(string ID, int Item)
+        public ActionResult FormBarangaRusak(string ID, int Item)
         {
             string npk = this.Session["NPK"].ToString();
 
@@ -234,7 +234,7 @@ namespace GAIS.Controllers
         }
 
         [HttpPost]
-        public ActionResult ChangesItem(DetailPeminjaman mdat)
+        public ActionResult FormBarangaRusak(DetailPeminjaman mdat)
         {
             // Get Data By ID
             var myData = entities.DetailPeminjamen.Where(x => x.ID_Peminjaman == mdat.ID_Peminjaman &&
@@ -286,7 +286,7 @@ namespace GAIS.Controllers
             // Session Username & Role
             ViewBag.NamaUser = this.Session["NamaUser"];
             ViewBag.Role = this.Session["Role"];
-            return View("ListPeminjaman", lists);
+            return View("DaftarPeminjaman", lists);
         }
 
         public ActionResult ConfirmationReturning(string id)
@@ -312,7 +312,7 @@ namespace GAIS.Controllers
             // Session Username & Role
             ViewBag.NamaUser = this.Session["NamaUser"];
             ViewBag.Role = this.Session["Role"];
-            return View("ListPeminjaman", lists);
+            return View("DaftarPeminjaman", lists);
         }
 
         public void RemoveCart(int? id_barang, string npk)

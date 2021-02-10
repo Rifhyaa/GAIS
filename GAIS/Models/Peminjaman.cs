@@ -14,6 +14,12 @@ namespace GAIS.Models
     
     public partial class Peminjaman
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Peminjaman()
+        {
+            this.DetailPeminjamen = new HashSet<DetailPeminjaman>();
+        }
+    
         public string ID { get; set; }
         public string ID_Karyawan { get; set; }
         public string ID_GA { get; set; }
@@ -26,5 +32,9 @@ namespace GAIS.Models
         public Nullable<int> IsLate { get; set; }
         public Nullable<int> Denda { get; set; }
         public string StatusDenda { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DetailPeminjaman> DetailPeminjamen { get; set; }
+        public virtual Karyawan Karyawan { get; set; }
     }
 }

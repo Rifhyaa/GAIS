@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<GAIS.Models.Pengajuan>
 
 @{
-    ViewBag.Title = "LampiranPengajuan";
+    ViewBag.Title = "Lampiran Pengajuan";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
     string pengajuan_0 = "Belum disetujui Kepala Divisi";
     string pengajuan_1 = "Telah disetujui Kepala Divisi";
@@ -17,8 +17,7 @@
                 <div class="col-auto mb-3">
                     <ol class="breadcrumb gais-breadcrumb" style="background-color: #fff">
                         <li class="breadcrumb-item">Home</li>
-                        <li class="breadcrumb-item">Admin</li>
-                        <li class="breadcrumb-item text-blue">Peminjaman</li>
+                        <li class="breadcrumb-item text-blue">@ViewBag.Title</li>
                     </ol>
                 </div>
             </div>
@@ -26,10 +25,10 @@
     </div>
 </header>
 <div class="container-fluid mt-4">
+    <h2 class="page-header-title pb-3">
+        Daftar @ViewBag.Title
+    </h2>
     <div class="card mb-4">
-        <div class="card-header" style="font-size: 1.1rem; ">
-            Riwayat Peminjaman
-        </div>
         <div class="card-body">
             <div class="datatable">
                 <table class="table table-bordered table-hover table-striped" id="dataTable" width="100%" cellspacing="0">
@@ -61,9 +60,9 @@
                                     }
                                 </td>
                                 <td>
-                                    <a href="~/Pengajuan/Details/@Html.DisplayFor(modelItem => item.ID_Pengajuan)" data-toggle="tooltip" title="Details" class="btn btn-datatable btn-icon btn-transparent-dark mr-2" te><i data-feather="list"></i></a>
-                                    <a href="~/Pengajuan/TidakDisetujui/@Html.DisplayFor(modelItem => item.ID_Pengajuan)" data-toggle="tooltip" title="Tidak Setujui Pengajuan" class="btn btn-datatable btn-icon btn-transparent-dark mr-2" te><i data-feather="list"></i></a>
-                                    <a href="~/Pengajuan/Disetujui/@Html.DisplayFor(modelItem => item.ID_Pengajuan)" data-toggle="tooltip" title="Setujui Pengajuan" class="btn btn-datatable btn-icon btn-transparent-dark mr-2" te><i data-feather="list"></i></a>
+                                    <a href="~/Pengajuan/Details/@Html.DisplayFor(modelItem => item.ID_Pengajuan)" data-toggle="tooltip" title="Lihat Detail Pengajuan" class="btn btn-datatable btn-icon btn-transparent-dark mr-2" te><i data-feather="list"></i></a>
+                                    <a href="~/Pengajuan/TidakDisetujui/@Html.DisplayFor(modelItem => item.ID_Pengajuan)" data-toggle="tooltip" title="Tidak Setujui Pengajuan" class="btn btn-datatable btn-icon btn-transparent-dark mr-2" te><i data-feather="x-circle"></i></a>
+                                    <a href="~/Pengajuan/Disetujui/@Html.DisplayFor(modelItem => item.ID_Pengajuan)" data-toggle="tooltip" title="Setujui Pengajuan" class="btn btn-datatable btn-icon btn-transparent-dark mr-2" te><i class="fas fa-signature"></i></a>
                                 </td>
                             </tr>
                         }

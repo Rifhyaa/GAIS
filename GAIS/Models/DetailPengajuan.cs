@@ -22,6 +22,7 @@ namespace GAIS.Models
         public string StatusBarang { get; set; }
     
         public virtual BarangVendor BarangVendor { get; set; }
+        public virtual Pengajuan Pengajuan { get; set; }
         public virtual Vendor Vendor { get; set; }
     }
 }

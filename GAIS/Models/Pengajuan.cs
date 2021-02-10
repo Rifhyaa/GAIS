@@ -14,14 +14,23 @@ namespace GAIS.Models
     
     public partial class Pengajuan
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Pengajuan()
+        {
+            this.DetailPengajuans = new HashSet<DetailPengajuan>();
+        }
+    
         public string ID_Pengajuan { get; set; }
         public string ID_GA { get; set; }
         public Nullable<System.DateTime> Tgl_Pengajuan { get; set; }
         public Nullable<int> TotalHarga { get; set; }
-        public Nullable<int> StatusPengajuan { get; set; }
+        public int StatusPengajuan { get; set; }
         public Nullable<int> SudahDibayar { get; set; }
         public string StatusFinal { get; set; }
         public Nullable<System.DateTime> LastModifiedTime { get; set; }
         public string ModifiedBy { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DetailPengajuan> DetailPengajuans { get; set; }
     }
 }

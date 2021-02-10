@@ -36,6 +36,7 @@ namespace GAIS.Controllers
 
         public ActionResult User()
         {
+            ViewBag.StatusPengajuan = entities.View_StatusPengajuan.ToList();
             // Session Username & Role
             ViewBag.NamaUser = this.Session["NamaUser"];
             ViewBag.Role = this.Session["Role"];

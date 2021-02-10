@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Pemesanan";
-    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    Layout = "~/Views/Shared/_LayoutVendor.cshtml";
 }
 
 <header class="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
@@ -12,9 +12,7 @@
                 <div class="col-auto mb-3">
                     <ol class="breadcrumb gais-breadcrumb" style="background-color: #fff">
                         <li class="breadcrumb-item">Home</li>
-                        <li class="breadcrumb-item">Admin</li>
-                        <li class="breadcrumb-item">Peminjaman</li>
-                        <li class="breadcrumb-item text-blue">Details</li>
+                        <li class="breadcrumb-item text-blue">Pemesanan</li>
                     </ol>
                 </div>
             </div>
@@ -22,16 +20,11 @@
     </div>
 </header>
 <div class="container-fluid mt-4">
+    <h2 class="page-header-title pb-3">
+        @ViewBag.Title
+    </h2>
     <div class="card mb-4">
-        <div class="card-header text-secondary" style="font-size: 1.1rem; ">
-            Daftar Pemesanan
-        </div>
         <div class="card-body">
-            <div class="row form-group">
-                <div class="col-sm-12 col-md-6">
-                    
-                </div>
-            </div>
             <div class="datatable">
                 <table class="table table-hover table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
@@ -50,18 +43,22 @@
                         @{int numRow = 0;}
                         @foreach (var item in Model)
                         {
-                        <tr>
-                            <td>@item.ID_Pengajuan</td>
-                            <td>@Html.DisplayFor(modelItem => item.BarangVendor.NamaBarang)</td>
-                            <td>@Html.DisplayFor(modelItem => item.Vendor.NamaVendor)</td>
-                            <td>@Html.DisplayFor(modelItem => item.Kuantitas)</td>
-                            <td class="text-right">Rp @string.Format("{0:N}", (item.HargaBarang))</td>
-                            <td class="text-right">Rp @string.Format("{0:N}", (item.HargaBarang * item.Kuantitas))</td>
-                            <td>@item.StatusBarang</td>
-                            <td>
-                                <a href="~/Pengajuan/KonfirmasiPengiriman/?ID=@item.ID_Pengajuan&Item=@item.ID_Barang" data-toggle="tooltip" title="Details" class="btn btn-datatable btn-icon btn-transparent-dark mr-2" te><i data-feather="list"></i></a>
-                            </td>
-                        </tr>
+                           
+                               
+                                    <tr>
+                                        <td>@item.ID_Pengajuan</td>
+                                        <td>@Html.DisplayFor(modelItem => item.BarangVendor.NamaBarang)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Vendor.NamaVendor)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Kuantitas)</td>
+                                        <td class="text-right">Rp @string.Format("{0:N}", (item.HargaBarang))</td>
+                                        <td class="text-right">Rp @string.Format("{0:N}", (item.HargaBarang * item.Kuantitas))</td>
+                                        <td>@item.StatusBarang</td>
+                                        <td>
+                                            <a href="~/Pengajuan/KonfirmasiPengiriman/?ID=@item.ID_Pengajuan&Item=@item.ID_Barang" data-toggle="tooltip" title="Konfirmasi Barang Telah Dikirim" class="btn btn-datatable btn-icon btn-transparent-dark mr-2" te><i class="fas fa-fw fa-paper-plane"></i></a>
+                                        </td>
+                                    </tr>
+                                
+                            
                         }
                     </tbody>
                 </table>

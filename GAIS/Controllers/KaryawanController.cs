@@ -73,7 +73,7 @@ namespace GAIS.Controllers
 
                 var ext = Path.GetExtension(File.FileName);
                 var inputFileName = DateTime.Now.ToString("yyyyMMddHHmmss") + mdat.NPK + ext;
-                var serverPath = Path.Combine(Server.MapPath("~/App_Data/Upload/") + inputFileName);
+                var serverPath = Path.Combine(Server.MapPath("~/assets/img/upload/") + inputFileName);
 
                 // Save File to Server Folder
                 File.SaveAs(serverPath);
@@ -114,7 +114,7 @@ namespace GAIS.Controllers
             }
             else
             {
-                ViewBag.PesanValidasi = "Profile Picture is not selected";
+                ViewBag.PesanValidasi = "Foto profil belum dipilih";
                 ViewBag.ID_Role = new SelectList(entities.Roles.Where(x => x.RowStatus == 0), "ID", "NamaRole", mdat.ID_Role);
                 ViewBag.ID_Seksi = new SelectList(entities.Sections.Where(x => x.RowStatus == 0), "ID", "NamaSection", mdat.ID_Seksi);
                 ViewBag.JenisKelamin = new SelectList(entities.References.Where(x => x.UsedFor == "Gender"), "Value", "Deskripsi", mdat.JenisKelamin);

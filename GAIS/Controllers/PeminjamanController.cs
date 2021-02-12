@@ -196,7 +196,7 @@ namespace GAIS.Controllers
             return View("Riwayat", data);
         }
 
-        public ActionResult LaporanPeminjaman()
+        public ActionResult SemuaPeminjaman()
         {
             string npk = this.Session["NPK"].ToString();
 
@@ -221,7 +221,7 @@ namespace GAIS.Controllers
         }
 
         [HttpGet]
-        public ActionResult FormBarangaRusak(string ID, int Item)
+        public ActionResult FormBarangRusak(string ID, int Item)
         {
             string npk = this.Session["NPK"].ToString();
 
@@ -234,42 +234,36 @@ namespace GAIS.Controllers
         }
 
         [HttpPost]
-        public ActionResult FormBarangaRusak(DetailPeminjaman mdat)
+        public ActionResult FormBarangRusak(DetailPeminjaman mdat)
         {
             // Get Data By ID
             var myData = entities.DetailPeminjamen.Where(x => x.ID_Peminjaman == mdat.ID_Peminjaman &&
                 x.ID_Barang == mdat.ID_Barang).FirstOrDefault();
+            
+            // Change Data
+            var data = entities.Peminjamen.Where(x => x.ID == mdat.ID_Peminjaman).FirstOrDefault();
+            myData.Kondisi_Rusak = mdat.Kondisi_Rusak;
+            myData.Keterangan = mdat.Keterangan;
 
-            if (ModelState.IsValid)
+            if (data.IsLate == 1)
             {
-                // Change Data
-                var data = entities.Peminjamen.Where(x => x.ID == mdat.ID_Peminjaman).FirstOrDefault();
-                myData.Kondisi_Rusak = mdat.Kondisi_Rusak;
-
-                if (data.IsLate == 1)
-                {
-                    var total = mdat.Kondisi_Rusak * mdat.HargaBarang;
-                    data.Denda = data.Denda + total;
-                }
-                else
-                {
-                    var total = (mdat.Kondisi_Rusak * mdat.HargaBarang) / 2;
-                    data.Denda = data.Denda + total;
-                }
-                entities.SaveChanges();
-
-                // Session Username & Role
-                ViewBag.NamaUser = this.Session["NamaUser"];
-                ViewBag.Role = this.Session["Role"];
-                return RedirectToAction("ViewAll");
+                var total = mdat.Kondisi_Rusak * mdat.HargaBarang;
+                data.Denda = data.Denda + total;
             }
             else
             {
-                // Session Username & Role
-                ViewBag.NamaUser = this.Session["NamaUser"];
-                ViewBag.Role = this.Session["Role"];
-                return View(mdat);
+                var total = (mdat.Kondisi_Rusak * mdat.HargaBarang) / 2;
+                data.Denda = data.Denda + total;
             }
+     
+            entities.SaveChanges();
+
+            // Session Username & Role
+            ViewBag.NamaUser = this.Session["NamaUser"];
+            ViewBag.Role = this.Session["Role"];
+            return RedirectToAction("SemuaPeminjaman");
+            
+            
         }
 
         public ActionResult ConfirmationBorrowing(string id)
@@ -286,7 +280,9 @@ namespace GAIS.Controllers
             // Session Username & Role
             ViewBag.NamaUser = this.Session["NamaUser"];
             ViewBag.Role = this.Session["Role"];
-            return View("DaftarPeminjaman", lists);
+
+            return RedirectToAction("DaftarPeminjaman");
+            //return View("DaftarPeminjaman", lists);
         }
 
         public ActionResult ConfirmationReturning(string id)
@@ -312,7 +308,24 @@ namespace GAIS.Controllers
             // Session Username & Role
             ViewBag.NamaUser = this.Session["NamaUser"];
             ViewBag.Role = this.Session["Role"];
-            return View("DaftarPeminjaman", lists);
+
+            return RedirectToAction("DaftarPeminjaman");
+            //return View("DaftarPeminjaman", lists);
+        }
+
+        public ActionResult BayarDenda(string id)
+        {
+            string npk = this.Session["NPK"].ToString();
+
+            var data = entities.Peminjamen.Where(x => x.ID == id).FirstOrDefault();
+            data.StatusDenda = "Sudah Lunas";
+            entities.SaveChanges();
+
+            // Session Username & Role
+            ViewBag.NamaUser = this.Session["NamaUser"];
+            ViewBag.Role = this.Session["Role"];
+
+            return RedirectToAction("SemuaPeminjaman");
         }
 
         public void RemoveCart(int? id_barang, string npk)

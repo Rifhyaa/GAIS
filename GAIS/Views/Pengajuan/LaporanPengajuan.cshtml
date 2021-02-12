@@ -1,83 +1,50 @@
 ﻿@model IEnumerable<GAIS.Models.Pengajuan>
 
 @{
-    ViewBag.Title = "LaporanPengajuan";
+    ViewBag.Title = "Laporan Peminjaman";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>LaporanPengajuan</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ID_GA)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Tgl_Pengajuan)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TotalHarga)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.StatusPengajuan)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SudahDibayar)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.StatusFinal)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LastModifiedTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ModifiedBy)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ID_GA)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Tgl_Pengajuan)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TotalHarga)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StatusPengajuan)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SudahDibayar)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StatusFinal)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastModifiedTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ModifiedBy)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID_Pengajuan }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID_Pengajuan }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID_Pengajuan })
-        </td>
-    </tr>
-}
-
-</table>
-
+<header class="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
+    <div class="container-fluid">
+        <div class="page-header-content">
+            <div class="row align-items-center justify-content-between pt-3">
+                <div class="col-auto mb-3">
+                    <ol class="breadcrumb gais-breadcrumb" style="background-color: #fff">
+                        <li class="breadcrumb-item">Home</li>
+                        <li class="breadcrumb-item text-blue">Laporan Peminjaman</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="container mt-4">
+    <h2 class="page-header-title pb-3">
+        @ViewBag.Title
+    </h2>
+    <div class="card mb-4">
+        <div class="card-body">
+            @using (Html.BeginForm("LaporanPengajuan", "Pengajuan", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                <fieldset>
+                    <div class="form-group">
+                        <div id="div_report" style="width:100%">
+                            <iframe id="showreport" src="~/Report/Report_Peminjaman.aspx" style="width:100%;height:500px;"></iframe>
+                        </div>
+                    </div>
+                </fieldset>
+            }
+        </div>
+    </div>
+</div>
+<!--
 <div class="form-group">
     <a href="@Url.Action("Report", new { id = "PDF"})">Get Report PDF</a>
     <a href="@Url.Action("Report", new { id = "Excel"})">Get Report Excel</a>
     <a href="@Url.Action("Report", new { id = "Word"})">Get Report Word</a>
     <a href="@Url.Action("Report", new { id = "Image"})">Get Report Image</a>
 </div>
+    -->

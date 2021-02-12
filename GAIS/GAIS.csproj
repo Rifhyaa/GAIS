@@ -51,6 +51,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="FastMember, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FastMember.1.5.0\lib\net461\FastMember.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.ReportViewer.WebForms, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="System" />
@@ -222,10 +225,29 @@
       <DependentUpon>GAISEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\VendorMetaData.cs" />
+    <Compile Include="Models\View_BarangMasuk.cs">
+      <DependentUpon>GAISEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\View_LaporanPeminjaman.cs">
+      <DependentUpon>GAISEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\View_StatusPembayaran.cs">
+      <DependentUpon>GAISEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\View_StatusPeminjaman.cs">
+      <DependentUpon>GAISEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\View_StatusPengajuan.cs">
       <DependentUpon>GAISEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Report\Report_Peminjaman.aspx.cs">
+      <DependentUpon>Report_Peminjaman.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Report\Report_Peminjaman.aspx.designer.cs">
+      <DependentUpon>Report_Peminjaman.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\demo\chart-area-demo.js" />
@@ -290,6 +312,7 @@
       <DependentUpon>GAISEntities.edmx</DependentUpon>
       <LastGenOutput>GAISEntities.cs</LastGenOutput>
     </Content>
+    <Content Include="Report\Report_Peminjaman.aspx" />
     <Content Include="sass.js" />
     <Content Include="sass.worker.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -343,8 +366,11 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Views\Dashboard\Admin.cshtml" />
-    <Content Include="Views\Dashboard\User.cshtml" />
+    <Content Include="Views\Dashboard\GA.cshtml" />
+    <Content Include="Views\Dashboard\Finance.cshtml" />
+    <Content Include="Views\Dashboard\Gudang.cshtml" />
+    <Content Include="Views\Dashboard\KepalaDivisi.cshtml" />
+    <Content Include="Views\Dashboard\Karyawan.cshtml" />
     <None Include="Views\Error\BadRequest.cshtml" />
     <Content Include="Views\Error\error-401.html" />
     <Content Include="Views\Error\error-403.html" />
@@ -397,10 +423,7 @@
     <Content Include="Views\Peminjaman\Submit.cshtml" />
     <Content Include="Views\Peminjaman\Details.cshtml" />
     <Content Include="Views\Peminjaman\DaftarPeminjaman.cshtml" />
-    <Content Include="Views\Peminjaman\LaporanPeminjaman.cshtml" />
-    <Content Include="Views\Peminjaman\FormBarangRusak.cshtml" />
-    <Content Include="Views\Shared\_Dashboard.cshtml" />
-    <Content Include="Views\User\EditProfile.cshtml" />
+    <Content Include="Views\Peminjaman\SemuaPeminjaman.cshtml" />
     <Content Include="Views\Pengajuan\Form.cshtml" />
     <Content Include="Views\Pengajuan\Submit.cshtml" />
     <Content Include="Views\Pengajuan\Riwayat.cshtml" />
@@ -415,6 +438,8 @@
     <Content Include="Views\User\MyProfile.cshtml" />
     <Content Include="Views\User\Security.cshtml" />
     <Content Include="Views\Pengajuan\LaporanPengajuan.cshtml" />
+    <Content Include="Views\Peminjaman\FormBarangRusak.cshtml" />
+    <Content Include="Views\Pengajuan\SemuaPemesanan.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Upload\" />
@@ -433,6 +458,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Report\ReportPeminjaman.rdlc" />
     <EmbeddedResource Include="Report\ReportPengajuan.rdlc" />
   </ItemGroup>
   <PropertyGroup>

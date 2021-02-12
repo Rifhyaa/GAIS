@@ -72,6 +72,29 @@
             </Mappings>
             <Sources />
           </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="View_LaporanPeminjamanTableAdapter" GeneratorDataComponentClassName="View_LaporanPeminjamanTableAdapter" Name="View_LaporanPeminjaman" UserDataComponentName="View_LaporanPeminjamanTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="GAISConnectionString (Web.config)" DbObjectName="GAIS.dbo.View_LaporanPeminjaman" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT ID, NamaKaryawan, AcceptedBy, NamaBarang, Kuantitas, TglPeminjaman, TglPengembalian, StatusPeminjaman FROM dbo.View_LaporanPeminjaman</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="ID" DataSetColumn="ID" />
+              <Mapping SourceColumn="NamaKaryawan" DataSetColumn="NamaKaryawan" />
+              <Mapping SourceColumn="AcceptedBy" DataSetColumn="AcceptedBy" />
+              <Mapping SourceColumn="NamaBarang" DataSetColumn="NamaBarang" />
+              <Mapping SourceColumn="Kuantitas" DataSetColumn="Kuantitas" />
+              <Mapping SourceColumn="TglPeminjaman" DataSetColumn="TglPeminjaman" />
+              <Mapping SourceColumn="TglPengembalian" DataSetColumn="TglPengembalian" />
+              <Mapping SourceColumn="StatusPeminjaman" DataSetColumn="StatusPeminjaman" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
         </Tables>
         <Sources />
       </DataSource>
@@ -80,7 +103,7 @@
   <xs:element name="GAISDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="GAISDataSet" msprop:Generator_UserDSName="GAISDataSet">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="Pengajuan" msprop:Generator_TableClassName="PengajuanDataTable" msprop:Generator_TableVarName="tablePengajuan" msprop:Generator_TablePropName="Pengajuan" msprop:Generator_RowDeletingName="PengajuanRowDeleting" msprop:Generator_RowChangingName="PengajuanRowChanging" msprop:Generator_RowEvHandlerName="PengajuanRowChangeEventHandler" msprop:Generator_RowDeletedName="PengajuanRowDeleted" msprop:Generator_UserTableName="Pengajuan" msprop:Generator_RowChangedName="PengajuanRowChanged" msprop:Generator_RowEvArgName="PengajuanRowChangeEvent" msprop:Generator_RowClassName="PengajuanRow">
+        <xs:element name="Pengajuan" msprop:Generator_TableClassName="PengajuanDataTable" msprop:Generator_TableVarName="tablePengajuan" msprop:Generator_RowChangedName="PengajuanRowChanged" msprop:Generator_TablePropName="Pengajuan" msprop:Generator_RowDeletingName="PengajuanRowDeleting" msprop:Generator_RowChangingName="PengajuanRowChanging" msprop:Generator_RowEvHandlerName="PengajuanRowChangeEventHandler" msprop:Generator_RowDeletedName="PengajuanRowDeleted" msprop:Generator_RowClassName="PengajuanRow" msprop:Generator_UserTableName="Pengajuan" msprop:Generator_RowEvArgName="PengajuanRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ID_Pengajuan" msprop:Generator_ColumnVarNameInTable="columnID_Pengajuan" msprop:Generator_ColumnPropNameInRow="ID_Pengajuan" msprop:Generator_ColumnPropNameInTable="ID_PengajuanColumn" msprop:Generator_UserColumnName="ID_Pengajuan">
@@ -119,11 +142,71 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="View_LaporanPeminjaman" msprop:Generator_TableClassName="View_LaporanPeminjamanDataTable" msprop:Generator_TableVarName="tableView_LaporanPeminjaman" msprop:Generator_TablePropName="View_LaporanPeminjaman" msprop:Generator_RowDeletingName="View_LaporanPeminjamanRowDeleting" msprop:Generator_RowChangingName="View_LaporanPeminjamanRowChanging" msprop:Generator_RowEvHandlerName="View_LaporanPeminjamanRowChangeEventHandler" msprop:Generator_RowDeletedName="View_LaporanPeminjamanRowDeleted" msprop:Generator_UserTableName="View_LaporanPeminjaman" msprop:Generator_RowChangedName="View_LaporanPeminjamanRowChanged" msprop:Generator_RowEvArgName="View_LaporanPeminjamanRowChangeEvent" msprop:Generator_RowClassName="View_LaporanPeminjamanRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ID" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NamaKaryawan" msprop:Generator_ColumnVarNameInTable="columnNamaKaryawan" msprop:Generator_ColumnPropNameInRow="NamaKaryawan" msprop:Generator_ColumnPropNameInTable="NamaKaryawanColumn" msprop:Generator_UserColumnName="NamaKaryawan" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="AcceptedBy" msprop:Generator_ColumnVarNameInTable="columnAcceptedBy" msprop:Generator_ColumnPropNameInRow="AcceptedBy" msprop:Generator_ColumnPropNameInTable="AcceptedByColumn" msprop:Generator_UserColumnName="AcceptedBy" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NamaBarang" msprop:Generator_ColumnVarNameInTable="columnNamaBarang" msprop:Generator_ColumnPropNameInRow="NamaBarang" msprop:Generator_ColumnPropNameInTable="NamaBarangColumn" msprop:Generator_UserColumnName="NamaBarang" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Kuantitas" msprop:Generator_ColumnVarNameInTable="columnKuantitas" msprop:Generator_ColumnPropNameInRow="Kuantitas" msprop:Generator_ColumnPropNameInTable="KuantitasColumn" msprop:Generator_UserColumnName="Kuantitas" type="xs:int" minOccurs="0" />
+              <xs:element name="TglPeminjaman" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnTglPeminjaman" msprop:Generator_ColumnPropNameInRow="TglPeminjaman" msprop:Generator_ColumnPropNameInTable="TglPeminjamanColumn" msprop:Generator_UserColumnName="TglPeminjaman" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="4000" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TglPengembalian" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnTglPengembalian" msprop:Generator_ColumnPropNameInRow="TglPengembalian" msprop:Generator_ColumnPropNameInTable="TglPengembalianColumn" msprop:Generator_UserColumnName="TglPengembalian" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="4000" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="StatusPeminjaman" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnStatusPeminjaman" msprop:Generator_ColumnPropNameInRow="StatusPeminjaman" msprop:Generator_ColumnPropNameInTable="StatusPeminjamanColumn" msprop:Generator_UserColumnName="StatusPeminjaman" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="22" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:choice>
     </xs:complexType>
     <xs:unique name="Constraint1" msdata:PrimaryKey="true">
       <xs:selector xpath=".//mstns:Pengajuan" />
       <xs:field xpath="mstns:ID_Pengajuan" />
+    </xs:unique>
+    <xs:unique name="View_LaporanPeminjaman_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:View_LaporanPeminjaman" />
+      <xs:field xpath="mstns:ID" />
     </xs:unique>
   </xs:element>
 </xs:schema>

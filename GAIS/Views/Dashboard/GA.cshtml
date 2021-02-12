@@ -1,0 +1,223 @@
+﻿
+@{
+    ViewBag.Title = "Dashboard GA";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="container mt-5">
+    <!-- Custom page header alternative example-->
+    <div class="d-flex justify-content-between align-items-sm-center flex-column flex-sm-row mb-4">
+        <div class="mr-4 mb-3 mb-sm-0">
+            <h1 class="mb-0">Dashboard</h1>
+            <div class="small">
+                <span class="font-weight-500 text-primary">@DateTime.Now.ToString("dddd")</span>
+                &#xB7; @DateTime.Now.ToString("MMMM dd, yyyy") &#xB7; @DateTime.Now.ToString("HH:mm tt")
+            </div>
+        </div>
+    </div>
+    <!-- Illustration dashboard card example-->
+    <div class="card card-waves mb-4 mt-5">
+        <div class="card-body p-5">
+            <div class="row align-items-center justify-content-between">
+                <div class="col">
+                    <h1 class="text-primary">Selamat Datang, @ViewBag.NamaUser</h1>
+                    <p class="text-gray-700">Jangan lupa menjaga jarak, memakai masker, dan patuhi protokol kesehatan untuk menghadapi pandemi ini.</p>
+                </div>
+                <div class="col d-none d-lg-block mt-xxl-n4"><img class="img-fluid px-xl-4 mt-xxl-n5" src="/assets/img/illustrations/statistics.svg" /></div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-3 col-md-6 mb-4">
+            <!-- Dashboard info widget 1-->
+            <div class="card border-top-0 border-bottom-0 border-right-0 border-left-lg border-primary h-100">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-grow-1">
+                            <div class="small font-weight-bold text-primary mb-1">Barang Perusahaan</div>
+                            <div class="h5">@ViewBag.TotalVendor</div>
+                        </div>
+                        <div class="ml-2"><i class="fas fa-percentage fa-2x text-gray-200"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <!-- Dashboard info widget 2-->
+            <div class="card border-top-0 border-bottom-0 border-right-0 border-left-lg border-secondary h-100">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-grow-1">
+                            <div class="small font-weight-bold text-secondary mb-1">Jenis Barang</div>
+                            <div class="h5">@ViewBag.TotalJenisBarang</div>
+                        </div>
+                        <div class="ml-2"><i class="fas fa-percentage fa-2x text-gray-200"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <!-- Dashboard info widget 3-->
+            <div class="card border-top-0 border-bottom-0 border-right-0 border-left-lg border-success h-100">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-grow-1">
+                            <div class="small font-weight-bold text-success mb-1">Vendor</div>
+                            <div class="h5">@ViewBag.TotalVendor</div>
+                        </div>
+                        <div class="ml-2"><i class="fas fa-percentage fa-2x text-gray-200"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <!-- Dashboard info widget 4-->
+            <div class="card border-top-0 border-bottom-0 border-right-0 border-left-lg border-info h-100">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-grow-1">
+                            <div class="small font-weight-bold text-info mb-1">Barang Vendor</div>
+                            <div class="h5">@ViewBag.TotalBarangVendor</div>
+                        </div>
+                        <div class="ml-2"><i class="fas fa-percentage fa-2x text-gray-200"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-6 col-md-12 mb-4">
+            <!-- Dashboard info widget 1-->
+            <div class="card border-top-0 border-bottom-0 border-right-0 border-left-lg border-red h-100">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-grow-1">
+                            <div class="small font-weight-bold text-red mb-1">Peminjaman</div>
+                            <div class="h5">@ViewBag.TotalPeminjaman</div>
+                        </div>
+                        <div class="ml-2"><i class="fas fa-percentage fa-2x text-gray-200"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6 col-md-12 mb-4">
+            <!-- Dashboard info widget 2-->
+            <div class="card border-top-0 border-bottom-0 border-right-0 border-left-lg border-black h-100">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-grow-1">
+                            <div class="small font-weight-bold text-black mb-1">Pengajuan</div>
+                            <div class="h5">@ViewBag.TotalPengajuan</div>
+                        </div>
+                        <div class="ml-2"><i class="fas fa-percentage fa-2x text-gray-200"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 mb-4">
+            <div class="card mb-4">
+                <div class="card-header">
+                    Daftar Status Peminjaman
+                </div>
+                <div class="card-body">
+                    <div class="datatable">
+                        <table class="table table-hover table-striped" width="100%" cellspacing="0">
+                            <thead>
+                                <tr class="text-blue">
+                                    <th>No</th>
+                                    <th>Status Peminjaman</th>
+                                    <th>Jumlah</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in ViewBag.StatusPeminjaman)
+                                {
+                                    <tr>
+                                        <td>@item.ID</td>
+                                        <td>@item.DeskripsiTrans</td>
+                                        <td>@item.jumlah</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 mb-4">
+            <div class="card mb-4">
+                <div class="card-header">Grafik Status Peminjaman</div>
+                <div class="card-body">
+                    <div class="chart-pie mb-4"><canvas id="chartStatusPeminjaman" width="100%" height="500"></canvas></div>
+                    <div class="list-group list-group-flush">
+                        <div class="list-group-item d-flex align-items-center justify-content-between small px-0 py-2">
+                            <div class="mr-3">
+                                <i class="fas fa-circle fa-sm mr-1 text-green"></i>
+                                Menunggu Konfirmasi GA
+                            </div>
+                        </div>
+                        <div class="list-group-item d-flex align-items-center justify-content-between small px-0 py-2">
+                            <div class="mr-3">
+                                <i class="fas fa-circle fa-sm mr-1 text-blue"></i>
+                                Sedang Meminjam
+                            </div>
+                        </div>
+                        <div class="list-group-item d-flex align-items-center justify-content-between small px-0 py-2">
+                            <div class="mr-3">
+                                <i class="fas fa-circle fa-sm mr-1 text-purple"></i>
+                                Telah Dikembalikan
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        var jmlPesanan = document.getElementById('chartStatusPeminjaman').getContext('2d');
+        var dtStatus = [];
+        var dtCount = [];
+
+        var array = @Html.Raw(Json.Encode(@ViewBag.StatusPeminjaman));
+
+        for (var i = 0; i < array.length; i++) {
+            //push ke array date dan count
+            dtStatus.push(" " + array[i].DeskripsiTrans);
+            dtCount.push(array[i].jumlah);
+        }
+
+
+        var adminChart = new Chart(jmlPesanan, {
+            type: 'doughnut',
+            data: {
+                labels: dtStatus,
+                datasets: [{
+                    label: dtStatus,
+                    backgroundColor: [
+                        '#00AC69', '#0061F2' , '#6900C7'
+                    ],
+                    borderColor: '#fff',
+                    data: dtCount,
+                }],
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                legend: {
+                    display: false,
+                    position: 'bottom',
+                    align: 'start',
+                    labels: {
+                        fontColor: 'rgba(213, 143, 56, 1)'
+                    }
+                },
+            }
+        });
+
+    </script>
+}

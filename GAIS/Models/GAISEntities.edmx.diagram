@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="5989be7335354426ba340eca58d1d52f" Name="Diagram1">
+      <Diagram DiagramId="5989be7335354426ba340eca58d1d52f" Name="Diagram1" ZoomLevel="82">
         <EntityTypeShape EntityType="GAISModel.BarangPerusahaan" Width="1.5" PointX="3" PointY="5.375" />
         <EntityTypeShape EntityType="GAISModel.BarangVendor" Width="1.5" PointX="6" PointY="5.75" />
         <EntityTypeShape EntityType="GAISModel.DetailPeminjaman" Width="1.5" PointX="8.25" PointY="6.375" />
@@ -20,7 +20,7 @@
         <EntityTypeShape EntityType="GAISModel.Role" Width="1.5" PointX="1.5" PointY="20.375" />
         <EntityTypeShape EntityType="GAISModel.Section" Width="1.5" PointX="0.75" PointY="15.625" />
         <EntityTypeShape EntityType="GAISModel.Vendor" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="GAISModel.View_StatusPengajuan" Width="1.5" PointX="4.75" PointY="1.25" />
+        <EntityTypeShape EntityType="GAISModel.View_StatusPengajuan" Width="1.5" PointX="11.375" PointY="2.875" />
         <AssociationConnector Association="GAISModel.FK_BarangPerusahaan_JenisBarang" />
         <AssociationConnector Association="GAISModel.FK_BarangPerusahaan_Seksi" />
         <AssociationConnector Association="GAISModel.FK_BarangPerusahaan_Vendor" />
@@ -37,6 +37,10 @@
         <AssociationConnector Association="GAISModel.FK_Karyawan_Role" />
         <AssociationConnector Association="GAISModel.FK_Karyawan_Section" />
         <AssociationConnector Association="GAISModel.FK_Peminjaman_Karyawan" />
+        <EntityTypeShape EntityType="GAISModel.View_StatusPembayaran" Width="1.5" PointX="13.125" PointY="2.875" />
+        <EntityTypeShape EntityType="GAISModel.View_StatusPeminjaman" Width="1.5" PointX="11.375" PointY="0.75" />
+        <EntityTypeShape EntityType="GAISModel.View_BarangMasuk" Width="1.5" PointX="13.125" PointY="0.75" />
+        <EntityTypeShape EntityType="GAISModel.View_LaporanPeminjaman" Width="1.5" PointX="13.125" PointY="5.125" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

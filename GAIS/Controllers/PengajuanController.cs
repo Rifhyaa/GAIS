@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
+using FastMember;
 using GAIS.Models;
 using Microsoft.Reporting.WebForms;
 
@@ -79,12 +81,11 @@ namespace GAIS.Controllers
             entities.KeranjangPengajuans.RemoveRange(entities.KeranjangPengajuans.Where(x => x.ID_Karyawan == npk));
             entities.SaveChanges();
 
-            var data = entities.Peminjamen.Where(x => x.ID_Karyawan == npk);
 
             // Session Username & Role
             ViewBag.NamaUser = this.Session["NamaUser"];
             ViewBag.Role = this.Session["Role"];
-            return View("Form", data);
+            return RedirectToAction("Form");
         }
 
         public ActionResult Add(int ID)
@@ -261,7 +262,7 @@ namespace GAIS.Controllers
         public ActionResult Pemesanan()
         {
             int id = Convert.ToInt32(this.Session["ID_Vendor"]);
-            var data = entities.DetailPengajuans.Where(x => x.ID_Vendor == id && x.StatusBarang != "Sudah diterima gudang");
+            var data = entities.DetailPengajuans.Where(x => x.ID_Vendor == id && x.StatusBarang != "Barang Telah Diterima");
             ViewBag.Transaksi = entities.Pengajuans.Where(x => x.StatusPengajuan == 1).ToList();
 
             // Session Username & Role
@@ -281,6 +282,17 @@ namespace GAIS.Controllers
             // Session Username & Role
             ViewBag.NamaVendor = this.Session["Nama_Vendor"];
             return RedirectToAction("Pemesanan");
+        }
+
+        public ActionResult SemuaPemesanan()
+        {
+            int id = Convert.ToInt32(this.Session["ID_Vendor"]);
+            var data = entities.DetailPengajuans.Where(x => x.ID_Vendor == id);
+            ViewBag.Transaksi = entities.Pengajuans.Where(x => x.StatusPengajuan == 1).ToList();
+
+            // Session Username & Role
+            ViewBag.NamaVendor = this.Session["Nama_Vendor"];
+            return View(data);
         }
 
         public ActionResult BarangMasuk()
@@ -312,7 +324,7 @@ namespace GAIS.Controllers
 
             // Mengecek Detail
             var totalDetail = entities.DetailPengajuans.Where(x => x.ID_Pengajuan == ID).Count();
-            var telahDikonfirmasi = entities.DetailPengajuans.Where(x => x.ID_Pengajuan == ID && x.StatusBarang == "Barang Telah Diterima Bagian Gudang").Count();
+            var telahDikonfirmasi = entities.DetailPengajuans.Where(x => x.ID_Pengajuan == ID && x.StatusBarang == "Barang Telah Diterima").Count();
 
             if (totalDetail == telahDikonfirmasi)
             {
@@ -340,8 +352,9 @@ namespace GAIS.Controllers
 
         public ActionResult Report(string id)
         {
+            
             LocalReport lr = new LocalReport();
-            string path = Path.Combine(Server.MapPath("~/Report"), "ReportPengajuan.rdlc");
+            string path = Path.Combine(Server.MapPath("~/Report"), "ReportPeminjaman.rdlc");
             if (System.IO.File.Exists(path))
             {
                 lr.ReportPath = path;
@@ -351,9 +364,9 @@ namespace GAIS.Controllers
                 return View("LaporanPengajuan");
             }
 
-            var data = entities.Pengajuans.ToList();
+            var data = entities.View_LaporanPeminjaman.ToList();
 
-            ReportDataSource rd = new ReportDataSource("MyDataset", data);
+            ReportDataSource rd = new ReportDataSource("DataSet1", data);
             lr.DataSources.Add(rd);
             string reportType = id;
             string mimeType;
@@ -362,13 +375,12 @@ namespace GAIS.Controllers
             string deviceInfo =
                 "<DeviceInfo>" +
                 "   <OutputFormat>" + id + "</OutputFormat>" +
-                "   <PageWidth>8.5in</PageWidth>" +
-                "   <PageHeight>11in</PageHeight>" +
-                "   <MarginTop>0.5in</MarginTop>" +
-                "   <MarginLeft>0.3in</MarginLeft>" +
-                "   <MarginRight>0.3in</MarginRight>" +
-                "   <MarginBottom>0.5</MarginBottom>" +
-                "   <EmbedFonts>None</EmbedFonts>" +
+                "   <PageWidth>10.5in</PageWidth>" +
+                "   <PageHeight>7.5in</PageHeight>" +
+                "   <MarginTop>0.2in</MarginTop>" +
+                "   <MarginLeft>0.2in</MarginLeft>" +
+                "   <MarginRight>0.2in</MarginRight>" +
+                "   <MarginBottom>0.2</MarginBottom>" +
                 "</DeviceInfo>";
             Warning[] warnings;
             string[] streams;
@@ -384,6 +396,8 @@ namespace GAIS.Controllers
                 out warnings
                 );
             return File(renderedBytes, mimeType);
+            
+            //return RedirectToAction("LaporanPengajuan");
         }
 
 

@@ -58,10 +58,10 @@
                     <div class="nav accordion" id="accordionSidenav">
                         @if (@ViewBag.Role == "GA")
                         {
-                            <!-- Sidenav Menu Heading (Core)-->
-                            <div class="sidenav-menu-heading">Core</div>
+                            <!-- Sidenav Menu Heading (Home)-->
+                            <div class="sidenav-menu-heading">Home</div>
                             <!-- Sidenav Accordion (Dashboard)-->
-                            <a class="nav-link collapsed" href="@Url.Action("Admin", "Dashboard")">
+                            <a class="nav-link collapsed" href="@Url.Action(@ViewBag.Role, "Dashboard")">
                                 <div class="nav-link-icon"><i class="fas fa-fw fa-tachometer-alt"></i></div>
                                 Dashboard
                             </a>
@@ -88,52 +88,48 @@
                                 Jenis Barang
                             </a>
                             <!-- Sidenav Heading (Transaksi Peminjaman)-->
-                            <div class="sidenav-menu-heading">Transaksi Peminjaman</div>
-                            <!-- Sidenav Link (Pengiriman)-->
-                            <a class="nav-link @(ViewContext.RouteData.Values["Action"].ToString() == "Form" ? "active" : "")" href="@Url.Action("Form", "Peminjaman")">
-                                <div class="nav-link-icon"><i class="fas fa-fw fa-exchange-alt"></i></div>
-                                Form Peminjaman
-                            </a>
-                            <!-- Sidenav Link (Pengiriman)-->
-                            <a class="nav-link @(ViewContext.RouteData.Values["Action"].ToString() == "Riwayat" ? "active" : "")" href="@Url.Action("Riwayat", "Peminjaman")">
-                                <div class="nav-link-icon"><i class="fas fa-fw fa-history"></i></div>
-                                Riwayat Peminjaman
-                            </a>
-                            <!-- Sidenav Link (Pengiriman)-->
+                            <div class="sidenav-menu-heading">Peminjaman</div>
+                            <!-- Sidenav Link (Daftar Peminjaman)-->
                             <a class="nav-link @(ViewContext.RouteData.Values["Action"].ToString() == "DaftarPeminjaman" ? "active" : "")" href="@Url.Action("DaftarPeminjaman", "Peminjaman")">
                                 <div class="nav-link-icon"><i class="fas fa-fw fa-list-ul"></i></div>
                                 Daftar Peminjaman
                             </a>
-                            <!-- Sidenav Heading (Transaksi Peminjaman)-->
-                            <div class="sidenav-menu-heading">Transaksi Pengajuan</div>
+                            <a class="nav-link @(ViewContext.RouteData.Values["Action"].ToString() == "SemuaPeminjaman" ? "active" : "")" href="@Url.Action("SemuaPeminjaman", "Peminjaman")">
+                                <div class="nav-link-icon"><i class="fas fa-fw fa-info"></i></div>
+                                Semua Peminjaman
+                            </a>
+                            <!-- Sidenav Heading (Transaksi Pengajuan)-->
+                            <div class="sidenav-menu-heading">Pengajuan</div>
                             <a class="nav-link @(ViewContext.RouteData.Values["Action"].ToString() == "Form" ? "active" : "")" href="@Url.Action("Form", "Pengajuan")">
                                 <div class="nav-link-icon"><i class="fas fa-fw fa-exchange-alt"></i></div>
                                 Form Pengajuan
                             </a>
+                            <!--
                             <a class="nav-link @(ViewContext.RouteData.Values["Action"].ToString() == "Form" ? "active" : "")" href="@Url.Action("Form", "Pengajuan")">
                                 <div class="nav-link-icon"><i class="fas fa-fw fa-list-ul"></i></div>
-                                Daftar Pengajuan
+                                Daftar Pengajuan dsfdsfds
                             </a>
+                            -->
                             <!-- Sidenav Heading (Laporan)-->
                             <div class="sidenav-menu-heading">Laporan</div>
                             <!-- Sidenav Link (Laporan Peminjaman)-->
-                            <a class="nav-link @(ViewContext.RouteData.Values["Action"].ToString() == "LaporanPeminjaman" ? "active" : "")" href="@Url.Action("LaporanPeminjaman", "Peminjaman")">
+                            <a class="nav-link @(ViewContext.RouteData.Values["Action"].ToString() == "LaporanPengajuan" ? "active" : "")" href="@Url.Action("LaporanPengajuan", "Pengajuan")">
                                 <div class="nav-link-icon"><i class="fas fa-fw fa-chart-bar"></i></div>
                                 Peminjaman Barang
                             </a>
-                            <!-- Sidenav Link (Laporan Pengadaan)-->
-                            <a class="nav-link" href="@Url.Action("Form", "Pengajuan")">
+                            <!-- Sidenav Link (Laporan Pengadaan)
+                            <a class="nav-link @(ViewContext.RouteData.Values["Action"].ToString() == "LaporanPengajuan" ? "active" : "")" href="@Url.Action("LaporanPengajuan", "Pengajuan")">
                                 <div class="nav-link-icon"><i class="fas fa-fw fa-chart-line"></i></div>
                                 Pengajuan Barang
-                            </a>
+                            </a>-->
                         }
                         @if (ViewBag.Role == "Finance")
                         {
-                            <!-- Sidenav Menu Heading (Halaman)-->
-                            <div class="sidenav-menu-heading">Halaman</div>
-                            <a class="nav-link collapsed" href="@Url.Action("User", "Dashboard")">
+                            <!-- Sidenav Menu Heading (Home)-->
+                            <div class="sidenav-menu-heading">Home</div>
+                            <a class="nav-link collapsed" href="@Url.Action(@ViewBag.Role, "Dashboard")">
                                 <div class="nav-link-icon"><i class="fas fa-fw fa-tachometer-alt"></i></div>
-                                Utama
+                                Dashboard
                             </a>
                             <a class="nav-link collapsed" href="@Url.Action("LampiranPembayaran", "Pengajuan")">
                                 <div class="nav-link-icon"><i class="far fa-fw fa-check-square"></i></div>
@@ -154,11 +150,11 @@
                         }
                         @if (ViewBag.Role == "Kepala Divisi")
                         {
-                            <!-- Sidenav Menu Heading (Halaman)-->
-                            <div class="sidenav-menu-heading">Halaman</div>
-                            <a class="nav-link collapsed" href="@Url.Action("User", "Dashboard")">
+                            <!-- Sidenav Menu Heading (Home)-->
+                            <div class="sidenav-menu-heading">Home</div>
+                            <a class="nav-link collapsed" href="@Url.Action("KepalaDivisi", "Dashboard")">
                                 <div class="nav-link-icon"><i class="fas fa-fw fa-tachometer-alt"></i></div>
-                                Utama
+                                Dashboard
                             </a>
                             <a class="nav-link collapsed" href="@Url.Action("LampiranPengajuan", "Pengajuan")">
                                 <div class="nav-link-icon"><i class="fas fa-fw fa-file-signature"></i></div>
@@ -179,11 +175,11 @@
                         }
                         @if (ViewBag.Role == "Karyawan")
                         {
-                            <!-- Sidenav Menu Heading (Halaman)-->
-                            <div class="sidenav-menu-heading">Halaman</div>
-                            <a class="nav-link collapsed" href="@Url.Action("User", "Dashboard")">
+                            <!-- Sidenav Menu Heading (Home)-->
+                            <div class="sidenav-menu-heading">Home</div>
+                            <a class="nav-link collapsed" href="@Url.Action(@ViewBag.Role, "Dashboard")">
                                 <div class="nav-link-icon"><i class="fas fa-fw fa-tachometer-alt"></i></div>
-                                Utama
+                                Dashboard
                             </a>
 
                             <!-- Sidenav Heading (Transaksi Peminjaman)-->
@@ -201,11 +197,11 @@
                         }
                         @if (ViewBag.Role == "Gudang")
                         {
-                            <!-- Sidenav Menu Heading (Halaman)-->
-                            <div class="sidenav-menu-heading">Halaman</div>
-                            <a class="nav-link collapsed" href="@Url.Action("User", "Dashboard")">
+                            <!-- Sidenav Menu Heading (Home)-->
+                            <div class="sidenav-menu-heading">Home</div>
+                            <a class="nav-link collapsed" href="@Url.Action(@ViewBag.Role, "Dashboard")">
                                 <div class="nav-link-icon"><i class="fas fa-fw fa-tachometer-alt"></i></div>
-                                Utama
+                                Dashboard
                             </a>
                             <a class="nav-link collapsed" href="@Url.Action("BarangMasuk", "Pengajuan")">
                                 <div class="nav-link-icon"><i class="fas fa-fw fa-truck-loading"></i></div>
@@ -227,10 +223,10 @@
                         }
                         @if (ViewBag.Role == "Administrator")
                         {
-                            <!-- Sidenav Menu Heading (Core)-->
-                            <div class="sidenav-menu-heading">Core</div>
+                            <!-- Sidenav Menu Heading (Home)-->
+                            <div class="sidenav-menu-heading">Home</div>
                             <!-- Sidenav Accordion (Dashboard)-->
-                            <a class="nav-link collapsed" href="@Url.Action("Admin", "Dashboard")">
+                            <a class="nav-link collapsed" href="@Url.Action("GA", "Dashboard")">
                                 <div class="nav-link-icon"><i class="fas fa-fw fa-tachometer-alt"></i></div>
                                 Dashboard
                             </a>
@@ -266,18 +262,6 @@
                                 <div class="nav-link-icon"><i class="far fa-fw fa-credit-card"></i></div>
                                 Jenis Bank
                             </a>
-                            <!-- Sidenav Heading (Laporan)-->
-                            <div class="sidenav-menu-heading">Laporan</div>
-                            <!-- Sidenav Link (Laporan Peminjaman)-->
-                            <a class="nav-link @(ViewContext.RouteData.Values["Action"].ToString() == "LaporanPeminjaman" ? "active" : "")" href="@Url.Action("LaporanPeminjaman", "Peminjaman")">
-                                <div class="nav-link-icon"><i class="fas fa-fw fa-chart-bar"></i></div>
-                                Peminjaman Barang
-                            </a>
-                            <!-- Sidenav Link (Laporan Pengadaan)-->
-                            <a class="nav-link" href="@Url.Action("Form", "Pengajuan")">
-                                <div class="nav-link-icon"><i class="fas fa-fw fa-dolly"></i></div>
-                                Pengajuan Barang
-                            </a>
                         }
                         <!-- Sidenav Heading (Pengguna Aplikasi)-->
                         <div class="sidenav-menu-heading">Akun Saya</div>
@@ -286,16 +270,11 @@
                             <div class="nav-link-icon"><i class="fas fa-fw fa-user-check"></i></div>
                             Profil Saya
                         </a>
-                        <!-- Sidenav Link (User)-->
-                        <a class="nav-link" href="@Url.Action("EditProfile", "User")">
-                            <div class="nav-link-icon"><i class="fas fa-fw fa-user-edit"></i></div>
-                            Ubah Profil
-                        </a>
-                        <!-- Sidenav Link (User)-->
-                        <a class="nav-link" href="@Url.Action("Security", "User")">
-                            <div class="nav-link-icon"><i class="fas fa-fw fa-key"></i></div>
-                            Keamanan
-                        </a>
+                        <!-- Sidenav Link (User)
+    <a class="nav-link" href="@Url.Action("Security", "User")">
+        <div class="nav-link-icon"><i class="fas fa-fw fa-key"></i></div>
+        Keamanan
+    </a>-->
                     </div>
                 </div>
                 <!-- Sidenav Footer-->

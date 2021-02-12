@@ -24,7 +24,7 @@ namespace GAIS.Controllers
             {
                 if (npk.Equals("sa") && password.Equals("1234"))
                 {
-                    this.Session["NPK"] = "0120210000";
+                    this.Session["NPK"] = "0120210006";
                     this.Session["NamaUser"] = "SA";
                     this.Session["Role"] = "Administrator";
                     this.Session["isLogged"] = true;
@@ -39,7 +39,7 @@ namespace GAIS.Controllers
                         if (obj == null)
                         {
                             ViewBag.Type = "danger";
-                            ViewBag.Validasi = "Username or password is wrong";
+                            ViewBag.Validasi = "NPK atau Password salah.";
                             return View();
                         }
                         else
@@ -49,9 +49,33 @@ namespace GAIS.Controllers
                             this.Session["Role"] = obj.Role.NamaRole;
                             this.Session["isLogged"] = true;
 
-                            return RedirectToAction("User", "Dashboard");
+                            string auth = this.Session["Role"].ToString();
 
-                            // disini di cek rolenya buat pindah2 halaman
+                            if (auth == "GA")
+                            {
+                                return RedirectToAction(auth, "Dashboard");
+                            }
+                            else if (auth == "Finance")
+                            {
+                                return RedirectToAction(auth, "Dashboard");
+                            }
+                            else if (auth == "Kepala Divisi")
+                            {
+                                return RedirectToAction("KepalaDivisi", "Dashboard");
+                            }
+                            else if (auth == "Karyawan")
+                            {
+                                return RedirectToAction(auth, "Dashboard");
+                            }
+                            else if (auth == "Gudang")
+                            {
+                                return RedirectToAction(auth, "Dashboard");
+                            }
+                            else
+                            {
+                                // Role Admin
+                                return RedirectToAction("GA", "Dashboard");
+                            }
                         }
                     }
                 }
@@ -77,7 +101,7 @@ namespace GAIS.Controllers
                     if (obj == null)
                     {
                         ViewBag.Type = "danger";
-                        ViewBag.Validasi = "Username or password is wrong";
+                        ViewBag.Validasi = "Username atau password salah.";
                         return View();
                     }
                     else
@@ -88,8 +112,6 @@ namespace GAIS.Controllers
                         this.Session["isLogged"] = true;
 
                         return RedirectToAction("Pemesanan", "Pengajuan");
-
-                        // disini di cek rolenya buat pindah2 halaman
                     }
                 }
             }
@@ -105,7 +127,7 @@ namespace GAIS.Controllers
             this.Session["isLogged"] = null;
 
             ViewBag.Type = "success";
-            ViewBag.Validasi = "You have been logged out!";
+            ViewBag.Validasi = "Anda telah berhasil keluar.";
 
             return View("Index");
         }

@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<GAIS.Models.Peminjaman>
 
 @{
-    ViewBag.Title = "ListPeminjaman";
+    ViewBag.Title = "Daftar Peminjaman";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
@@ -12,8 +12,7 @@
                 <div class="col-auto mb-3">
                     <ol class="breadcrumb gais-breadcrumb" style="background-color: #fff">
                         <li class="breadcrumb-item">Home</li>
-                        <li class="breadcrumb-item">Peminjaman</li>
-                        <li class="breadcrumb-item text-blue">Permintaan Peminjaman</li>
+                        <li class="breadcrumb-item text-blue">Daftar Peminjaman</li>
                     </ol>
                 </div>
             </div>
@@ -21,10 +20,10 @@
     </div>
 </header>
 <div class="container-fluid mt-4">
+    <h2 class="page-header-title pb-3">
+        @ViewBag.Title
+    </h2>
     <div class="card mb-4">
-        <div class="card-header" style="font-size: 1.1rem; ">
-            Daftar Peminjaman
-        </div>
         <div class="card-body">
             <div class="row form-group">
             </div>
@@ -33,15 +32,13 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>ID Transaction</th>
-                            <th>Borrow Date</th>
-                            <th>Date Returned</th>
-                            <th>Created By</th>
-                            <th>Confirmed By</th>
+                            <th>ID Transaksi</th>
+                            <th>Tanggal Peminjaman</th>
+                            <th>Tanggal Pengembalian</th>
+                            <th>Peminjam</th>
+                            <th>Dikonfirmasi</th>
                             <th>Status</th>
-                            <th>Fine</th>
-                            <th>Fine Status</th>
-                            <th>Action</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -63,24 +60,15 @@
                                 {
                                     <td>Meminjam</td>
                                 }
-                                @if (item.Denda == 0)
-                                {
-                                    <td>-</td>
-                                }
-                                else
-                                {
-                                    <td>@Html.DisplayFor(modelItem => item.Denda)</td>
-                                }
-                                <td>@Html.DisplayFor(modelItem => item.StatusDenda)</td>
                                 <td>
-                                    <a href="~/Peminjaman/Details/@Html.DisplayFor(modelItem => item.ID)" data-toggle="tooltip" title="Details" class="btn btn-datatable btn-icon btn-transparent-dark mr-2" te><i data-feather="list"></i></a>
+                                    <a href="~/Peminjaman/Details/@Html.DisplayFor(modelItem => item.ID)" data-toggle="tooltip" title="Lihat Detail Peminjaman" class="btn btn-datatable btn-icon btn-transparent-dark mr-2" te><i data-feather="list"></i></a>
                                     @if (item.Status == 0)
                                     {
-                                        <a onclick="return confirm('Confirmation borrowing?')" href="~/Peminjaman/ConfirmationBorrowing/@Html.DisplayFor(modelItem => item.ID)" data-toggle="tooltip" title="Confirmation Borrowing" class="btn btn-datatable btn-icon btn-transparent-dark mr-2" te><i data-feather="check"></i></a>
+                                        <a onclick="return confirm('Apa anda akan mengkonfirmasi peminjaman ini?')" href="~/Peminjaman/ConfirmationBorrowing/@Html.DisplayFor(modelItem => item.ID)" data-toggle="tooltip" title="Konfirmasi Peminjaman" class="btn btn-datatable btn-icon btn-transparent-dark mr-2" te><i data-feather="check"></i></a>
                                     }
                                     @if (item.Status == 1)
                                     {
-                                        <a onclick="return confirm('Return confirmation?')" href="~/Peminjaman/ConfirmationReturning/@Html.DisplayFor(modelItem => item.ID)" data-toggle="tooltip" title="Return Confirmation" class="btn btn-datatable btn-icon btn-transparent-dark mr-2" te><i data-feather="check-circle"></i></a>
+                                        <a onclick="return confirm('Apa anda yakin barang sudah dikembalikan?')" href="~/Peminjaman/ConfirmationReturning/@Html.DisplayFor(modelItem => item.ID)" data-toggle="tooltip" title="Konfirmasi Pengembalian" class="btn btn-datatable btn-icon btn-transparent-dark mr-2" te><i data-feather="check-circle"></i></a>
                                     }
                                 </td>
                             </tr>

@@ -41,5 +41,9 @@ namespace GAIS.Models
         public virtual DbSet<Section> Sections { get; set; }
         public virtual DbSet<Vendor> Vendors { get; set; }
         public virtual DbSet<View_StatusPengajuan> View_StatusPengajuan { get; set; }
+        public virtual DbSet<View_StatusPembayaran> View_StatusPembayaran { get; set; }
+        public virtual DbSet<View_StatusPeminjaman> View_StatusPeminjaman { get; set; }
+        public virtual DbSet<View_BarangMasuk> View_BarangMasuk { get; set; }
+        public virtual DbSet<View_LaporanPeminjaman> View_LaporanPeminjaman { get; set; }
     }
 }

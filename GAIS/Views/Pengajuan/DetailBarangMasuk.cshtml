@@ -41,6 +41,7 @@
                             <th class="text-center">Kuantitas</th>
                             <th class="text-center">Harga</th>
                             <th class="text-center">Aksi</th>
+                            <th class="text-center">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -53,6 +54,7 @@
                                 <td>@Html.DisplayFor(modelItem => item.BarangVendor.Vendor.NamaVendor)</td>
                                 <td>@Html.DisplayFor(modelItem => item.Kuantitas)</td>
                                 <td class="text-right">Rp @string.Format("{0:N}", (item.HargaBarang))</td>
+                                <td>@Html.DisplayFor(modelItem => item.StatusBarang)</td>
                                 <td class="text-center">
                                     <a href="~/Pengajuan/KonfirmasiBarangMasuk/?ID=@item.ID_Pengajuan&item=@item.ID_Barang" data-toggle="tooltip" title="Konfirmasi Barang Telah Diterima" class="btn btn-datatable btn-icon btn-transparent-dark mr-2" te><i data-feather="check-square"></i></a>
                                 </td>

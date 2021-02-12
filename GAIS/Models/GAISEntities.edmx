@@ -211,6 +211,54 @@
           <Property Name="RowStatus" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'GAIS.dbo.View_BarangMasuk' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="View_BarangMasuk">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="StatusBarang" Type="varchar" MaxLength="50" />
+          <Property Name="DeskripsiTrans" Type="varchar" MaxLength="21" />
+          <Property Name="jumlah" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'GAIS.dbo.View_LaporanPeminjaman' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="View_LaporanPeminjaman">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="NamaKaryawan" Type="varchar" MaxLength="100" />
+          <Property Name="AcceptedBy" Type="varchar" MaxLength="50" />
+          <Property Name="NamaBarang" Type="varchar" MaxLength="100" />
+          <Property Name="Kuantitas" Type="int" />
+          <Property Name="TglPeminjaman" Type="nvarchar" MaxLength="4000" />
+          <Property Name="TglPengembalian" Type="nvarchar" MaxLength="4000" />
+          <Property Name="StatusPeminjaman" Type="varchar" MaxLength="22" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'GAIS.dbo.View_StatusPembayaran' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="View_StatusPembayaran">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="SudahDibayar" Type="int" />
+          <Property Name="DeskripsiTrans" Type="varchar" MaxLength="13" />
+          <Property Name="jumlah" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'GAIS.dbo.View_StatusPeminjaman' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="View_StatusPeminjaman">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Status" Type="int" />
+          <Property Name="DeskripsiTrans" Type="varchar" MaxLength="22" />
+          <Property Name="jumlah" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'GAIS.dbo.View_StatusPengajuan' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="View_StatusPengajuan">
           <Key>
@@ -219,7 +267,7 @@ warning 6002: The table/view 'GAIS.dbo.View_StatusPengajuan' does not have a pri
           </Key>
           <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="StatusPengajuan" Type="int" Nullable="false" />
-          <Property Name="DeskripsiTrans" Type="varchar" MaxLength="41" />
+          <Property Name="DeskripsiTrans" Type="varchar" MaxLength="39" />
           <Property Name="jumlah" Type="int" />
         </EntityType>
         <Association Name="FK_BarangPerusahaan_JenisBarang">
@@ -430,6 +478,42 @@ warning 6002: The table/view 'GAIS.dbo.View_StatusPengajuan' does not have a pri
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Section" EntityType="Self.Section" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Vendor" EntityType="Self.Vendor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="View_BarangMasuk" EntityType="Self.View_BarangMasuk" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [View_BarangMasuk].[ID] AS [ID], 
+    [View_BarangMasuk].[StatusBarang] AS [StatusBarang], 
+    [View_BarangMasuk].[DeskripsiTrans] AS [DeskripsiTrans], 
+    [View_BarangMasuk].[jumlah] AS [jumlah]
+    FROM [dbo].[View_BarangMasuk] AS [View_BarangMasuk]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="View_LaporanPeminjaman" EntityType="Self.View_LaporanPeminjaman" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [View_LaporanPeminjaman].[ID] AS [ID], 
+    [View_LaporanPeminjaman].[NamaKaryawan] AS [NamaKaryawan], 
+    [View_LaporanPeminjaman].[AcceptedBy] AS [AcceptedBy], 
+    [View_LaporanPeminjaman].[NamaBarang] AS [NamaBarang], 
+    [View_LaporanPeminjaman].[Kuantitas] AS [Kuantitas], 
+    [View_LaporanPeminjaman].[TglPeminjaman] AS [TglPeminjaman], 
+    [View_LaporanPeminjaman].[TglPengembalian] AS [TglPengembalian], 
+    [View_LaporanPeminjaman].[StatusPeminjaman] AS [StatusPeminjaman]
+    FROM [dbo].[View_LaporanPeminjaman] AS [View_LaporanPeminjaman]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="View_StatusPembayaran" EntityType="Self.View_StatusPembayaran" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [View_StatusPembayaran].[ID] AS [ID], 
+    [View_StatusPembayaran].[SudahDibayar] AS [SudahDibayar], 
+    [View_StatusPembayaran].[DeskripsiTrans] AS [DeskripsiTrans], 
+    [View_StatusPembayaran].[jumlah] AS [jumlah]
+    FROM [dbo].[View_StatusPembayaran] AS [View_StatusPembayaran]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="View_StatusPeminjaman" EntityType="Self.View_StatusPeminjaman" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [View_StatusPeminjaman].[ID] AS [ID], 
+    [View_StatusPeminjaman].[Status] AS [Status], 
+    [View_StatusPeminjaman].[DeskripsiTrans] AS [DeskripsiTrans], 
+    [View_StatusPeminjaman].[jumlah] AS [jumlah]
+    FROM [dbo].[View_StatusPeminjaman] AS [View_StatusPeminjaman]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="View_StatusPengajuan" EntityType="Self.View_StatusPengajuan" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [View_StatusPengajuan].[ID] AS [ID], 
@@ -588,6 +672,10 @@ warning 6002: The table/view 'GAIS.dbo.View_StatusPengajuan' does not have a pri
             <End Role="Karyawan" EntitySet="Karyawans" />
             <End Role="Peminjaman" EntitySet="Peminjamen" />
           </AssociationSet>
+          <EntitySet Name="View_StatusPembayaran" EntityType="GAISModel.View_StatusPembayaran" />
+          <EntitySet Name="View_StatusPeminjaman" EntityType="GAISModel.View_StatusPeminjaman" />
+          <EntitySet Name="View_BarangMasuk" EntityType="GAISModel.View_BarangMasuk" />
+          <EntitySet Name="View_LaporanPeminjaman" EntityType="GAISModel.View_LaporanPeminjaman" />
         </EntityContainer>
         <EntityType Name="BarangPerusahaan">
           <Key>
@@ -833,7 +921,7 @@ warning 6002: The table/view 'GAIS.dbo.View_StatusPengajuan' does not have a pri
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" />
           <Property Name="StatusPengajuan" Type="Int32" Nullable="false" />
-          <Property Name="DeskripsiTrans" Type="String" MaxLength="41" FixedLength="false" Unicode="false" />
+          <Property Name="DeskripsiTrans" Type="String" MaxLength="39" FixedLength="false" Unicode="false" />
           <Property Name="jumlah" Type="Int32" />
         </EntityType>
         <Association Name="FK_BarangPerusahaan_JenisBarang">
@@ -1028,6 +1116,46 @@ warning 6002: The table/view 'GAIS.dbo.View_StatusPengajuan' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="View_StatusPembayaran">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="SudahDibayar" Type="Int32" />
+          <Property Name="DeskripsiTrans" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="jumlah" Type="Int32" />
+        </EntityType>
+        <EntityType Name="View_StatusPeminjaman">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="DeskripsiTrans" Type="String" MaxLength="22" FixedLength="false" Unicode="false" />
+          <Property Name="jumlah" Type="Int32" />
+        </EntityType>
+        <EntityType Name="View_BarangMasuk">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="StatusBarang" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DeskripsiTrans" Type="String" MaxLength="21" FixedLength="false" Unicode="false" />
+          <Property Name="jumlah" Type="Int32" />
+        </EntityType>
+        <EntityType Name="View_LaporanPeminjaman">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="NamaKaryawan" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="AcceptedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NamaBarang" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Kuantitas" Type="Int32" />
+          <Property Name="TglPeminjaman" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="TglPengembalian" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="StatusPeminjaman" Type="String" MaxLength="22" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1258,6 +1386,50 @@ warning 6002: The table/view 'GAIS.dbo.View_StatusPengajuan' does not have a pri
                 <ScalarProperty Name="jumlah" ColumnName="jumlah" />
                 <ScalarProperty Name="DeskripsiTrans" ColumnName="DeskripsiTrans" />
                 <ScalarProperty Name="StatusPengajuan" ColumnName="StatusPengajuan" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="View_StatusPembayaran">
+            <EntityTypeMapping TypeName="GAISModel.View_StatusPembayaran">
+              <MappingFragment StoreEntitySet="View_StatusPembayaran">
+                <ScalarProperty Name="jumlah" ColumnName="jumlah" />
+                <ScalarProperty Name="DeskripsiTrans" ColumnName="DeskripsiTrans" />
+                <ScalarProperty Name="SudahDibayar" ColumnName="SudahDibayar" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="View_StatusPeminjaman">
+            <EntityTypeMapping TypeName="GAISModel.View_StatusPeminjaman">
+              <MappingFragment StoreEntitySet="View_StatusPeminjaman">
+                <ScalarProperty Name="jumlah" ColumnName="jumlah" />
+                <ScalarProperty Name="DeskripsiTrans" ColumnName="DeskripsiTrans" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="View_BarangMasuk">
+            <EntityTypeMapping TypeName="GAISModel.View_BarangMasuk">
+              <MappingFragment StoreEntitySet="View_BarangMasuk">
+                <ScalarProperty Name="jumlah" ColumnName="jumlah" />
+                <ScalarProperty Name="DeskripsiTrans" ColumnName="DeskripsiTrans" />
+                <ScalarProperty Name="StatusBarang" ColumnName="StatusBarang" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="View_LaporanPeminjaman">
+            <EntityTypeMapping TypeName="GAISModel.View_LaporanPeminjaman">
+              <MappingFragment StoreEntitySet="View_LaporanPeminjaman">
+                <ScalarProperty Name="StatusPeminjaman" ColumnName="StatusPeminjaman" />
+                <ScalarProperty Name="TglPengembalian" ColumnName="TglPengembalian" />
+                <ScalarProperty Name="TglPeminjaman" ColumnName="TglPeminjaman" />
+                <ScalarProperty Name="Kuantitas" ColumnName="Kuantitas" />
+                <ScalarProperty Name="NamaBarang" ColumnName="NamaBarang" />
+                <ScalarProperty Name="AcceptedBy" ColumnName="AcceptedBy" />
+                <ScalarProperty Name="NamaKaryawan" ColumnName="NamaKaryawan" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

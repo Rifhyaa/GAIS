@@ -1,9 +1,10 @@
 ﻿@model GAIS.Models.DetailPeminjaman
 
 @{
-    ViewBag.Title = "ChangesItem";
+    ViewBag.Title = "Form Barang Rusak";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
+
 
 <header class="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
     <div class="container-fluid">
@@ -13,7 +14,7 @@
                     <ol class="breadcrumb gais-breadcrumb" style="background-color: #fff">
                         <li class="breadcrumb-item">Home</li>
                         <li class="breadcrumb-item">Peminjaman</li>
-                        <li class="breadcrumb-item">Detail</li>
+                        <li class="breadcrumb-item">Detail Peminjaman</li>
                         <li class="breadcrumb-item text-blue">Form Barang Rusak</li>
                     </ol>
                 </div>
@@ -27,39 +28,44 @@
     <div class="container mt-4">
         <div class="card mb-4">
             <div class="card-header" style="font-size: 1.1rem;">
-                Form Broken Item
+                Form Barang Rusak
             </div>
             <div class="card-body">
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="form-group">
-                    <label class="control-label">ID Transaction</label>
+                    <label class="control-label">ID Transaksi</label>
                     @Html.EditorFor(model => model.ID_Peminjaman, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label">Item</label>
+                    <label class="control-label">Barang</label>
                     @Html.HiddenFor(model => model.ID_Barang)
-                    @Html.EditorFor(model => model.BarangPerusahaan.NamaBarang, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } });
+                    @Html.EditorFor(model => model.BarangPerusahaan.NamaBarang, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label">Quantity</label>
-                    @Html.EditorFor(model => model.Kuantitas, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } });
+                    <label class="control-label">Kuantitas</label>
+                    @Html.EditorFor(model => model.Kuantitas, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label">Price</label>
-                    @Html.EditorFor(model => model.HargaBarang, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } });
+                    <label class="control-label">Harga</label>
+                    @Html.EditorFor(model => model.HargaBarang, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label">Broken</label>
-                    @Html.EditorFor(model => model.Kondisi_Rusak, new { htmlAttributes = new { @class = "form-control", placeholder = "Fill Quantity Broken Item" } });
+                    <label class="control-label">Barang Rusak</label>
+                    @Html.EditorFor(model => model.Kondisi_Rusak, new { htmlAttributes = new { @class = "form-control", placeholder = "Isi Jumlah Barang Yang Rusak", required = "required" } })
                 </div>
 
                 <div class="form-group">
-                    <input type="submit" value="Submit" class="btn btn-primary" />
-                    <a onclick="history.back()" class="btn btn-outline-primary">Back to list</a>
+                    <label class="control-label">Keterangan Rusak</label>
+                    @Html.EditorFor(model => model.Keterangan, new { htmlAttributes = new { @class = "form-control", placeholder = "Alasan Barang Rusak", required = "required" } })
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Simpan" class="btn btn-primary" />
+                    <a onclick="history.back()" class="btn btn-outline-primary">Kembali</a>
                 </div>
             </div>
         </div>

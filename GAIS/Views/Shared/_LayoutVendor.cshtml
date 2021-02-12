@@ -28,14 +28,6 @@
         <button class="btn btn-icon btn-transparent-dark order-1 order-lg-0 mr-lg-2" id="sidebarToggle"><i data-feather="menu"></i></button>
         <!-- Navbar Items-->
         <ul class="navbar-nav align-items-center ml-auto">
-            <!-- Alerts Dropdown-->
-            <li class="nav-item dropdown no-caret d-none d-sm-block mr-3 dropdown-notifications">
-                <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownAlerts" href="javascript:void(0);" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i data-feather="bell"></i></a>
-            </li>
-            <!-- Messages Dropdown-->
-            <li class="nav-item dropdown no-caret d-none d-sm-block mr-3 dropdown-notifications">
-                <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownMessages" href="javascript:void(0);" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i data-feather="mail"></i></a>
-            </li>
             <!-- User Dropdown-->
             <li class="nav-item dropdown no-caret mr-3 mr-lg-0 dropdown-user">
                 <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownUserImage" href="javascript:void(0);" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class="img-fluid" src="/assets/img/upload/default.png" /></a>
@@ -47,10 +39,6 @@
                         </div>
                     </h6>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#!">
-                        <div class="dropdown-item-icon"><i data-feather="settings"></i></div>
-                        Account
-                    </a>
                     <a class="dropdown-item" data-toggle="modal" data-target="#logoutModal">
                         <div class="dropdown-item-icon"><i data-feather="log-out"></i></div>
                         Logout
@@ -64,21 +52,17 @@
             <nav class="sidenav shadow-right sidenav-dark">
                 <div class="sidenav-menu">
                     <div class="nav accordion" id="accordionSidenav">
-                        <!-- Sidenav Menu Heading (Core)-->
-                        <div class="sidenav-menu-heading">Core</div>
-                        <!-- Sidenav Accordion (Dashboard)-->
-                        <a class="nav-link collapsed" href="#">
-                            <div class="nav-link-icon"><i class="fas fa-fw fa-tachometer-alt"></i></div>
-                            Dashboard
-                        </a>
-                        <!-- Sidenav Heading (Transaksi Peminjaman)-->
-                        <div class="sidenav-menu-heading">Pemesanan</div>
-                        <!-- Sidenav Link (Pengiriman)-->
-                        <a class="nav-link @(ViewContext.RouteData.Values["Action"].ToString() == "Form" ? "active" : "")" href="@Url.Action("Pemesanan", "Pengajuan")">
+                        <!-- Sidenav Heading (Transaksi Pemesanan)-->
+                        <div class="sidenav-menu-heading">Pesanan</div>
+                        <!-- Sidenav Link (Daftar)-->
+                        <a class="nav-link @(ViewContext.RouteData.Values["Action"].ToString() == "Pemesanan" ? "active" : "")" href="@Url.Action("Pemesanan", "Pengajuan")">
                             <div class="nav-link-icon"><i class="fas fa-fw fa-exchange-alt"></i></div>
-                            Daftar Pemesanan
+                            Daftar Pesanan
                         </a>
-                      
+                        <a class="nav-link @(ViewContext.RouteData.Values["Action"].ToString() == "SemuaPemesanan" ? "active" : "")" href="@Url.Action("SemuaPemesanan", "Pengajuan")">
+                            <div class="nav-link-icon"><i class="fas fa-fw fa-handshake"></i></div>
+                            Semua Pesanan
+                        </a>
                     </div>
                 </div>
                 <!-- Sidenav Footer-->
@@ -122,52 +106,17 @@
                 <div class="modal-body">Tekan tombol 'Logout' untuk mengakhiri sesi anda.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
-                    <a class="btn btn-primary" href="#">Logout</a>
+                    <a class="btn btn-primary" href="@Url.Action("Logout", "Login")">Logout</a>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Delete Modal -->
-    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Apa anda yakin?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Data yang dihapus tidak akan bisa dikembalikan.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
-                    <a id="btn-delete" class="btn btn-danger" href="#">Hapus</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script>
-        function deleteConfirm(url) {
-            $('#btn-delete').attr('href', url);
-            $('#deleteModal').modal();
-        }
-    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="/js/scripts.js"></script>
-    <!--
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" crossorigin="anonymous"></script>
-    <script src="../assets/demo/chart-area-demo.js"></script>
-    <script src="../assets/demo/chart-bar-demo.js"></script>
-    <script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js" crossorigin="anonymous"></script>
-    <script src="../assets/demo/date-range-picker-demo.js"></script>
-    -->
-
     <script src="/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
     <script src="/assets/demo/datatables-demo.js"></script>
-
     <script src="/Scripts/jquery.validate.js"></script>
-    <!--<script src="/Scripts/jquery.unobtrusive-ajax.js"></script> -->
     <script src="/Scripts/jquery.validate.unobtrusive.js"></script>
 </body>
 </html>

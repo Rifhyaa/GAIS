@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<GAIS.Models.DetailPengajuan>
 
 @{
-    ViewBag.Title = "Pesanan";
+    ViewBag.Title = "Semua Pesanan";
     Layout = "~/Views/Shared/_LayoutVendor.cshtml";
 }
 
@@ -37,7 +37,6 @@
                             <th class="text-center">Harga</th>
                             <th class="text-center">Total</th>
                             <th>Status</th>
-                            <th class="text-center">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -55,9 +54,6 @@
                                     <td class="text-right">@string.Format("{0:C}", (item.HargaBarang))</td>
                                     <td class="text-right">@string.Format("{0:C}", (item.HargaBarang * item.Kuantitas))</td>
                                     <td>@item.StatusBarang</td>
-                                    <td class="text-center">
-                                        <a href="~/Pengajuan/KonfirmasiPengiriman/?ID=@item.ID_Pengajuan&Item=@item.ID_Barang" data-toggle="tooltip" title="Konfirmasi Barang Telah Dikirim" class="btn btn-datatable btn-icon btn-transparent-dark mr-2" te><i class="fas fa-fw fa-paper-plane"></i></a>
-                                    </td>
                                 </tr>
                             }
                         }
